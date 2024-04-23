@@ -15,20 +15,29 @@
                 
                 <div class="mb-3">
                   <label for="nom" class="form-label">Nom</label>
-                  <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom" formControlName="nom" required>
-                  <div class="invalid-feedback" *ngIf="submitted && f.nom.errors?.required">
+                  <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom" formControlName="firstName" required>
+                  <div class="invalid-feedback" *ngIf="submitted && f.firstName.errors?.required">
                     Le nom est requis.
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <label for="prenom" class="form-label">Prénom</label>
-                  <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom" formControlName="prenom" required>
-                  <div class="invalid-feedback" *ngIf="submitted && f.prenom.errors?.required">
+                  <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom" formControlName="lastName" required>
+                  <div class="invalid-feedback" *ngIf="submitted && f.lastName.errors?.required">
                     Le prénom est requis.
                   </div>
                 </div>
-
+                <div class="mb-3">
+                  <label for="UserName" class="form-label">UserName</label>
+                  <input type="username" class="form-control" id="username" placeholder="Entrez votre username" formControlName="username" required>
+                  <div class="invalid-feedback" *ngIf="submitted && f.username.errors?.required">
+                    L'email est requis.
+                  </div>
+                  <div class="invalid-feedback" *ngIf="submitted && f.username.errors?.username">
+                    L'email doit être une username valide.
+                  </div>
+                </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" placeholder="Entrez votre email" formControlName="email" required>
@@ -42,8 +51,8 @@
 
                 <div class="mb-3">
                   <label for="motdepasse" class="form-label">Mot de passe</label>
-                  <input type="password" class="form-control" id="motdepasse" placeholder="Entrez votre mot de passe" formControlName="motdepasse" required>
-                  <div class="invalid-feedback" *ngIf="submitted && f.motdepasse.errors?.required">
+                  <input type="password" class="form-control" id="motdepasse" placeholder="Entrez votre mot de passe" formControlName="password" required>
+                  <div class="invalid-feedback" *ngIf="submitted && f.password.errors?.required">
                     Le mot de passe est requis.
                   </div>
                 </div>

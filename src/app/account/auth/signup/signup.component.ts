@@ -13,17 +13,18 @@ export class SignupComponent implements OnInit {
   submitted = false;
   error = '';
   successmsg = false;
-  messageError='';
+  messageError = '';
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
+      firstName: ['', Validators.required], // Changed from 'nom' to 'firstName'
+      lastName: ['', Validators.required],  // Changed from 'prenom' to 'lastName'
       email: ['', [Validators.required, Validators.email]],
-      motdepasse: ['', Validators.required],
-      genre: ['', Validators.required]
+      password: ['', Validators.required],  // Changed from 'motdepasse' to 'password'
+      genre: ['', Validators.required],     // Added 'genre' field
+      username: ['', Validators.required]   // Added 'username' field
     });
   }
 
@@ -32,23 +33,21 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // Stop here if form is invalid
     if (this.signupForm.invalid) {
       return;
     }
 
-    // If form is valid, send data to API
     this.http.post<any>('http://localhost:4000/api/auth/signup', this.signupForm.value)
       .subscribe(
         (response) => {
           console.log('API Response:', response);
           this.successmsg = true;
-          this.error = ''; // Clear any previous errors
+          this.error = '';
         },
         (error) => {
           console.error('API Error:', error);
-          this.error = 'An error occurred. Please try again.'; // Display error message
-          this.successmsg = false; // Hide success message
+          this.error = 'An error occurred. Please try again.';
+          this.successmsg = false;
         }
       );
   }
