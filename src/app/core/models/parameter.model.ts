@@ -2,7 +2,6 @@
 import { Echantillon } from './echantillon.model';
 
 export class Parameter {
-  parameterId?: number;
   name: string;
   rdl: number; 
   unit: string;
@@ -13,9 +12,7 @@ export class Parameter {
     rdl: number,
     unit: string,
     echantillonId: number,
-    parameterId?: number
   ) {
-    this.parameterId = parameterId;
     this.name = name;
     this.rdl = rdl;
     this.unit = unit;

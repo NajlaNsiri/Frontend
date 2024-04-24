@@ -4,7 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 
 import { SignupComponent } from './signup/signup.component';
-import { DemandeFormComponent } from '../demande-form/demande-form.component';
+import { DemandeFormComponent } from './demande-form/demande-form.component';
+import { EchantillonFormComponent } from './echantillon-form/echantillon-form.component';
+import { ParameterListComponent } from './parameter-list/parameter-list.component';
+import { ParameterFormComponent } from './paramater-form/paramater-form.component';
 
 const routes: Routes = [
     {
@@ -18,8 +21,15 @@ const routes: Routes = [
     {
         path: 'demande',
         component:DemandeFormComponent
+    },
+    {
+        path: 'echantillon',
+        component: EchantillonFormComponent
+    },
+    {
+        path :'paramter',
+        component:ParameterFormComponent
     }
-    
    
 ];
 

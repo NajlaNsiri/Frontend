@@ -2,7 +2,6 @@ import { Langue } from "./langue.enum";
 
 // models/demande.model.ts
 export class Demande {
-    demandeId?: number;
     demandePour: string;
     envoyeAuLaboratoire: string;
     courrielsSupplementaires: string;
@@ -20,9 +19,7 @@ export class Demande {
       langueDuCertificat: Langue,
       commentairesInternes: string,
       userId: number,
-      demandeId?: number
     ) {
-      this.demandeId = demandeId;
       this.demandePour = demandePour;
       this.envoyeAuLaboratoire = envoyeAuLaboratoire;
       this.courrielsSupplementaires = courrielsSupplementaires;

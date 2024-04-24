@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 
 import { AuthRoutingModule } from './auth-routing';
 
+
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
   imports: [
@@ -20,7 +21,8 @@ import { AuthRoutingModule } from './auth-routing';
     NgbAlertModule,
     UIModule,
     AuthRoutingModule,
-    CarouselModule
+    CarouselModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

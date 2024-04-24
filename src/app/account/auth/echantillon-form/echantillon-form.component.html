@@ -1,0 +1,49 @@
+<div class="container">
+    <form [formGroup]="echantillonForm" (ngSubmit)="onSubmit()">
+      <!-- Other form controls -->
+  
+      <div class="form-group">
+        <label for="gabarit">Gabarit:</label>
+        <select class="form-control" formControlName="gabarit" id="gabarit">
+          <option *ngFor="let g of gabarits" [value]="g.value">{{ g.display }}</option>
+        </select>
+    </div>
+  
+      <div class="form-group">
+        <label for="typeEchantillon">Type d'échantillon:</label>
+        <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
+          <option *ngFor="let type of typesEchantillon" [value]="type.value">{{ type.display }}</option>
+        </select>
+      </div>
+  
+      <!-- Add inputs for normeEchantillon, nomEchantillon, lieuPrelevement -->
+  
+      <div class="form-group">
+        <label for="dateFinPrelevement">Date de fin de prélèvement:</label>
+        <input type="date" class="form-control" formControlName="dateFinPrelevement" id="dateFinPrelevement">
+      </div>
+  
+      <div class="form-group">
+        <label for="heureFinPrelevement">Heure de fin de prélèvement:</label>
+        <input type="time" class="form-control" formControlName="heureFinPrelevement" id="heureFinPrelevement">
+      </div>
+  
+      <div class="form-group">
+        <label>Priorité:</label>
+        <div *ngFor="let p of priorites">
+            <label>
+                <input type="radio" formControlName="priorite" [value]="p.value"> {{ p.display }}
+            </label>
+        </div>
+    </div>
+    
+  
+      <div class="form-group">
+        <label for="commentairesInternes">Commentaires internes de l'échantillon:</label>
+        <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-success">Enregistrer</button>
+    </form>
+  </div>
+  

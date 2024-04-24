@@ -4,7 +4,6 @@ import { TypeEchantillon } from "./typeEchantillon.enum";
 import { Demande } from './demande.model';
 
 export class Echantillon {
-    echantillonId?: number;
     gabarit: Gabarit;
     typeEchantillon: TypeEchantillon;
     normeEchantillon: string;
@@ -27,9 +26,7 @@ export class Echantillon {
       priorite: Priorite,
       commentairesInternes: string,
       demandeId: number,
-      echantillonId?: number
     ) {
-      this.echantillonId = echantillonId;
       this.gabarit = gabarit;
       this.typeEchantillon = typeEchantillon;
       this.normeEchantillon = normeEchantillon;

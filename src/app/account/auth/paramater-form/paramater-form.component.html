@@ -1,0 +1,17 @@
+<div class="container">
+  <form [formGroup]="parameterForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Name:</label>
+        <input id="name" type="text" formControlName="name">
+      </div>
+      <div>
+        <label for="rdl">RDL:</label>
+        <input id="rdl" type="number" step="any" formControlName="rdl">
+      </div>
+      <div>
+        <label for="unit">Unit:</label>
+        <input id="unit" type="text" formControlName="unit">
+      </div>
+      <button type="submit" [disabled]="!parameterForm.valid">Submit</button>
+    </form>
+</div>

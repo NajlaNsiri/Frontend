@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpInterceptorService } from './account/auth/interceptor/http-interceptor.service';
 
 import { SiteModule } from './site/site.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -25,6 +26,7 @@ export function createTranslateLoader(http: HttpClient): any {
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -42,7 +44,7 @@ export function createTranslateLoader(http: HttpClient): any {
     NgbTooltipModule,
     ScrollToModule.forRoot(),
     NgbModule, 
-
+    ReactiveFormsModule,
     ToastrModule.forRoot(),   
   ],
   bootstrap: [AppComponent],

@@ -1,0 +1,26 @@
+<div class="parameter-list-container">
+    <h2>PARAMETERS LIST</h2>
+    <div *ngIf="parameters.length; else noParametersTemplate">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>RDL</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let parameter of parameters">
+            <td>{{ parameter.name }}</td>
+            <td>{{ parameter.rdl }}</td>
+            <td>{{ parameter.unit }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noParametersTemplate>
+      <p>No records found.</p>
+    </ng-template>
+    <button class="btn btn-primary" >Add parameters</button>
+  </div>
+  

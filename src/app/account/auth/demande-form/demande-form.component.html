@@ -1,0 +1,44 @@
+<div class="container">
+    <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()" >
+      <div class="form-group">
+        <label for="demandePour">Demande pour:</label>
+        <input type="text" class="form-control" formControlName="demandePour" id="demandePour">
+      </div>
+  
+      <div class="form-group">
+        <label for="envoyeAuLaboratoire">Envoyé au laboratoire:</label>
+        <input type="text" class="form-control" formControlName="envoyeAuLaboratoire" id="envoyeAuLaboratoire">
+      </div>
+  
+      <div class="form-group">
+        <label for="courrielsSupplementaires">Courriels supplémentaires:</label>
+        <textarea class="form-control" formControlName="courrielsSupplementaires" id="courrielsSupplementaires"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="bonDeCommande">Bon de commande:</label>
+        <input type="text" class="form-control" formControlName="bonDeCommande" id="bonDeCommande">
+      </div>
+  
+      <div class="form-group">
+        <label for="unEchantillon">Un échantillon:</label>
+        <input type="checkbox" formControlName="unEchantillon" id="unEchantillon">
+      </div>
+  
+      <div class="form-group">
+        <label for="langueDuCertificat">Langue du certificat:</label>
+        <select class="form-control" formControlName="langueDuCertificat" id="langueDuCertificat">
+          <option value="FRANCAIS">Français</option>
+          <option value="ANGLAIS">Anglais</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="commentairesInternes">Commentaires internes de la demande d'analyses:</label>
+        <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
