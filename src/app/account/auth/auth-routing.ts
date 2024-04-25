@@ -10,6 +10,8 @@ import { ParameterListComponent } from './parameter-list/parameter-list.componen
 import { ParameterFormComponent } from './paramater-form/paramater-form.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { ListDemandeComponent } from './list-demande/list-demande.component';
+import { ResultParameterComponent } from './result-parameter/result-parameter.component';
+import { ResultDemandeComponent } from './result-demande/result-demande.component';
 
 const routes: Routes = [
     {
@@ -39,8 +41,19 @@ const routes: Routes = [
     {
         path :'paramter',
         component:ParameterFormComponent
+    },
+    {
+        path :'ListParamter',
+        component:ParameterListComponent
+    },
+    {
+        path :'ResultParamter',
+        component:ResultParameterComponent
+    },
+    {
+        path :'ResultDemande',
+        component:ResultDemandeComponent
     }
-   
 ];
 
 @NgModule({

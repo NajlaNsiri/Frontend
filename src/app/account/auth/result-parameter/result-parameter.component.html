@@ -1,0 +1,39 @@
+<app-client-nav-bar></app-client-nav-bar>
+<div class="parameter-list-container">
+    <h2>PARAMETERS LIST</h2>
+    <div *ngIf="parameters.length; else noParametersTemplate">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>RDL</th>
+            <th>Unit</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let parameter of parameters; let i = index">
+            <td>{{ parameter.name }}</td>
+            <td>{{ parameter.rdl }}</td>
+            <td>{{ parameter.unit }}</td>
+            <td>
+              <button (click)="deleteParameter(parameter)" class="btn-action">
+                <!-- Use appropriate icon for delete -->
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        
+      </table>
+    </div>
+    <ng-template #noParametersTemplate>
+      <p>No records found.</p>
+    </ng-template>
+    <div class="actions">
+      <button class="btn-action">Add parameters</button>
+      <button class="btn-action save-draft">Save as draft</button>
+      <button class="btn-action submit-request" (click)="submitRequest()">Submit request</button>
+    </div>
+  </div>
+  

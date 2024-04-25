@@ -80,7 +80,7 @@ ngOnInit(): void {
         console.log('API Response:', response);
         this.successmsg = true; 
         this.error = ''; 
-        this.router.navigate(['/account/paramter'], { queryParams: { echantillonId: response.echantillonId } });
+        this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: response.echantillonId } });
       },
       (error) => {
         console.error('API Error:', error);

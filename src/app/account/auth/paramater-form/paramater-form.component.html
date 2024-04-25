@@ -1,17 +1,26 @@
-<div class="container">
-  <form [formGroup]="parameterForm" (ngSubmit)="onSubmit()">
-      <div>
+<div class="form-container">
+  <div class="main-title">
+    <h1>Saisie des Paramètres</h1>
+    <p class="required-note"><span>*</span> Champs obligatoires</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>Saisir les Détails</h2>
+    </div>
+    <form [formGroup]="parameterForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
         <label for="name">Name:</label>
-        <input id="name" type="text" formControlName="name">
+        <input type="text" class="form-control" formControlName="name" id="name">
       </div>
-      <div>
+      <div class="form-group">
         <label for="rdl">RDL:</label>
-        <input id="rdl" type="number" step="any" formControlName="rdl">
+        <input type="number" class="form-control" formControlName="rdl" id="rdl" step="any">
       </div>
-      <div>
+      <div class="form-group">
         <label for="unit">Unit:</label>
-        <input id="unit" type="text" formControlName="unit">
+        <input type="text" class="form-control" formControlName="unit" id="unit">
       </div>
-      <button type="submit" [disabled]="!parameterForm.valid">Submit</button>
+      <button type="submit" class="btn submit-btn" [disabled]="!parameterForm.valid">Submit</button>
     </form>
+  </div>
 </div>

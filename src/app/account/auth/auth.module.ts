@@ -12,6 +12,10 @@ import { EchantillonFormComponent } from './echantillon-form/echantillon-form.co
 import { ParameterListComponent } from './parameter-list/parameter-list.component';
 import { ParameterFormComponent } from './paramater-form/paramater-form.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { ResultParameterComponent } from './result-parameter/result-parameter.component';
+import { ResultDemandeComponent } from './result-demande/result-demande.component';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
     EchantillonFormComponent,
     ParameterListComponent,
     ParameterFormComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    ResultParameterComponent,
+    ResultDemandeComponent,
   ],
   imports: [
     CommonModule,

@@ -1,44 +1,106 @@
-form {
-    max-width: 300px;
-    margin: 0 auto;
+.form-container {
+  max-width: 600px; // Adjusted for a wider form to accommodate side by side inputs
+  margin: 20px auto;
+  padding: 15px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .main-title {
+    h1 {
+      color: #000;
+      font-size: 24px;
+      text-align: left;
+    }
+
+    .required-note {
+      text-align: left;
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+
+      span {
+        color: red; // Only the asterisk is red
+      }
+    }
   }
-  
-  div {
-    margin-bottom: 10px;
-  }
-  
-  label {
-    display: block;
-  }
-  
-  input[type="text"],
-  input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
+
+  .card {
+    background: #f9f9f9;
     border-radius: 4px;
-    box-sizing: border-box;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      h2 {
+        color: #333;
+        font-size: 20px;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      label {
+        flex: 1;
+        margin-bottom: 0; // Remove bottom margin as label is in-line
+        color: #333;
+      }
+
+      .form-control {
+        flex: 2; // Takes more space
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+        &:focus {
+          border-color: #80bdff;
+          outline: 0;
+          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+      }
+
+      input[type="number"] {
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+
+      &.submit-btn {
+        background-color: #007bff;
+        color: #fff;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
   }
-  
-  button {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  button[disabled] {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
+}

@@ -1,26 +1,27 @@
-<div class="parameter-list-container">
-    <h2>PARAMETERS LIST</h2>
-    <div *ngIf="parameters.length; else noParametersTemplate">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>RDL</th>
-            <th>Unit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let parameter of parameters">
-            <td>{{ parameter.name }}</td>
-            <td>{{ parameter.rdl }}</td>
-            <td>{{ parameter.unit }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <ng-template #noParametersTemplate>
-      <p>No records found.</p>
-    </ng-template>
-    <button class="btn btn-primary" >Add parameters</button>
-  </div>
-  
+
+<app-client-nav-bar></app-client-nav-bar>
+   <table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Analyte</th>
+            <th scope="col">RDL</th>
+            <th scope="col">Unit</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let analyte of analytesList; let i = index">
+        <th scope="row">
+            <input type="checkbox"
+                   [name]="'check-' + analyte.name.toLowerCase()"
+                   [value]="analyte.name"
+                   (change)="toggleAnalyteSelection(analyte)">
+        </th>
+        <td>{{ analyte.name }}</td>
+        <td>{{ analyte.rdl }}</td>
+        <td>{{ analyte.unit }}</td>
+    </tr>
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary" (click)="submitAnalytes()">Submit</button>
+

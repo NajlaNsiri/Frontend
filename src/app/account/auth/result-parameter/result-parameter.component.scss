@@ -1,0 +1,41 @@
+.parameter-list-container {
+    /* Add your container styles here */
+  }
+  
+  .table {
+    /* Add your table styles here */
+    width: 100%;
+    /* Rest of table styling */
+  }
+  
+  th, td {
+    /* Add your header and cell styles here */
+  }
+  
+  .btn-action {
+    /* Style for your action buttons */
+    background-color: #007bff; /* for example */
+    color: white;
+    /* Rest of button styling */
+  }
+  
+  .actions {
+    /* Style for the action buttons container */
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Adjust the gap as needed */
+    margin-top: 20px; /* Adjust the margin as needed */
+  }
+  
+  .save-draft {
+    /* Additional styles specific to save as draft button */
+  }
+  
+  .submit-request {
+    /* Additional styles specific to submit request button */
+  }
+  
+  .fas {
+    /* If you are using Font Awesome, add styles for the icons here */
+  }
+  
