@@ -1,28 +1,33 @@
+// auth.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-
-import { UIModule } from '../../shared/ui/ui.module';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthRoutingModule } from './auth-routing';
 
+// Import all components specific to AuthModule
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { DemandeFormComponent } from './demande-form/demande-form.component';
+import { EchantillonFormComponent } from './echantillon-form/echantillon-form.component';
+import { ParameterListComponent } from './parameter-list/parameter-list.component';
+import { ParameterFormComponent } from './paramater-form/paramater-form.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent],
+  declarations: [
+    // Declare all AuthModule-specific components here
+    LoginComponent,
+    SignupComponent,
+    DemandeFormComponent,
+    EchantillonFormComponent,
+    ParameterListComponent,
+    ParameterFormComponent,
+    UpdateProfileComponent
+  ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgbAlertModule,
-    UIModule,
     AuthRoutingModule,
-    CarouselModule,
-    ReactiveFormsModule
+    SharedModule // Import SharedModule to use components like ClientNavBarComponent
   ]
 })
 export class AuthModule { }

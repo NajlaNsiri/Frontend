@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-echantillon-form',
   templateUrl: './echantillon-form.component.html',
-  styleUrls: ['./echantillon-form.component.css']
+  styleUrls: ['./echantillon-form.component.scss']
 })
 export class EchantillonFormComponent {
   echantillonForm: FormGroup;

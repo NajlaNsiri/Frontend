@@ -13,6 +13,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { WizardDialogComponent } from './components/wizard-dialog/wizard-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ClientNavBarComponent } from './client-nav-bar/client-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SpinnerComponent,
     StepperComponent,
     WizardDialogComponent,
-   
+    ClientNavBarComponent,
   ], 
   imports: [
     CommonModule,
@@ -43,7 +44,8 @@ import { TranslateModule } from '@ngx-translate/core';
     StepperComponent,
     PaginationComponent,  
     SpinnerComponent,
-    NoDataComponent
+    NoDataComponent,
+    ClientNavBarComponent
   ]
 })
 

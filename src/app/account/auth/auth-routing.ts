@@ -8,6 +8,8 @@ import { DemandeFormComponent } from './demande-form/demande-form.component';
 import { EchantillonFormComponent } from './echantillon-form/echantillon-form.component';
 import { ParameterListComponent } from './parameter-list/parameter-list.component';
 import { ParameterFormComponent } from './paramater-form/paramater-form.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { ListDemandeComponent } from './list-demande/list-demande.component';
 
 const routes: Routes = [
     {
@@ -19,8 +21,16 @@ const routes: Routes = [
         component: SignupComponent
     },
     {
+        path :'profile',
+        component:UpdateProfileComponent
+    },
+    {
         path: 'demande',
         component:DemandeFormComponent
+    },
+    {
+        path: 'Listdemande',
+        component:ListDemandeComponent
     },
     {
         path: 'echantillon',

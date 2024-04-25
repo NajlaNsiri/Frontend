@@ -1,49 +1,64 @@
-<div class="container">
+<app-client-nav-bar></app-client-nav-bar>
+<div class="form-container">
+  <div class="main-title">
+    <h1>ÉCHANTILLON 1</h1>
+  </div>
+  <div class="card">
     <form [formGroup]="echantillonForm" (ngSubmit)="onSubmit()">
-      <!-- Other form controls -->
-  
-      <div class="form-group">
-        <label for="gabarit">Gabarit:</label>
-        <select class="form-control" formControlName="gabarit" id="gabarit">
-          <option *ngFor="let g of gabarits" [value]="g.value">{{ g.display }}</option>
-        </select>
-    </div>
-  
-      <div class="form-group">
-        <label for="typeEchantillon">Type d'échantillon:</label>
-        <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
-          <option *ngFor="let type of typesEchantillon" [value]="type.value">{{ type.display }}</option>
-        </select>
-      </div>
-  
-      <!-- Add inputs for normeEchantillon, nomEchantillon, lieuPrelevement -->
-  
-      <div class="form-group">
-        <label for="dateFinPrelevement">Date de fin de prélèvement:</label>
-        <input type="date" class="form-control" formControlName="dateFinPrelevement" id="dateFinPrelevement">
-      </div>
-  
-      <div class="form-group">
-        <label for="heureFinPrelevement">Heure de fin de prélèvement:</label>
-        <input type="time" class="form-control" formControlName="heureFinPrelevement" id="heureFinPrelevement">
-      </div>
-  
-      <div class="form-group">
-        <label>Priorité:</label>
-        <div *ngFor="let p of priorites">
-            <label>
-                <input type="radio" formControlName="priorite" [value]="p.value"> {{ p.display }}
-            </label>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gabarit">Gabarit:</label>
+          <select class="form-control" formControlName="gabarit" id="gabarit">
+            <!-- options will be populated here -->
+          </select>
         </div>
-    </div>
-    
-  
+        <div class="form-group">
+          <label for="typeEchantillon" class="required">Type d'échantillon:</label>
+          <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
+            <!-- options will be populated here -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Add more form-row divs for each additional row you need in your form -->
+      <!-- Each .form-row can contain multiple .form-group elements side by side -->
+
+      <div class="form-group">
+        <label for="nomEchantillon">Nom de l'échantillon:</label>
+        <input type="text" class="form-control" formControlName="nomEchantillon" id="nomEchantillon">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dateFinPrelevement" class="required">Date de fin de prélèvement:</label>
+          <input type="date" class="form-control" formControlName="dateFinPrelevement" id="dateFinPrelevement">
+        </div>
+        <div class="form-group">
+          <label for="heureFinPrelevement" class="required">Heure de fin de prélèvement:</label>
+          <input type="time" class="form-control" formControlName="heureFinPrelevement" id="heureFinPrelevement">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group priority-group">
+          <label class="required">Priorité:</label>
+          <div class="priority-options">
+            <!-- Replace with actual value and formControlName -->
+            <label><input type="radio" name="priorite" value="standard"> Standard</label>
+            <label><input type="radio" name="priorite" value="1heure"> 1 heure</label>
+            <label><input type="radio" name="priorite" value="2jours"> 2 jours</label>
+            <label><input type="radio" name="priorite" value="3jours"> 3 jours</label>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="commentairesInternes">Commentaires internes de l'échantillon:</label>
         <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
       </div>
-  
-      <button type="submit" class="btn btn-success">Enregistrer</button>
+
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
     </form>
   </div>
-  
+</div>
