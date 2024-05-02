@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private http: HttpClient ,private router: Router  ) { }
 
   ngOnInit() {
+    localStorage.clear();
     this.loginForm = this.formBuilder.group({
       usernameOrEmail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],

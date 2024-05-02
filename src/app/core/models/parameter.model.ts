@@ -3,17 +3,15 @@ import { Echantillon } from './echantillon.model';
 
 export class Parameter {
   name: string;
-  rdl: number; 
+  rdl: number;
   unit: string;
-  echantillonId: number; 
+  echantillonId: number;
   echantillon?: Echantillon;
-  constructor(
-    name: string,
-    rdl: number,
-    unit: string,
-  ) {
+
+  constructor(name: string, rdl: number, unit: string, echantillonId: number) {
     this.name = name;
     this.rdl = rdl;
     this.unit = unit;
+    this.echantillonId = echantillonId;
   }
 }

@@ -4,6 +4,7 @@ import { TypeEchantillon } from "./typeEchantillon.enum";
 import { Demande } from './demande.model';
 
 export class Echantillon {
+    echantillonId: number;
     gabarit: Gabarit;
     typeEchantillon: TypeEchantillon;
     normeEchantillon: string;

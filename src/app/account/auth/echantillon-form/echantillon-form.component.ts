@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EchantillonService } from '../echantillon.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EchantillonService } from '../echantillon.service';
+import { Echantillon } from 'src/app/core/models/echantillon.model';
+
 @Component({
   selector: 'app-echantillon-form',
   templateUrl: './echantillon-form.component.html',
   styleUrls: ['./echantillon-form.component.scss']
 })
-export class EchantillonFormComponent {
+export class EchantillonFormComponent implements OnInit {
   echantillonForm: FormGroup;
-  demandeId :Number;
+  echantillons: Echantillon[] = [];
+  demandeId: number;
   submitted = false;
+  loading:boolean = true;
   error = '';
   successmsg = false;
   messageError = '';
@@ -30,7 +34,7 @@ export class EchantillonFormComponent {
     { display: 'S - Soil', value: 'S_SOIL' },
     { display: 'V - Vegetation', value: 'V_VEGETATION' },
     { display: 'SS - Stream Sediment', value: 'SS_STREAM_SEDIMENT' }
-];
+  ];
   typesEchantillon = [
     { display: '-Analyse', value: 'ANALYSE' },
     { display: 'Roche', value: 'ROCHE' },
@@ -41,18 +45,13 @@ export class EchantillonFormComponent {
     { display: '1 jour', value: 'UN_JOUR' },
     { display: '2 jours', value: 'DEUX_JOURS' },
     { display: '3 jours', value: 'TROIS_JOURS' }
-];
+  ];
 
- 
+  constructor(private fb: FormBuilder, private echantillonService: EchantillonService, private route: ActivatedRoute, private router: Router) {}
 
-
-constructor(private fb: FormBuilder ,
-   private echantillonService: EchantillonService ,
-   private route: ActivatedRoute, 
-   private router: Router) {}
-   
-ngOnInit(): void {
+  ngOnInit(): void {
     this.echantillonForm = this.fb.group({
+      id: '',
       gabarit: '',
       typeEchantillon: '',
       normeEchantillon: '',
@@ -62,15 +61,29 @@ ngOnInit(): void {
       heureFinPrelevement: '',
       priorite: '',
       commentairesInternes: '',
-      demandeId:[this.demandeId,]
+      demandeId: [this.demandeId,]
     });
+    this.loadExistingData();
+  }
+ 
+  loadExistingData() {
   }
 
-   onSubmit() {
-        const existingData = localStorage.getItem('echantillonFormData');
-        const echantillonList = existingData ? JSON.parse(existingData) : [];
-        echantillonList.push(this.echantillonForm.value);
-        localStorage.setItem('echantillonFormData', JSON.stringify(echantillonList));
-        this.router.navigate(['/account/ListParamter']); 
+  dupliquer() {
+    const formValue = this.echantillonForm.value;
+    formValue.id = this.echantillons.length + 1;
+    this.echantillons.push(formValue);
+    localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
+    this.router.navigate(['/account/ListParamter'], { queryParams: { dup: true, echantillonId: formValue.id }});
+  }
+
+  onSubmit() {
+    const existingData = localStorage.getItem('echantillonFormData');
+    this.echantillons = JSON.parse(existingData);
+    const formValue = this.echantillonForm.value;
+    formValue.id = this.echantillons.length + 1;
+    this.echantillons.push(formValue);
+    localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
+    this.router.navigate(['/account/ListParamter'], { queryParams: { dup: false, echantillonId: formValue.id }});
   }
 }

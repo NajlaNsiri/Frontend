@@ -16,6 +16,7 @@ import { ResultParameterComponent } from './result-parameter/result-parameter.co
 import { ResultDemandeComponent } from './result-demande/result-demande.component';
 import { RestPasswordComponent } from './rest-password/rest-password.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { ListEchantillonComponent } from './list-echantillon/list-echantillon.component';
 
 
 
@@ -33,6 +34,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
     ResultDemandeComponent,
     RestPasswordComponent,
     UpdatePasswordComponent,
+    ListEchantillonComponent,
   ],
   imports: [
     CommonModule,

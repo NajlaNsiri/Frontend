@@ -39,7 +39,7 @@ export class DemandeFormComponent implements OnInit {
 
   onSubmit() {
         localStorage.setItem('demandeFormData', JSON.stringify(this.demandeForm.value));
-        this.router.navigate(['/account/echantillon'],);
+        this.router.navigate(['/account/Listechantillon'],);
   }
   
 }

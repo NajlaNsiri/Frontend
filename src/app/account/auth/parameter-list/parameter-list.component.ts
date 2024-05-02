@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ParameterListComponent implements OnInit {
   parameters: Parameter[]=[];
   echantillonId :Number;
+  dup: boolean;
 
   selectedAnalytes: Set<any> = new Set();
 
@@ -32,6 +33,10 @@ export class ParameterListComponent implements OnInit {
   }
   ngOnInit() {
     this.getParameters();
+    this.route.params.subscribe(params => {
+      this.echantillonId = params['echantillonId'];
+      this.dup = params['dup'];
+    });
   }
   getParameters() {
     this.parameterService.getParameters().subscribe({
@@ -45,8 +50,13 @@ export class ParameterListComponent implements OnInit {
     });
   }
   submitAnalytes() {
-    const serializedAnalytes = JSON.stringify(Array.from(this.selectedAnalytes));
+    const analytesWithIds = Array.from(this.selectedAnalytes).map(analyte => ({
+      ...analyte,
+      echantillonId: this.echantillonId // Assuming each analyte should have the current echantillonId
+    }));
+    
+    const serializedAnalytes = JSON.stringify(analytesWithIds);
     localStorage.setItem('ListParamater', serializedAnalytes);
-    this.router.navigate(['/account/ResultParamter'], );
+    this.router.navigate(['/account/ResultParamter'],{ queryParams: { dup: this.dup}});
   }
 }

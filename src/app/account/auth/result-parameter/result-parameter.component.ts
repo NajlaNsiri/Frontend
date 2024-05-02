@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ResultParameterComponent implements OnInit {
   parameters: any[];
   echantillonId :Number;
+  dup:boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -19,6 +20,7 @@ export class ResultParameterComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
+      this.dup = params['dup'];
       this.getParametersFromLocalStorage();
     });
   }
@@ -36,7 +38,12 @@ export class ResultParameterComponent implements OnInit {
   }
 
   submitRequest(): void {
+    if(this.dup ===true){
       localStorage.setItem('ListParamater', JSON.stringify(this.parameters));
-      this.router.navigate(['/account/ResultDemande'], );
+      this.router.navigate(['/account/Listechantillon'], );
+    }else{
+      localStorage.setItem('ListParamater', JSON.stringify(this.parameters));
+      this.router.navigate(['/account/Listechantillon'], );
+    }
   }
 }
