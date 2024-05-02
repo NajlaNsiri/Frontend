@@ -19,26 +19,24 @@ export class ResultParameterComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.echantillonId= +params['echantillonId'];
-      this.parameters = JSON.parse(params['parameters']);
+      this.getParametersFromLocalStorage();
     });
   }
-
+  private getParametersFromLocalStorage() {
+    const storedParameters = localStorage.getItem('ListParamater');
+    if (storedParameters) {
+      this.parameters = JSON.parse(storedParameters);
+    } else {
+      console.error('No parameters found in localStorage');
+      // Handle the absence of data as needed
+    }
+  }
   deleteParameter(index: number): void {
     this.parameters.splice(index, 1);
   }
 
   submitRequest(): void {
-      const url = `http://localhost:4000/api/parameters/${this.echantillonId}`; 
-      this.http.post(url, this.parameters).subscribe({
-        next: (response) => {
-          console.log('Parameters saved successfully', response);
-          // Handle success response
-        },
-        error: (error) => {
-          console.error('Error saving parameters', error);
-          // Handle error response
-        }
-      });
+      localStorage.setItem('ListParamater', JSON.stringify(this.parameters));
+      this.router.navigate(['/account/ResultDemande'], );
   }
 }

@@ -1,5 +1,10 @@
 
 <app-client-nav-bar></app-client-nav-bar>
+<div class="form-container">
+    <div class="main-title">
+        <h1>List de Paramater</h1>
+        <p class="required-note"><span>*</span>: obligatoire</p>
+      </div>
    <table class="table table-hover">
     <thead>
         <tr>
@@ -10,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let analyte of analytesList; let i = index">
+      <tr *ngFor="let analyte of parameters; let i = index">
         <th scope="row">
             <input type="checkbox"
                    [name]="'check-' + analyte.name.toLowerCase()"
@@ -24,4 +29,4 @@
     </tbody>
 </table>
 <button type="button" class="btn btn-primary" (click)="submitAnalytes()">Submit</button>
-
+</div>

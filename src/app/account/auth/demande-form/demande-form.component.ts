@@ -15,6 +15,7 @@ export class DemandeFormComponent implements OnInit {
   successmsg = false;
   messageError = '';
   userId: number;
+  loading :boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -24,10 +25,6 @@ export class DemandeFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.userId = +params['userId'];
-    });
-
     this.demandeForm = this.fb.group({
       demandePour: ['', Validators.required],
       envoyeAuLaboratoire: ['', Validators.required],
@@ -41,24 +38,8 @@ export class DemandeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-    if (this.demandeForm.invalid) {
-      return;
-    }
-
-    this.demandeService.createDemande(this.demandeForm.value).subscribe(
-      (response) => {
-        console.log('API Response:', response);
-        this.successmsg = true; // Set the success message
-        this.error = ''; // Clear any previous errors
-        // Navigate to '/account/echantillon' with demandeId
-        this.router.navigate(['/account/echantillon'], { queryParams: { demandeId: response.demandeId } });
-      },
-      (error) => {
-        console.error('API Error:', error);
-        this.error = 'An error occurred. Please try again.'; // Display error message
-        this.successmsg = false; // Indicate that the submission wasn't successful
-      }
-    );
+        localStorage.setItem('demandeFormData', JSON.stringify(this.demandeForm.value));
+        this.router.navigate(['/account/echantillon'],);
   }
+  
 }

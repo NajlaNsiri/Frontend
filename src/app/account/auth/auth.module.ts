@@ -14,6 +14,8 @@ import { ParameterFormComponent } from './paramater-form/paramater-form.componen
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { ResultParameterComponent } from './result-parameter/result-parameter.component';
 import { ResultDemandeComponent } from './result-demande/result-demande.component';
+import { RestPasswordComponent } from './rest-password/rest-password.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 
@@ -29,6 +31,8 @@ import { ResultDemandeComponent } from './result-demande/result-demande.componen
     UpdateProfileComponent,
     ResultParameterComponent,
     ResultDemandeComponent,
+    RestPasswordComponent,
+    UpdatePasswordComponent,
   ],
   imports: [
     CommonModule,

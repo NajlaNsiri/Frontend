@@ -12,6 +12,8 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { ListDemandeComponent } from './list-demande/list-demande.component';
 import { ResultParameterComponent } from './result-parameter/result-parameter.component';
 import { ResultDemandeComponent } from './result-demande/result-demande.component';
+import { RestPasswordComponent } from './rest-password/rest-password.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 const routes: Routes = [
     {
@@ -21,6 +23,14 @@ const routes: Routes = [
     {
         path: 'signup',
         component: SignupComponent
+    },
+    {
+        path: 'restpassword',
+        component: RestPasswordComponent
+    },
+    {
+        path: 'updatePassword',
+        component: UpdatePasswordComponent
     },
     {
         path :'profile',

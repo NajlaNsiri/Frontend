@@ -1,0 +1,78 @@
+.request-summary {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .header-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .detail {
+        display: flex;
+        flex-direction: column;
+        label {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        // Include styles for your inputs/selects/etc.
+      }
+    }
+    .samples-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 20px;
+      h2 {
+        font-size: 20px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+      .card-content {
+        .card-item {
+          margin-bottom: 10px;
+          .item-title {
+            font-weight: bold;
+          }
+          // Include any additional item styles
+        }
+      }
+    }
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      .cancel-button,
+      .submit-button {
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .cancel-button {
+        background-color: #ccc;
+        // Define any additional cancel button styles
+      }
+      .submit-button {
+        background-color: #4CAF50; // A green color
+        color: white;
+        // Define any additional submit button styles
+      }
+    }
+  }

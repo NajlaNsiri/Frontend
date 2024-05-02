@@ -52,9 +52,6 @@ constructor(private fb: FormBuilder ,
    private router: Router) {}
    
 ngOnInit(): void {
-  this.route.queryParams.subscribe(params => {
-    this.demandeId= +params['demandeId'];
-  });
     this.echantillonForm = this.fb.group({
       gabarit: '',
       typeEchantillon: '',
@@ -70,23 +67,10 @@ ngOnInit(): void {
   }
 
    onSubmit() {
-    this.submitted = true;
-    if (this.echantillonForm.invalid) {
-      return;
-    }
-
-    this.echantillonService.createEchantillon(this.echantillonForm.value).subscribe(
-      (response) => {
-        console.log('API Response:', response);
-        this.successmsg = true; 
-        this.error = ''; 
-        this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: response.echantillonId } });
-      },
-      (error) => {
-        console.error('API Error:', error);
-        this.error = 'An error occurred. Please try again.'; 
-        this.successmsg = false; 
-      }
-    );
+        const existingData = localStorage.getItem('echantillonFormData');
+        const echantillonList = existingData ? JSON.parse(existingData) : [];
+        echantillonList.push(this.echantillonForm.value);
+        localStorage.setItem('echantillonFormData', JSON.stringify(echantillonList));
+        this.router.navigate(['/account/ListParamter']); 
   }
 }

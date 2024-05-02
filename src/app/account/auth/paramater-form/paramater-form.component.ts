@@ -37,19 +37,5 @@ export class ParameterFormComponent {
     if (this.parameterForm.invalid) {
       return;
     }
-
-    this.parameterService.createParameter(this.parameterForm.value).subscribe(
-      (response) => {
-        console.log('API Response:', response);
-        this.successmsg = true; 
-        this.error = ''; 
-        this.router.navigate(['/account/paramter'],);
-      },
-      (error) => {
-        console.error('API Error:', error);
-        this.error = 'An error occurred. Please try again.'; 
-        this.successmsg = false; 
-      }
-    );
   }
 }

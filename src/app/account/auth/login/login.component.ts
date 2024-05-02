@@ -35,6 +35,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log('API Response:', response); // Log the full response object
+
+          // Store userId and token in localStorage
+          localStorage.setItem('userId', response.userId.toString());
+          localStorage.setItem('token', response.token);
+
           // Navigate to the 'demande' page and pass the user ID as a state or parameter
           this.router.navigate(['/account/demande'], { queryParams: { userId: response.userId } });
           this.error = ''; // Clear any previous errors
@@ -44,6 +49,7 @@ export class LoginComponent implements OnInit {
           this.error = 'An error occurred. Please try again.'; // Display error message
         }
       );
+
   }
   
 }

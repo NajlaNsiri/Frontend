@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
 @Injectable({
@@ -22,7 +22,11 @@ export class EchantillonService {
 
   // Create a new echantillon
   createEchantillon(echantillon: Echantillon): Observable<any> {
-    return this.http.post(this.baseUrl, echantillon);
+    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post(this.baseUrl, echantillon,{ headers });
   }
 
   // Update an existing echantillon

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Demande } from 'src/app/core/models/demande.model';
 @Injectable({
@@ -21,8 +21,13 @@ export class DemandeService {
   }
 
   // Create a new demande
-  createDemande(demande: Demande): Observable<any> {
-    return this.http.post(this.baseUrl, demande);
+  createDemande(demandeData: any): Observable<any> {
+    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post(`${this.baseUrl}`, demandeData, { headers });
   }
 
   // Update an existing demande

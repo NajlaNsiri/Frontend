@@ -1,43 +1,61 @@
 <app-client-nav-bar></app-client-nav-bar>
 <div class="request-summary">
-    <h2>Request summary for Nyrtstar Bouchard Hébert</h2>
-    
-    <div class="request-details">
-      <div class="detail">
-        <label for="purchaseOrder">Purchase order:</label>
-        <input id="purchaseOrder" type="text" />
-      </div>
-      <div class="detail">
-        <label for="sentToLab">Sent to laboratory:</label>
-        <input id="sentToLab" type="text" />
-      </div>
-      <div class="detail">
-        <label for="sampleNumber">Sample number:</label>
-        <input id="sampleNumber" type="number" />
-      </div>
-      <!-- Additional details fields here -->
+  <h1>Demande de résumé pour  Bouchard Hébert</h1>
+  <div class="header-details">
+    <div class="detail">
+      <label>Bon de commande:</label>
+      {{demandes.bonDeCommande}}
     </div>
-  
-    <div class="comments">
-      <label for="comments">Comments:</label>
-      <textarea id="comments"></textarea>
+    <div class="detail">
+      <label>Langue du certificat:</label>
+      {{demandes.langueDuCertificat}}
     </div>
-  
-    <div class="details-table">
-      <!-- You can use Angular *ngFor directive to render table rows based on data -->
-      <table>
-        <thead>
-          <tr>
-            <th>Network name</th>
-            <th>Sampler name</th>
-            <th>Customer Information</th>
-            <!-- Additional table headers here -->
-          </tr>
-        </thead>
-        <tbody>
-          
-        </tbody>
-      </table>
+    <div class="detail">
+      <label>commentaires:</label>
+      {{demandes.commentairesInternes}}
+    </div>
+    <div class="detail">
+      <label>Envoyé au laboratoire:</label>
+      {{demandes.envoyeAuLaboratoire}}
     </div>
   </div>
-  
+  <table class="samples-table">
+    <thead>
+      <tr>
+        <th>Type Echantillon</th>
+        <th>Norme Echantillon</th>
+        <th>Nom Echantillon</th>
+        <th>Lieu Prelevement</th>
+        <th>Date Fin Prelevement</th>
+        <th>Priorite</th>
+        <th>CommentairesInternes </th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to iterate over your samples data -->
+      <tr *ngFor="let echantillon of echantillons">
+        <td>{{ echantillon.typeEchantillon }}</td>
+        <td>{{ echantillon.normeEchantillon }}</td>
+        <td>{{ echantillon.nomEchantillon }}</td>
+        <td>{{ echantillon.lieuPrelevement }}</td>
+        <td>{{ echantillon.dateFinPrelevement }}</td>
+        <td>{{ echantillon.priorite  }}</td>
+        <td>{{ echantillon.commentairesInternes  }}</td>
+        <td>
+          <div class="card parameters-card">
+            <h2>Parameters</h2>
+            <div class="card-content">
+              <!-- Parameters content goes here -->
+              <!-- This will likely need to be dynamic based on your Angular component data -->
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-actions">
+    <button class="cancel-button">Cancel</button>
+    <button class="submit-button">Submit request</button>
+  </div>
+</div>
+

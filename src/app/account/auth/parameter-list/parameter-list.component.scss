@@ -39,4 +39,162 @@
   .btn:hover {
     background-color: #0056b3;
   }
+  .form-container {
+    max-width: 1085px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    .main-title {
+      h1 {
+        color: #000;
+        font-size: 24px;
+        text-align: left;
+      }
+  
+      .required-note {
+        text-align: left;
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+  
+        span {
+          color: red; // Only the asterisk is red
+        }
+      }
+    }
+  
+    .card {
+      background: #f9f9f9;
+      border-radius: 4px;
+      margin-top: 20px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+  
+        h2 {
+          color: #333;
+          font-size: 20px;
+        }
+  
+        .card-actions {
+          display: flex;
+  
+          .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+  
+            &:not(:last-child) {
+              margin-right: 10px;
+            }
+  
+            &.draft-btn {
+              background-color: #6c757d;
+              color: #fff;
+            }
+  
+            &.submit-btn {
+              background-color: #007bff;
+              color: #fff;
+            }
+          }
+        }
+      }
+  
+      .form-group {
+        margin-bottom: 20px;
+  
+        label {
+          display: block;
+          margin-bottom: 5px;
+          color: #333;
+        }
+  
+        .form-control {
+          display: block;
+          width: 100%;
+          padding: .375rem .75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          color: #495057;
+          background-color: #fff;
+          background-clip: padding-box;
+          border: 1px solid #ced4da;
+          border-radius: .25rem;
+          transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  
+          &:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+          }
+        }
+  
+        .form-control:disabled, .form-control[readonly] {
+          background-color: #e9ecef;
+          opacity: 1;
+        }
+  
+        input[type="checkbox"] {
+          width: auto;
+          margin-top: .25rem;
+        }
+  
+        select.form-control:not([size]):not([multiple]) {
+          height: calc(2.25rem + 2px);
+        }
+  
+        textarea.form-control {
+          height: auto;
+        }
+      }
+  
+      // Additional styles for inline checkbox and textarea
+      .form-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+  
+        .checkbox-group {
+          flex-basis: 20%;
+          padding-right: 10px;
+  
+          label {
+            margin-right: 10px;
+          }
+  
+          input[type="checkbox"] {
+            margin-top: 0;
+          }
+        }
+  
+        .textarea-group {
+          flex-basis: 75%;
+          padding-left: 10px;
+        }
+  
+        @media (max-width: 768px) {
+          flex-direction: column;
+  
+          .checkbox-group,
+          .textarea-group {
+            flex-basis: auto;
+            padding-right: 0;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
   
