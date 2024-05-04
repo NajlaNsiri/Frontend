@@ -29,9 +29,9 @@ export class ListDemandeComponent implements OnInit {
     this.loadDemandes();
   }
   loadDemandes(): void {
-    const demandeIds = [1, 2, 3, 4]; // Example IDs of demandes to fetch
+    const demandeIds =2;
 
-    forkJoin(demandeIds.map(id => this.demandeService.getDemande(id)))
+    this.demandeService.getDemande(demandeIds)
       .subscribe(results => {
         this.demandes = results;
       }, error => {

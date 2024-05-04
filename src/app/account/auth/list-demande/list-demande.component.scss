@@ -1,60 +1,235 @@
-.demande-client-table {
-    margin: 20px;
-    overflow-x: auto;
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  
-      th, td {
-        border: 1px solid #ddd;
-        padding: 12px 15px;
-        text-align: left;
-        font-size: 14px;
-      }
-  
-      th {
-        background-color: #007BFF;
-        color: white;
-        font-weight: bold;
-      }
-  
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-  
-      button {
-        padding: 8px 16px;
-        margin: 4px;
-        cursor: pointer;
-        border: none;
-        border-radius: 4px;
-        font-size: 14px;
-        transition: background-color 0.3s, box-shadow 0.3s;
-  
-        &:hover {
-          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-      }
-  
-      .accept-btn {
-        background-color: #4CAF50; // Green for accept
-        color: white;
-  
-        &:hover {
-          background-color: #45a049;
-        }
-      }
-  
-      .refuse-btn {
-        background-color: #f44336; // Red for refuse
-        color: white;
-  
-        &:hover {
-          background-color: #d73825;
-        }
-      }
-    }
-  }
-  
+.demande-client-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.demande-client-table th, .demande-client-table td {
+  padding: 8px 16px;
+  text-align: left;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.demande-client-table th {
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.demande-client-table input {
+  width: 95%; /* Makes the input field take up most of the cell */
+  padding: 4px; /* Smaller padding to fit within the cell */
+  margin: auto; /* Centered within the cell */
+  display: block; /* Ensures it doesn't inline with anything else */
+  border: 1px solid #ccc; /* Light border making it subtle */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.demande-client-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.demande-client-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+.demande-client-table input[type="checkbox"] {
+  margin-left: auto; /* Center checkbox horizontally */
+  margin-right: auto; /* Center checkbox horizontally */
+  display: block;
+}
+
+.demande-client-table th, .demande-client-table td {
+  padding: 8px 16px;
+  text-align: center; /* Center content */
+  border-right: 1px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.demande-client-table th:first-child, .demande-client-table td:first-child {
+  width: 50px; /* Ensure consistent width for checkbox column */
+}
+.demande-client-table .btn-search, .demande-client-table .btn-reset {
+  display: block; /* Make buttons block to fill the cell width */
+  width: 100%; /* Full width to align better in the cell */
+  padding: 6px 12px; /* Padding inside the buttons */
+  margin: 0px 0 0 0; /* Reduce margin on top for the second button */
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.demande-client-table .btn-search {
+  margin-bottom: 2px; /* Smaller margin below the first button */
+  background-color: #007bff; /* Blue background */
+}
+
+.demande-client-table .btn-search:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.demande-client-table .btn-reset {
+  background-color: #dc3545; /* Red background */
+}
+
+.demande-client-table .btn-reset:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+.demande-client-table .table-legend-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns children to the right */
+  margin-bottom: 10px;
+}
+
+.demande-client-table .table-legend {
+  font-family: Arial, sans-serif;
+  margin-left: 20px; /* Ensures spacing between the two legend blocks */
+}
+
+.demande-client-table .table-legend .icon {
+  font-size: 16px;
+  padding-right: 5px;
+}
+
+.demande-client-table .table-legend .icon.green {
+  color: green;
+}
+
+.demande-client-table .table-legend .icon.yellow {
+  color: orange;
+}
+
+.demande-client-table .table-legend .icon.red {
+  color: red;
+}
+
+.demande-client-table .table-legend .icon.blue {
+  color: blue;
+}
+
+.demande-client-table .table-legend .icon.gray {
+  color: gray;
+}
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 50px; /* Increased padding at the top to lower the buttons */
+  padding-bottom: 20px; /* Adjust padding at the bottom if needed */
+  padding-left: 20px; /* Left padding for alignment */
+}
+
+.table-button {
+  background-color: #007bff; /* Initial background color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px; /* Space between buttons */
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2); /* Text shadow for better readability */
+}
+
+.table-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Shadow effect for depth */
+}
+
+.download-button {
+  background-image: linear-gradient(to right, #007bff, #0056b3); /* Gradient background */
+  position: relative; /* Needed for absolute positioning of the icon */
+  padding-right: 40px; /* Extra padding to accommodate the icon */
+}
+
+.download-button::after {
+  content: '⬇️'; /* Using emoji as a placeholder */
+  position: absolute;
+  right: 10px; /* Position icon on the right within the button */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Ensure it's perfectly centered */
+  font-size: 16px; /* Icon size */
+}
+.content-container {
+  display: flex;
+  justify-content: space-between; /* This will position children at both ends */
+  align-items: center; /* Align items vertically */
+}
+
+.button-container {
+  display: flex;
+  padding: 20px; /* Adjust padding as needed */
+}
+
+.table-button {
+  background-color: #007bff; /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px; /* Space between buttons */
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.table-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.icon-legend-container {
+  display: flex;
+}
+
+.icon-legend {
+  font-family: Arial, sans-serif;
+  margin-left: 20px;
+}
+
+.icon-legend p {
+  margin: 0 10px; /* Adjust margin for spacing */
+}
+
+.icon {
+  font-size: 16px;
+  padding-right: 5px;
+}
+
+.icon.green { color: green; }
+.icon.yellow { color: orange; }
+.icon.red { color: red; }
+.icon.blue { color: blue; }
+.icon.gray { color: gray; }
+.card-container {
+  background-color: #ffffff; /* White background for the card */
+  border: 1px solid #ddd; /* Light grey border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 0; /* No padding here, padding will be inside content areas */
+  margin: 20px auto; /* Center the card with some margin from the top and bottom */
+  width: 95%; /* Adjust based on your layout needs */
+  overflow: hidden; /* Ensures no content spills out */
+}
+
+.card-header {
+  background-color: #007bff; /* Blue background matching the top bar */
+  color: #ffffff; /* White text */
+  padding: 10px 20px; /* Adequate padding for the header */
+  font-size: 16px; /* Adequate font size for visibility */
+  font-weight: bold; /* Bold text */
+  border-top-left-radius: 8px; /* Rounded top left corner */
+  border-top-right-radius: 8px; /* Rounded top right corner */
+}
+
+.content-container {
+  padding: 20px; /* Padding inside the content area */
+  display: flex;
+  justify-content: space-between; /* Maintains layout of buttons and legends */
+  align-items: center; /* Vertical alignment */
+}

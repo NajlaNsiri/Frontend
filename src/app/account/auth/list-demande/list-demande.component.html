@@ -1,31 +1,90 @@
-<div class="demande-client-table">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Demande Pour</th>
-          <th>Envoyé Au Laboratoire</th>
-          <th>Courriels Supplémentaires</th>
-          <th>Bon De Commande</th>
-          <th>Langue Du Certificat</th>
-          <th>Commentaires Internes</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let demande of demandes; let i = index">
-            <td>{{ demande.demandeId }}</td>
-            <td>{{ demande.demandePour }}</td>
-            <td>{{ demande.envoyeAuLaboratoire }}</td>
-            <td>{{ demande.courrielsSupplementaires }}</td>
-            <td>{{ demande.bonDeCommande }}</td>
-            <td>{{ demande.langueDuCertificat }}</td>
-            <td>{{ demande.commentairesInternes }}</td>
-          <td>
-            <button class="accept-btn" (click)="details(demande.demandeId)">Details</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="card-container">
+  <div class="card-header">
+    LISTE DES RÉSULTATS (accessible à NYSTAR LANGLOIS)
   </div>
+<div class="demande-client-table">
+  <!-- Button container for left-aligned buttons -->
+  <div class="content-container">
+    <div class="button-container">
+      <button class="table-button">Afficher</button>
+      <button class="table-button">Exporter</button>
+      <button class="table-button download-button">Télécharger documents</button>
+    </div>
   
+    <div class="icon-legend-container">
+      <div class="icon-legend">
+        <p><span class="icon green">✔️</span> Demande d'analyse transmise et en attente d'acceptation</p>
+        <p><span class="icon yellow">❗</span> Résultats partiels</p>
+        <p><span class="icon red">✖️</span> Échantillon rejeté</p>
+        <p><span class="icon blue">⚠️</span> Dépassement de norme</p>
+      </div>
+      <div class="icon-legend">
+        <p><span class="icon gray">🔬</span> Reçu au laboratoire, en cours d'analyse</p>
+        <p><span class="icon green">✔️</span> Résultats complétés</p>
+        <p><span class="icon red">❗❗</span> Non-Potable</p>
+      </div>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th><input type="checkbox" id="select-all"></th>
+        <th>ID</th>
+        <th><div style="white-space: nowrap;">Bon de <br> commande</div></th>
+
+        
+        <th>Numéro <br>d'échantillon</th>
+        <th>Nom de<br> l'échantillon</th>
+        <th>Nom du<br> préleveur</th>
+        <th>Nom du<br> projet</th>
+        <th>Type <br>d'échantillon</th>
+        <th>Lieu de<br> prélèvement</th>
+        <th>Type de<br> prélèvement</th>
+        <th>Date de<br> fin de <br>prélèvement</th>
+        <th>Date de <br>dernière<br> modification</th>
+        <th>Nom du <br>réseau</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+      <tr> <!-- Second row for filters -->
+        <th><!-- Placeholder for checkbox filter --></th>
+        
+        <th><input type="text" placeholder="Filter Bon de commande" /></th>
+        
+        <th><input type="text" placeholder="Filter Numéro d'échantillon" /></th>
+        <th><input type="text" placeholder="Filter Nom de l'échantillon" /></th>
+        <th><input type="text" placeholder="Filter Nom du préleveur" /></th>
+        <th><input type="text" placeholder="Filter Nom du projet" /></th>
+        <th><input type="text" placeholder="Filter Type d'échantillon" /></th>
+        <th><input type="text" placeholder="Filter Lieu de prélèvement" /></th>
+        <th><input type="text" placeholder="Filter Type de prélèvement" /></th>
+        <th><input type="text" placeholder="Filter Date de fin de prélèvement" /></th>
+        <th><input type="text" placeholder="Filter Date de dernière modification" /></th>
+        <th><input type="text" placeholder="Filter Nom du réseau" /></th>
+        <th><input type="text" placeholder="Filter Statut" /></th>
+        <th>
+          <button class="btn-search">Recherche</button><br>
+          <button class="btn-reset">Réinitialiser</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Sample row -->
+      <tr *ngFor="let demande of demandes; let i = index">
+        <td>{{ demande.demandeId }}</td>
+        <td>{{ demande.demandePour }}</td>
+        <td>{{ demande.envoyeAuLaboratoire }}</td>
+        <td>{{ demande.courrielsSupplementaires }}</td>
+        <td>{{ demande.bonDeCommande }}</td>
+        <td>{{ demande.langueDuCertificat }}</td>
+        <td>{{ demande.commentairesInternes }}</td>
+        <td>
+          <!-- Buttons for actions such as edit, delete, etc. -->
+          <button class="btn-edit">Modifier</button>
+          <button class="btn-delete">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
