@@ -22,7 +22,11 @@ export class ParameterListComponent implements OnInit {
       this.selectedAnalytes.add(analyte);
     }
   }
-  constructor(private parameterService: ParameterService, private router: Router , private route: ActivatedRoute) { }
+  constructor(private parameterService: ParameterService, private router: Router , private route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        this.echantillonId = params['echantillonId'];
+      });
+   }
   
   setSelectedAnalytes(analytes: Set<string>) {
     this.selectedAnalytes = analytes;
@@ -33,16 +37,11 @@ export class ParameterListComponent implements OnInit {
   }
   ngOnInit() {
     this.getParameters();
-    this.route.params.subscribe(params => {
-      this.echantillonId = params['echantillonId'];
-      this.dup = params['dup'];
-    });
   }
   getParameters() {
     this.parameterService.getParameters().subscribe({
       next: (parameters: Parameter[]) => {
         this.parameters = parameters; // Store the fetched parameters in the array
-        console.log('Parameters fetched and stored:', this.parameters);
       },
       error: (error) => {
         console.error('Error fetching parameters:', error);
@@ -54,7 +53,7 @@ export class ParameterListComponent implements OnInit {
       ...analyte,
       echantillonId: this.echantillonId // Assuming each analyte should have the current echantillonId
     }));
-    
+    console.log(analytesWithIds);
     const serializedAnalytes = JSON.stringify(analytesWithIds);
     localStorage.setItem('ListParamater', serializedAnalytes);
     this.router.navigate(['/account/ResultParamter'],{ queryParams: { dup: this.dup}});

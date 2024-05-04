@@ -40,9 +40,11 @@ export class ResultParameterComponent implements OnInit {
   submitRequest(): void {
     if(this.dup ===true){
       localStorage.setItem('ListParamater', JSON.stringify(this.parameters));
+      console.log(this.parameters);
       this.router.navigate(['/account/Listechantillon'], );
     }else{
       localStorage.setItem('ListParamater', JSON.stringify(this.parameters));
+      console.log(this.parameters);
       this.router.navigate(['/account/Listechantillon'], );
     }
   }

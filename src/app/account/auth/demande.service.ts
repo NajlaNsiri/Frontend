@@ -9,15 +9,25 @@ export class DemandeService {
   baseUrl: string = "http://localhost:4000/api/demandes";
 
   constructor(private http: HttpClient) { }
-
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token');  // Retrieve the token from localStorage
+    return {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+  }
   // Get all demandes
   getDemandes(): Observable<any> {
-    return this.http.get(this.baseUrl);
+    return this.http.get(this.baseUrl, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Get a single demande by id
   getDemande(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+    return this.http.get(`${this.baseUrl}/${id}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Create a new demande
@@ -32,11 +42,15 @@ export class DemandeService {
 
   // Update an existing demande
   updateDemande(id: number, demande: Demande): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, demande);
+    return this.http.put(`${this.baseUrl}/${id}`, demande, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Delete a demande
   deleteDemande(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 }

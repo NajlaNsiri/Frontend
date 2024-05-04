@@ -1,0 +1,71 @@
+<app-client-nav-bar></app-client-nav-bar>
+<div class="form-container">
+  <div class="card-header">
+    <h2>ÉCHANTILLON 1</h2>
+    <div class="card-actions">
+      <!-- <button type="button" class="btn">Enregistrer Gabarit</button> -->
+      <!-- <button type="button"(click)="dupliquer()" class="btn">Dupliquer</button>
+      <button type="button" class="btn">Supprimer</button> -->
+    </div>
+  </div>
+  <div class="card">
+    <form [formGroup]="echantillonForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gabarit">Gabarit:</label>
+          <select class="form-control" formControlName="gabarit" id="gabarit">
+            <option *ngFor="let gabarit of gabarits" [value]="gabarit.value">
+              {{ gabarit.display }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="typeEchantillon" class="required">Type d'échantillon:</label>
+          <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
+            <option *ngFor="let type of typesEchantillon" [value]="type.value">
+              {{ type.display }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nomEchantillon">Nom de l'échantillon:</label>
+        <input type="text" class="form-control" formControlName="nomEchantillon" id="nomEchantillon">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dateFinPrelevement" class="required">Date de fin de prélèvement:</label>
+          <input type="date" class="form-control" formControlName="dateFinPrelevement" id="dateFinPrelevement">
+        </div>
+        <div class="form-group">
+          <label for="heureFinPrelevement" class="required">Heure de fin de prélèvement:</label>
+          <input type="time" class="form-control" formControlName="heureFinPrelevement" id="heureFinPrelevement">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group priority-group">
+          <label class="required">Priorité:</label>
+          <div class="priority-options">
+            <!-- Radio buttons for priority -->
+            <!-- Replace with actual value and formControlName -->
+            <label><input type="radio" formControlName="priorite" value="STANDARD"> Standard</label>
+            <label><input type="radio" formControlName="priorite" value="UN_JOUR"> 1 heure</label>
+            <label><input type="radio" formControlName="priorite" value="DEUX_JOURS"> 2 jours</label>
+            <label><input type="radio" formControlName="priorite" value="TROIS_JOURS"> 3 jours</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="commentairesInternes">Commentaires internes de l'échantillon:</label>
+        <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <button (click)="updateParamter()" class="btn btn-primary">modifier paramaters</button>
+    </form>
+  </div>
+</div>

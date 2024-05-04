@@ -42,6 +42,7 @@ export class ListEchantillonComponent implements OnInit {
   ];
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     this.form = this.fb.group({});
+    
   }
 
   ngOnInit(): void {
@@ -77,7 +78,9 @@ export class ListEchantillonComponent implements OnInit {
     localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
     this.form.removeControl(`echantillon${index}`);
   }
-
+  update(echantillonId:number){
+    this.router.navigate(['/account/updateechantillon'], { queryParams: { echantillonId: echantillonId }});
+  }
   onSubmit(index: number) {
     const formGroup = this.form.get(`echantillon${index}`) as FormGroup;
     if (formGroup.valid) {

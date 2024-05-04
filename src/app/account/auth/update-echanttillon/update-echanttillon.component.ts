@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { EchantillonService } from '../echantillon.service';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
+import { EchantillonService } from '../echantillon.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-echantillon-form',
-  templateUrl: './echantillon-form.component.html',
-  styleUrls: ['./echantillon-form.component.scss']
+  selector: 'app-update-echanttillon',
+  templateUrl: './update-echanttillon.component.html',
+  styleUrls: ['./update-echanttillon.component.scss']
 })
-export class EchantillonFormComponent implements OnInit {
+export class UpdateEchanttillonComponent implements OnInit {
   echantillonForm: FormGroup;
   echantillons: Echantillon[] = [];
+  echantillonId: number;
   demandeId: number;
   submitted = false;
   loading: boolean = true;
@@ -47,7 +48,11 @@ export class EchantillonFormComponent implements OnInit {
     { display: '3 jours', value: 'TROIS_JOURS' }
   ];
 
-  constructor(private fb: FormBuilder, private echantillonService: EchantillonService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private fb: FormBuilder, private echantillonService: EchantillonService, private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      this.echantillonId = params['echantillonId'];
+    });
+  }
 
   ngOnInit(): void {
     this.echantillonForm = this.fb.group({
@@ -69,22 +74,35 @@ export class EchantillonFormComponent implements OnInit {
   loadExistingData() {
     const existingData = localStorage.getItem('echantillonFormData');
     this.echantillons = existingData ? JSON.parse(existingData) : [];
-  }
+    const echantillon = this.echantillons.find(e => e.echantillonId === this.echantillonId);
 
-  dupliquer() {
-    const formValue = this.echantillonForm.value;
-    formValue.id = this.echantillons && this.echantillons.length ? this.echantillons.length + 1 : 1;
-    this.echantillons.push(formValue);
-    localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
-    this.router.navigate(['/account/ListParamter'], { queryParams: { dup: true, echantillonId: formValue.id }});
+  // If a matching echantillon is found, patch the form values
+  if (echantillon) {
+    this.echantillonForm.patchValue(echantillon);
   }
-
-  onSubmit() {
+  }
+  updateParamter(){
     this.loadExistingData();
     const formValue = this.echantillonForm.value;
     formValue.id = this.echantillons.length ? this.echantillons.length + 1 : 1;
     this.echantillons.push(formValue);
     localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
     this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: formValue.id }});
+  }
+  
+  onSubmit() {
+    if (this.echantillonForm.valid) {
+      const formData = this.echantillonForm.value;
+      const index = this.echantillons.findIndex(e => e.echantillonId === formData.id);
+      if (index !== -1) {
+        this.echantillons[index] = formData;
+      } else {
+        this.echantillons.push(formData);
+      }
+      localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
+      this.router.navigate(['/account/Listechantillon']);  // Adjust the route as needed
+    } else {
+      console.error('Form is not valid');
+    }
   }
 }

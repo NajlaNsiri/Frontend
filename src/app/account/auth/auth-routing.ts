@@ -15,6 +15,8 @@ import { ResultDemandeComponent } from './result-demande/result-demande.componen
 import { RestPasswordComponent } from './rest-password/rest-password.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { ListEchantillonComponent } from './list-echantillon/list-echantillon.component';
+import { UpdateEchanttillonComponent } from './update-echanttillon/update-echanttillon.component';
+import { UpdateListParameterComponent } from './update-list-parameter/update-list-parameter.component';
 
 const routes: Routes = [
     {
@@ -52,6 +54,14 @@ const routes: Routes = [
     {
         path: 'echantillon',
         component: EchantillonFormComponent
+    },
+    {
+        path: 'updateechantillon',
+        component: UpdateEchanttillonComponent
+    },
+    {
+        path: 'updateparameter',
+        component: UpdateListParameterComponent
     },
     {
         path :'paramter',
