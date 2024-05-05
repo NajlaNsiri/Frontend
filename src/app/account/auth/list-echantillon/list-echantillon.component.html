@@ -1,54 +1,50 @@
-<div class="card-container">
-  <div class="card-header">
-    RÉSULTATS RÉCENTS (accessible à NYSTAR LANGLOIS)
-  </div>
-<div class="demande-client-table">
-  <!-- Button container for left-aligned buttons -->
-  <div class="content-container">
-    <div class="button-container">
-      <button class="table-button">Afficher/masquer le columnes</button>
-      
+<app-client-nav-bar></app-client-nav-bar>
+<div class="form-container" *ngIf="form">
+  <button type="button" (click)="navigateToListEchantillon()" class="btn btn-primary">Ajouter un Échantillon</button>
+  <div *ngFor="let echantillon of echantillons; let i = index" [formGroup]="form.get('echantillon'+i)" class="card">
+    <div class="card-header">
+      <h2>ÉCHANTILLON {{ echantillon.echantillonId }}</h2>
+      <div class="card-actions">
+        <button type="button" (click)="onSubmit(i)" class="btn btn-success">Update le paramètre</button>
+        <button type="button" (click)="delete(i)" class="btn btn-danger">Supprimer</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="gabarit{{ i }}">Gabarit:</label>
+        <select formControlName="gabarit" class="form-control" id="gabarit{{ i }}">
+          <option *ngFor="let gabarit of gabarits" [value]="gabarit.value">{{ gabarit.display }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="typeEchantillon{{ i }}">Type d'échantillon:</label>
+        <select formControlName="typeEchantillon" class="form-control" id="typeEchantillon{{ i }}">
+          <option *ngFor="let type of typesEchantillon" [value]="type.value">{{ type.display }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="nomEchantillon{{ i }}">Nom de l'échantillon:</label>
+        <input type="text" formControlName="nomEchantillon" class="form-control" id="nomEchantillon{{ i }}">
+      </div>
+      <div class="form-group">
+        <label for="dateFinPrelevement{{ i }}">Date de fin de prélèvement:</label>
+        <input type="date" formControlName="dateFinPrelevement" class="form-control" id="dateFinPrelevement{{ i }}">
+      </div>
+      <div class="form-group">
+        <label for="heureFinPrelevement{{ i }}">Heure de fin de prélèvement:</label>
+        <input type="time" formControlName="heureFinPrelevement" class="form-control" id="heureFinPrelevement{{ i }}">
+      </div>
+      <div class="form-group">
+        <label for="commentairesInternes{{ i }}">Commentaires internes de l'échantillon:</label>
+        <textarea formControlName="commentairesInternes" class="form-control" id="commentairesInternes{{ i }}"></textarea>
+      </div>
     </div>
   </div>
-  
-<table>
-  <thead>
-      <tr>
-         
-          <th>Numéro d'échantillon</th>
-          <th>Nom de l'échantillon</th>
-          <th>Type d'échantillon</th>
-          <th>Lieu de prélèvement</th>
-          <th>Type de prélèvement</th>
-          <th>Date de début de prélèvement</th>
-          <th>Statut</th>
-          <th>Details</th>
-      </tr>
-      <tr> <!-- Second row for filters -->
-         
-          <th><input type="text" placeholder="Filter Numéro d'échantillon" /></th>
-          <th><input type="text" placeholder="Filter Nom de l'échantillon" /></th>
-          <th><input type="text" placeholder="Filter Type d'échantillon" /></th>
-          <th><input type="text" placeholder="Filter Lieu de prélèvement" /></th>
-          <th><input type="text" placeholder="Filter Type de prélèvement" /></th>
-          <th><input type="text" placeholder="Filter Date de début de prélèvement" /></th>
-          <th><input type="text" placeholder="Filter Statut" /></th>
-          <th><!-- Placeholder for actions --></th>
-      </tr>
-  </thead>
-  <tbody>
-      <!-- Dynamic row generation using *ngFor directive on echantillons array -->
-      <tr *ngFor="let item of echantillons">
-        
-          <td>{{ item.sampleNumber }}</td>
-          <td>{{ item.sampleName }}</td>
-          <td>{{ item.sampleType }}</td>
-          <td>{{ item.location }}</td>
-          <td>{{ item.collectionType }}</td>
-          <td>{{ item.startDate | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ item.status }}</td>
-          <td><button>Details</button></td>
-      </tr>
-  </tbody>
-</table>
+  <div class="button-container">
+    <button type="button" (click)="navigateToPrevious()" class="btn btn-secondary">Previous</button>
+    <button type="button" (click)="navigateToNext()" class="btn btn-secondary">Next</button>
+  </div>
+</div>
+<div *ngIf="loading" class="loading-indicator">
+  Loading...
 </div>

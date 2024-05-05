@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,24 @@ export class EchantillonService {
 
   constructor(private http: HttpClient) { }
 
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    return {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+  }
+
+  getEchantillonsByDemandeId(demandeId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/by-demande/${demandeId}`, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      catchError((error) => {
+        console.error('Error fetching echantillons by demandeId', error);
+        return throwError(error); // Properly handle the error and return an observable
+      })
+    );
+  }
   // Get all echantillons
   getEchantillons(): Observable<any> {
     return this.http.get(this.baseUrl);

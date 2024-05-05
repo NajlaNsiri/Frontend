@@ -51,7 +51,7 @@ export class EchantillonFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.echantillonForm = this.fb.group({
-      id: '',
+      echantillonId: '',
       gabarit: '',
       typeEchantillon: '',
       normeEchantillon: '',
@@ -73,18 +73,19 @@ export class EchantillonFormComponent implements OnInit {
 
   dupliquer() {
     const formValue = this.echantillonForm.value;
-    formValue.id = this.echantillons && this.echantillons.length ? this.echantillons.length + 1 : 1;
+    formValue.echantillonId = this.echantillons && this.echantillons.length ? this.echantillons.length + 1 : 1;
     this.echantillons.push(formValue);
     localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
-    this.router.navigate(['/account/ListParamter'], { queryParams: { dup: true, echantillonId: formValue.id }});
+    this.router.navigate(['/account/ListParamter'], { queryParams: { dup: true, echantillonId: formValue.echantillonId }});
   }
 
   onSubmit() {
     this.loadExistingData();
     const formValue = this.echantillonForm.value;
-    formValue.id = this.echantillons.length ? this.echantillons.length + 1 : 1;
+    formValue.echantillonId = this.echantillons.length ? this.echantillons.length + 1 : 1;
     this.echantillons.push(formValue);
     localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
-    this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: formValue.id }});
+    console.log(formValue);
+    this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: formValue.echantillonId }});
   }
 }

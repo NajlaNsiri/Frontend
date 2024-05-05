@@ -22,6 +22,16 @@ export class DemandeService {
       headers: this.getAuthHeaders()
     });
   }
+  getDemandesByUserId(): Observable<any> {
+    const userId = localStorage.getItem('userId'); // Retrieve the userId from localStorage
+    if (!userId) {
+      throw new Error('User ID not found'); // Optionally handle the absence of userId
+    }
+    return this.http.get(`${this.baseUrl}/user/${userId}`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+  
 
   // Get a single demande by id
   getDemande(id: number): Observable<any> {
@@ -32,6 +42,7 @@ export class DemandeService {
 
   // Create a new demande
   createDemande(demandeData: any): Observable<any> {
+
     const token = localStorage.getItem('token'); // Retrieve the token from localStorage
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

@@ -19,6 +19,11 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { ListEchantillonComponent } from './list-echantillon/list-echantillon.component';
 import { UpdateEchanttillonComponent } from './update-echanttillon/update-echanttillon.component';
 import { UpdateListParameterComponent } from './update-list-parameter/update-list-parameter.component';
+import { NavbarComponent } from 'src/app/site/components/navbar/navbar.component';
+import { ClientNavBarComponent } from 'src/app/shared/client-nav-bar/client-nav-bar.component';
+import { ListDemandeComponent } from './list-demande/list-demande.component';
+import { ListEchantillonsComponent } from './list-echantillons/list-echantillons.component';
+import { FilterParametersPipe } from './pipes/filter-parameters.pipe';
 
 
 
@@ -38,6 +43,9 @@ import { UpdateListParameterComponent } from './update-list-parameter/update-lis
     ListEchantillonComponent,
     UpdateEchanttillonComponent,
     UpdateListParameterComponent,
+    ListDemandeComponent,
+    ListEchantillonsComponent,
+    FilterParametersPipe
   ],
   imports: [
     CommonModule,

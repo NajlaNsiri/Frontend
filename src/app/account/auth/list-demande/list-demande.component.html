@@ -1,3 +1,4 @@
+<app-client-nav-bar></app-client-nav-bar>
 <div class="card-container">
   <div class="card-header">
     LISTE DES RÉSULTATS (accessible à NYSTAR LANGLOIS)
@@ -28,26 +29,17 @@
   <table>
     <thead>
       <tr>
-        <th><input type="checkbox" id="select-all"></th>
         <th>ID</th>
-        <th><div style="white-space: nowrap;">Bon de <br> commande</div></th>
-
-        
-        <th>Numéro <br>d'échantillon</th>
-        <th>Nom de<br> l'échantillon</th>
-        <th>Nom du<br> préleveur</th>
-        <th>Nom du<br> projet</th>
-        <th>Type <br>d'échantillon</th>
-        <th>Lieu de<br> prélèvement</th>
-        <th>Type de<br> prélèvement</th>
-        <th>Date de<br> fin de <br>prélèvement</th>
-        <th>Date de <br>dernière<br> modification</th>
-        <th>Nom du <br>réseau</th>
-        <th>Statut</th>
-        <th>Actions</th>
-      </tr>
-      <tr> <!-- Second row for filters -->
-        <th><!-- Placeholder for checkbox filter --></th>
+          <th>Demande Pour</th>
+          <th>Envoyé Au Laboratoire</th>
+          <th>Courriels Supplémentaires</th>
+          <th>Bon De Commande</th>
+          <th>Langue Du Certificat</th>
+          <th>Commentaires Internes</th>
+          <th>etat</th>
+          <th>Actions</th>
+      <!-- <tr> 
+        <th></th>
         
         <th><input type="text" placeholder="Filter Bon de commande" /></th>
         
@@ -66,11 +58,35 @@
           <button class="btn-search">Recherche</button><br>
           <button class="btn-reset">Réinitialiser</button>
         </th>
+      </tr> -->
+        <tr *ngFor="let demande of demandes; let i = index">
+          <td>{{ demande.demandeId }}</td>
+          <td>{{ demande.demandePour }}</td>
+          <td>{{ demande.envoyeAuLaboratoire }}</td>
+          <td>{{ demande.courrielsSupplementaires }}</td>
+          <td>{{ demande.bonDeCommande }}</td>
+          <td>{{ demande.langueDuCertificat }}</td>
+          <td>{{ demande.commentairesInternes }}</td>
+          <td [ngSwitch]="demande.etat">
+            <span *ngSwitchCase="'Demande en attente'">✔️ </span>
+            <span *ngSwitchCase="'Resultats partiels'">❗ </span>
+            <span *ngSwitchCase="'Echantillon rejeté'">✖️ </span>
+            <span *ngSwitchCase="'Depassement de norme'">⚠️ </span>
+            <span *ngSwitchCase="'En cours d`analyse'">🔬 </span>
+            <span *ngSwitchCase="'Résultats complétés'">✔️ </span>
+            <span *ngSwitchCase="'Non-Potable'">❗❗ </span>
+            <span *ngSwitchDefault>Unknown Status</span>
+          </td>
+          
+          <td>
+            <!-- Buttons for actions such as edit, delete, etc. -->
+            <button class="btn-edit" (click)="details(demande.demandeId)">Details</button>
+          </td>
       </tr>
     </thead>
     <tbody>
       <!-- Sample row -->
-      <tr *ngFor="let demande of demandes; let i = index">
+      <!-- <tr *ngFor="let demande of demandes; let i = index">
         <td>{{ demande.demandeId }}</td>
         <td>{{ demande.demandePour }}</td>
         <td>{{ demande.envoyeAuLaboratoire }}</td>
@@ -78,13 +94,14 @@
         <td>{{ demande.bonDeCommande }}</td>
         <td>{{ demande.langueDuCertificat }}</td>
         <td>{{ demande.commentairesInternes }}</td>
-        <td>
+        <td> -->
           <!-- Buttons for actions such as edit, delete, etc. -->
-          <button class="btn-edit">Modifier</button>
+          <!-- <button class="btn-edit">Modifier</button>
           <button class="btn-delete">Supprimer</button>
         </td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
+
 </div>

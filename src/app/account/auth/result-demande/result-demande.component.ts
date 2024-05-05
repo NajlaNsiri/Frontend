@@ -11,38 +11,34 @@ import { Parameter } from 'src/app/core/models/parameter.model';
   styleUrls: ['./result-demande.component.scss']
 })
 export class ResultDemandeComponent implements OnInit {
-  parameters: Parameter[];  // Assuming parameters should be an array
-  demandes: Demande;        // Assuming a singular Demande object
-  echantillons: Echantillon[];  // Assuming a singular Echantillon object
+  parameters: Parameter[] = [];  // Initialize as empty array
+  demandes: Demande;      // If demandes is also an array, initialize it as well
+  echantillons: Echantillon[] = [];  // Initialize as empty array
   echantillonId: number;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient
   ) { }
-
   ngOnInit(): void {
     this.loadFormDataFromLocalStorage();
-
   }
 
   private loadFormDataFromLocalStorage() {
     const demandeData = localStorage.getItem('demandeFormData');
     const echantillonData = localStorage.getItem('echantillonFormData');
-    const listParameterData = localStorage.getItem('ListParamater');
+    const parameterData = localStorage.getItem('ListParamater');
 
-    if (demandeData) {
-      this.demandes = JSON.parse(demandeData);
-    }
+    this.demandes = demandeData ? JSON.parse(demandeData) : [];
+    this.echantillons = echantillonData ? JSON.parse(echantillonData) : [];
+    this.parameters = parameterData ? JSON.parse(parameterData) : [];
+    console.log(this.parameters);
+  }
+  getParametersByEchantillonId(echantillonId: number): Parameter[] {
+    const param= this.parameters.filter(param => param.echantillonId == echantillonId);
+    console.log(param, echantillonId);
 
-    if (echantillonData) {
-      this.echantillons = JSON.parse(echantillonData);
-    }
-
-    if (listParameterData) {
-      this.parameters = JSON.parse(listParameterData);
-    }
+    return param;
   }
 
   saveParameters(): void {

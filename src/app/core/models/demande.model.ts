@@ -2,23 +2,25 @@ import { Langue } from "./langue.enum";
 
 // models/demande.model.ts
 export class Demande {
-    demandePour: string;
-    envoyeAuLaboratoire: string;
-    courrielsSupplementaires: string;
-    bonDeCommande: string;
-    unEchantillon: boolean;
-    langueDuCertificat: Langue;
-    commentairesInternes: string;
-    userId: number;
+  demandeId: number;
+  demandePour: string;
+  envoyeAuLaboratoire: string;
+  courrielsSupplementaires: string;
+  bonDeCommande: string;
+  unEchantillon: boolean;
+  etat: string; // Assuming etat is a nested object based on your example
+  langueDuCertificat: string;
+  commentairesInternes: string;
     constructor(
+      demandeId: number,
       demandePour: string,
       envoyeAuLaboratoire: string,
       courrielsSupplementaires: string,
       bonDeCommande: string,
       unEchantillon: boolean,
-      langueDuCertificat: Langue,
+      etat: string, // Assuming etat is a nested object based on your example
+      langueDuCertificat: string,
       commentairesInternes: string,
-      userId: number,
     ) {
       this.demandePour = demandePour;
       this.envoyeAuLaboratoire = envoyeAuLaboratoire;
@@ -27,7 +29,7 @@ export class Demande {
       this.unEchantillon = unEchantillon;
       this.langueDuCertificat = langueDuCertificat;
       this.commentairesInternes = commentairesInternes;
-      this.userId = userId;
+      this.etat= etat;
     }
   }
   

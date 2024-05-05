@@ -155,4 +155,10 @@
       }
     }
   }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;  /* Adjust margin to create space after the cards */
+  }
+  
 }

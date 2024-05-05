@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', response.token);
 
           // Navigate to the 'demande' page and pass the user ID as a state or parameter
-          this.router.navigate(['/account/demande'], { queryParams: { userId: response.userId } });
+          this.router.navigate(['/account/Listdemande'], { queryParams: { userId: response.userId } });
           this.error = ''; // Clear any previous errors
         },
         (error) => {

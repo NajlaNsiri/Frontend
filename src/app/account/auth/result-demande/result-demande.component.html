@@ -39,18 +39,20 @@
         <td>{{ echantillon.nomEchantillon }}</td>
         <td>{{ echantillon.lieuPrelevement }}</td>
         <td>{{ echantillon.dateFinPrelevement }}</td>
-        <td>{{ echantillon.priorite  }}</td>
-        <td>{{ echantillon.commentairesInternes  }}</td>
+        <td>{{ echantillon.priorite }}</td>
+        <td>{{ echantillon.commentairesInternes }}</td>
         <td>
           <div class="card parameters-card">
             <h2>Parameters</h2>
             <div class="card-content">
-              <!-- Parameters content goes here -->
-              <!-- This will likely need to be dynamic based on your Angular component data -->
+              <!-- Adjust the filter to compare string IDs if necessary -->
+              <ul *ngFor="let parameter of getParametersByEchantillonId(echantillon.echantillonId)" >
+                <li>{{ parameter.name }}: {{ parameter.rdl }} {{ parameter.unit }}</li>
+              </ul>
             </div>
           </div>
         </td>
-      </tr>
+      </tr>         
     </tbody>
   </table>
   <div class="form-actions">

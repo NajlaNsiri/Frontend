@@ -38,8 +38,10 @@ export class DemandeFormComponent implements OnInit {
   }
 
   onSubmit() {
-        localStorage.setItem('demandeFormData', JSON.stringify(this.demandeForm.value));
-        this.router.navigate(['/account/Listechantillon'],);
+        
   }
-  
+  navigateToNext(){
+    localStorage.setItem('demandeFormData', JSON.stringify(this.demandeForm.value));
+    this.router.navigate(['/account/Listechantillon']);
+  }
 }

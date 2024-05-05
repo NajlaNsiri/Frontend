@@ -72,7 +72,12 @@ export class ListEchantillonComponent implements OnInit {
   navigateToListEchantillon() {
     this.router.navigate(['/account/echantillon']);
   }
-
+  navigateToNext(){
+    this.router.navigate(['/account/ResultDemande']);
+  }
+  navigateToPrevious(){
+    this.router.navigate(['/account/demande']);
+  }
   delete(index: number) {
     this.echantillons.splice(index, 1);
     localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
