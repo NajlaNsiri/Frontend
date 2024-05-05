@@ -41,12 +41,12 @@ export class EchantillonService {
   }
 
   // Create a new echantillon
-  createEchantillon(echantillon: Echantillon): Observable<any> {
+  createEchantillon(demandeId: number, echantillon: Echantillon[]): Observable<any> {
     const token = localStorage.getItem('token'); // Retrieve the token from localStorage
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post(this.baseUrl, echantillon,{ headers });
+    return this.http.post(`${this.baseUrl}/All/${demandeId}`, echantillon,{ headers });
   }
 
   // Update an existing echantillon

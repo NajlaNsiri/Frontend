@@ -11,6 +11,7 @@ export class Demande {
   etat: string; // Assuming etat is a nested object based on your example
   langueDuCertificat: string;
   commentairesInternes: string;
+  userId?: string;
     constructor(
       demandeId: number,
       demandePour: string,

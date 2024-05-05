@@ -16,6 +16,7 @@ export class Echantillon {
     commentairesInternes: string;
     demandeId: number;  
     demande?: Demande;
+    parameterIds?: number[]
     constructor(
       gabarit: Gabarit,
       typeEchantillon: TypeEchantillon,
@@ -27,6 +28,7 @@ export class Echantillon {
       priorite: Priorite,
       commentairesInternes: string,
       demandeId: number,
+      parameterIds?: number[]
     ) {
       this.gabarit = gabarit;
       this.typeEchantillon = typeEchantillon;

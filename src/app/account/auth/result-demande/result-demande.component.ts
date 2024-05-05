@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Demande } from 'src/app/core/models/demande.model';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
 import { Parameter } from 'src/app/core/models/parameter.model';
+import { DemandeService } from '../demande.service';
+import { EchantillonService } from '../echantillon.service';
 
 @Component({
   selector: 'app-result-demande',
@@ -18,7 +20,9 @@ export class ResultDemandeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private demandeService: DemandeService,
+    private echantillonService: EchantillonService
   ) { }
   ngOnInit(): void {
     this.loadFormDataFromLocalStorage();
@@ -32,29 +36,47 @@ export class ResultDemandeComponent implements OnInit {
     this.demandes = demandeData ? JSON.parse(demandeData) : [];
     this.echantillons = echantillonData ? JSON.parse(echantillonData) : [];
     this.parameters = parameterData ? JSON.parse(parameterData) : [];
-    console.log(this.parameters);
+    this.linkParametersToEchantillons();
+  }
+  private linkParametersToEchantillons() {
+    this.echantillons.forEach(ech => {
+      // Filter parameters by echantillonId and map to get their IDs
+      ech.parameterIds = this.parameters
+        .filter(param => param.echantillonId == ech.echantillonId)
+        .map(param => param.parameterId);
+    });
+    console.log(this.echantillons);
   }
   getParametersByEchantillonId(echantillonId: number): Parameter[] {
     const param= this.parameters.filter(param => param.echantillonId == echantillonId);
-    console.log(param, echantillonId);
-
     return param;
   }
 
-  saveParameters(): void {
-    if (this.echantillonId && this.parameters) {
-      const url = `http://localhost:4000/api/parameters/${this.echantillonId}`;
-      this.http.post(url, { parameters: this.parameters }).subscribe({
+  saveDemande(): void {
+    if (this.echantillonId && this.parameters && this.demandes) {
+    const userId = localStorage.getItem('userId'); 
+    this.demandes.userId = userId;
+      this.demandeService.createDemande(this.demandes).subscribe({
         next: (response) => {
-          console.log('Parameters saved successfully', response);
-          // Optionally redirect or perform additional actions upon success
+          console.log('Demande created successfully', response);
+          const demandeId = response.demandeId;  // Extract the demandeId from the response
+          console.log('Received Demande ID:', demandeId);
+          this.saveEchantillon(demandeId);
         },
-        error: (error) => {
-          console.error('Error saving parameters', error);
-        }
+        error: (error) => console.error('Error creating demande', error)
       });
     } else {
-      console.error('Echantillon ID or Parameters are missing');
+      console.error('Required data is missing to create a demande');
     }
   }
+  saveEchantillon(demandeId: number){
+    this.echantillonService.createEchantillon(demandeId, this.echantillons).subscribe({
+      next: (response) => {
+        console.log('Batch of Echantillons sent successfully', response),
+        this.router.navigate(['/account/Listdemande']);
+      },
+      error: (error) => console.error('Error sending batch of Echantillons', error)
+    });
+  }
+  
 }

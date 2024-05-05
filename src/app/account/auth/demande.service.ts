@@ -41,14 +41,13 @@ export class DemandeService {
   }
 
   // Create a new demande
-  createDemande(demandeData: any): Observable<any> {
 
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+  createDemande(demande: Demande): Observable<any> {
+    const token = localStorage.getItem('token'); // Retrieve the token from localStorage if authentication is needed
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-
-    return this.http.post(`${this.baseUrl}`, demandeData, { headers });
+    return this.http.post(this.baseUrl, demande, { headers });
   }
 
   // Update an existing demande
