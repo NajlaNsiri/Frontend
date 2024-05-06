@@ -10,10 +10,10 @@
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" placeholder="Entrez votre email" formControlName="usernameOrEmail" required>
-                  <div class="invalid-feedback" *ngIf="f.usernameOrEmail.errors?.required">
+                  <div *ngIf="f.usernameOrEmail.errors?.required" class="invalid-feedback">
                     L'email est requis.
                   </div>
-                  <div class="invalid-feedback" *ngIf="f.usernameOrEmail.errors?.usernameOrEmail">
+                  <div *ngIf="f.usernameOrEmail.errors?.email" class="invalid-feedback">
                     L'email doit être une adresse email valide.
                   </div>
                 </div>
@@ -21,29 +21,24 @@
                 <div class="mb-3">
                   <label for="motdepasse" class="form-label">Mot de passe</label>
                   <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" formControlName="password" required>
-                  <div class="invalid-feedback" *ngIf="f.password.errors?.required">
+                  <div *ngIf="f.password.errors?.required" class="invalid-feedback">
                     Le mot de passe est requis.
                   </div>
                 </div>
 
                 <div class="mt-3 d-grid">
-                  <button class="btn btn-primary" type="submit">Connexion </button>
+                  <button class="btn btn-primary" type="submit">Connexion</button>
                 </div>
               </form>
             </div>
-
           </div>
         </div>
         <div class="mt-5 text-center">
-          <p>Vous averz oublie vorte mot de passe ? <a routerLink="/account/restpassword" class="fw-medium text-primary">Réinitialisez-le maintenant.</a> </p>
+          <p>Vous avez oublié votre mot de passe ? <a routerLink="/account/resetpassword" class="fw-medium text-primary">Réinitialisez-le maintenant.</a></p>
+          <p>Vous n'avez pas de compte ? <a routerLink="/account/signup" class="fw-medium text-primary">Inscrivez-vous maintenant.</a></p>
         </div>
-        <div class="mt-5 text-center">
-          <p>Vous n'avez pas de compte ? <a routerLink="/account/signup" class="fw-medium text-primary"> Inscrivez-vous maintenant.</a> </p>
-        </div>
-
       </div>
     </div>
   </div>
-
   <!-- end container -->
 </div>

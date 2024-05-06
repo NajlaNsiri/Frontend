@@ -47,7 +47,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ScrollToModule.forRoot(),
     NgbModule, 
     ReactiveFormsModule,
-    ToastrModule.forRoot(),   
+    ToastrModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [{

@@ -6,6 +6,7 @@ import { Echantillon } from 'src/app/core/models/echantillon.model';
 import { Parameter } from 'src/app/core/models/parameter.model';
 import { DemandeService } from '../demande.service';
 import { EchantillonService } from '../echantillon.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-result-demande',
@@ -22,7 +23,8 @@ export class ResultDemandeComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private demandeService: DemandeService,
-    private echantillonService: EchantillonService
+    private echantillonService: EchantillonService,
+    private toastr: ToastrService 
   ) { }
   ngOnInit(): void {
     this.loadFormDataFromLocalStorage();
@@ -53,7 +55,6 @@ export class ResultDemandeComponent implements OnInit {
   }
 
   saveDemande(): void {
-    if (this.echantillonId && this.parameters && this.demandes) {
     const userId = localStorage.getItem('userId'); 
     this.demandes.userId = userId;
       this.demandeService.createDemande(this.demandes).subscribe({
@@ -65,17 +66,27 @@ export class ResultDemandeComponent implements OnInit {
         },
         error: (error) => console.error('Error creating demande', error)
       });
-    } else {
-      console.error('Required data is missing to create a demande');
-    }
   }
   saveEchantillon(demandeId: number){
     this.echantillonService.createEchantillon(demandeId, this.echantillons).subscribe({
       next: (response) => {
         console.log('Batch of Echantillons sent successfully', response),
+        this.toastr.success('demande envoyée avec succès', '', {
+          timeOut: 5000,
+          positionClass: 'toast-top-right',
+          closeButton: true,
+          progressBar: true
+        });  
         this.router.navigate(['/account/Listdemande']);
       },
-      error: (error) => console.error('Error sending batch of Echantillons', error)
+      error: (error) => {
+        console.error('Error sending batch of Echantillons', error)
+        this.toastr.error(error, 'Error sending batch of Echantillons', {
+          positionClass: 'toast-top-center',
+          timeOut: 3000,
+          closeButton: true
+        });
+      }
     });
   }
   
