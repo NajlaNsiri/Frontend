@@ -42,7 +42,7 @@ export class ListDemandeComponent implements OnInit {
   }
   
   details(demandeId:number){
-    this.router.navigate(['/account/echantillonList'], { queryParams: { demandeId: demandeId } });
+    this.router.navigate(['/account/Listechantillons'], { queryParams: { demandeId: demandeId } });
   }
   acceptDemande(id: number) {
     console.log('Demande accepted with ID:', id);

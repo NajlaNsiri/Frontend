@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ResultParameterComponent implements OnInit {
   parameters: any[];
+  ListParameters: any[];
   echantillonId :Number;
   dup:boolean;
   constructor(
@@ -16,36 +17,36 @@ export class ResultParameterComponent implements OnInit {
     private router: Router,
     private http: HttpClient
     // public dialog: MatDialog // Inject MatDialog service
-  ) { }
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.echantillonId = params['echantillonId'];
+    });
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.dup = params['dup'];
       this.getParametersFromLocalStorage();
     });
   }
   private getParametersFromLocalStorage() {
-    const storedParameters = localStorage.getItem('ListParamater');
+    const storedParameters = localStorage.getItem('ListParameter');
     if (storedParameters) {
       this.parameters = JSON.parse(storedParameters);
+      this.ListParameters = this.parameters.filter(param => param.echantillonId === this.echantillonId);
+      console.log(this.ListParameters);
     } else {
       console.error('No parameters found in localStorage');
-      // Handle the absence of data as needed
     }
   }
   deleteParameter(index: number): void {
-    this.parameters.splice(index, 1);
+    this.ListParameters.splice(index, 1);
   }
 
   submitRequest(): void {
-    if(this.dup ===true){
-      localStorage.setItem('ListParamater', JSON.stringify(this.parameters));
+      this.parameters = this.parameters.filter(param => param.echantillonId !== this.echantillonId);
+      let concatenatedArray = [...this.parameters, ...this.ListParameters];
+      localStorage.setItem('ListParamater', JSON.stringify(concatenatedArray));
       console.log(this.parameters);
       this.router.navigate(['/account/Listechantillon'], );
-    }else{
-      localStorage.setItem('ListParamater', JSON.stringify(this.parameters));
-      console.log(this.parameters);
-      this.router.navigate(['/account/Listechantillon'], );
-    }
   }
 }

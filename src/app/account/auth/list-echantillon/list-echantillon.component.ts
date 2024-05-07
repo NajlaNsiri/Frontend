@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
 
 @Component({
@@ -12,6 +13,7 @@ export class ListEchantillonComponent implements OnInit {
   form: FormGroup;
   echantillons: Echantillon[] = [];
   loading = true;
+  existingData : any;
   gabarits = [
     { display: 'B - Brine', value: 'B_BRINE' },
     { display: 'MW - Marine Water', value: 'MW_MARINE_WATER' },
@@ -40,7 +42,7 @@ export class ListEchantillonComponent implements OnInit {
     { display: '2 jours', value: 'DEUX_JOURS' },
     { display: '3 jours', value: 'TROIS_JOURS' }
   ];
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,private toastr: ToastrService ) {
     this.form = this.fb.group({});
     
   }
@@ -50,10 +52,10 @@ export class ListEchantillonComponent implements OnInit {
   }
 
   loadExistingData() {
-    const existingData = localStorage.getItem('echantillonFormData');
+    this.existingData = localStorage.getItem('echantillonFormData');
     
-    if (existingData) {
-      this.echantillons = JSON.parse(existingData);
+    if (this.existingData) {
+      this.echantillons = JSON.parse(this.existingData);
       this.echantillons.forEach((echantillon, index) => {
         this.form.addControl(`echantillon${index}`, this.fb.group({
           gabarit: [echantillon.gabarit, Validators.required],
@@ -89,9 +91,18 @@ export class ListEchantillonComponent implements OnInit {
   onSubmit(index: number) {
     const formGroup = this.form.get(`echantillon${index}`) as FormGroup;
     if (formGroup.valid) {
-      this.echantillons[index] = formGroup.getRawValue();
+      if(this.existingData){
+        this.echantillons[index] = formGroup.getRawValue();
       localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
       this.router.navigate(['/account/ListParameter'], { queryParams: { dup: false, echantillonId: this.echantillons[index].echantillonId }});
+      }
+      else {
+        this.toastr.error('Ajouter un échantillon ', '', {
+          positionClass: 'toast-top-center',
+          timeOut: 3000,
+          closeButton: true
+        });
+      }
     }
   }
 }

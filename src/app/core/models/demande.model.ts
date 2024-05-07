@@ -8,7 +8,7 @@ export class Demande {
   courrielsSupplementaires: string;
   bonDeCommande: string;
   unEchantillon: boolean;
-  etat: string="Demande en attente"; // Assuming etat is a nested object based on your example
+  etat: string;
   langueDuCertificat: string;
   commentairesInternes: string;
   userId?: string;
@@ -19,7 +19,7 @@ export class Demande {
       courrielsSupplementaires: string,
       bonDeCommande: string,
       unEchantillon: boolean,
-      etat: string, // Assuming etat is a nested object based on your example
+      etat: string, 
       langueDuCertificat: string,
       commentairesInternes: string,
     ) {

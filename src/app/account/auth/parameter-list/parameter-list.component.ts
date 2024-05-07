@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ParameterListComponent implements OnInit {
   parameters: Parameter[]=[];
   echantillonId :Number;
+  ListParameters : Parameter[]=[];
   dup: boolean;
 
   selectedAnalytes: Set<any> = new Set();
@@ -49,13 +50,32 @@ export class ParameterListComponent implements OnInit {
     });
   }
   submitAnalytes() {
-    const analytesWithIds = Array.from(this.selectedAnalytes).map(analyte => ({
-      ...analyte,
-      echantillonId: this.echantillonId // Assuming each analyte should have the current echantillonId
-    }));
-    console.log(analytesWithIds);
-    const serializedAnalytes = JSON.stringify(analytesWithIds);
-    localStorage.setItem('ListParamater', serializedAnalytes);
-    this.router.navigate(['/account/ResultParamter'],{ queryParams: { dup: this.dup}});
+  // Create the analytesWithIds from selectedAnalytes
+  const analytesWithIds = Array.from(this.selectedAnalytes).map(analyte => ({
+    ...analyte,
+    echantillonId: this.echantillonId // Assuming each analyte should have the current echantillonId
+  }));
+  
+  // Retrieve stored parameters from localStorage
+  const storedParameters = localStorage.getItem('ListParameter');
+  if (storedParameters) {
+    // Parse the stored parameters and merge them with analytesWithIds
+    const existingParameters = JSON.parse(storedParameters);
+    let ListParamaters = [...existingParameters, ...analytesWithIds];
+    console.log(ListParamaters);
+    // Serialize the updated parameters array with embedded analytes
+    const serializedParameters = JSON.stringify(ListParamaters);
+    localStorage.setItem('ListParameter', serializedParameters);
+  } else {
+    // When there are no existing parameters, store just the analytesWithIds array
+    // Optionally, wrap analytesWithIds in an object if needed for structure consistency
+    const serializedParameters = JSON.stringify(analytesWithIds);
+    localStorage.setItem('ListParameter', serializedParameters);
   }
+
+  // Navigate after saving
+  this.router.navigate(['/account/ResultParamter'], { queryParams: { echantillonId: this.echantillonId }});
+}
+
+  
 }
