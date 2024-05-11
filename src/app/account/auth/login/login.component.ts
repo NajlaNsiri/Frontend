@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import * as toast from 'react-toastify'; // Import all named exports
-import 'react-toastify/dist/ReactToastify.css';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

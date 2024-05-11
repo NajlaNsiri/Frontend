@@ -91,7 +91,7 @@ export class ListEchantillonComponent implements OnInit {
   onSubmit(index: number) {
     const formGroup = this.form.get(`echantillon${index}`) as FormGroup;
     if (formGroup.valid) {
-      if(this.existingData){
+      if(this.existingData!=null){
         this.echantillons[index] = formGroup.getRawValue();
       localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
       this.router.navigate(['/account/ListParameter'], { queryParams: { dup: false, echantillonId: this.echantillons[index].echantillonId }});

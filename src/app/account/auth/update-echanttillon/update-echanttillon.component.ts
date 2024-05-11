@@ -49,38 +49,48 @@ export class UpdateEchanttillonComponent implements OnInit {
   ];
 
   constructor(private fb: FormBuilder, private echantillonService: EchantillonService, private route: ActivatedRoute, private router: Router) {
-    this.route.queryParams.subscribe(params => {
-      this.echantillonId = params['echantillonId'];
-    });
   }
 
   ngOnInit(): void {
-    this.echantillonForm = this.fb.group({
-      id: '',
-      gabarit: '',
-      typeEchantillon: '',
-      normeEchantillon: '',
-      nomEchantillon: '',
-      lieuPrelevement: '',
-      dateFinPrelevement: '',
-      heureFinPrelevement: '',
-      priorite: '',
-      commentairesInternes: '',
-      demandeId: [this.demandeId,]
+    this.route.queryParams.subscribe(params => {
+      this.echantillonId = +params['echantillonId']; // Ensure it's a number
+      this.initializeForm();
+      this.loadExistingData();
     });
-    this.loadExistingData();
   }
 
-  loadExistingData() {
+  initializeForm(): void {
+    this.echantillonForm = this.fb.group({
+      id: [''],
+      gabarit: [''],
+      typeEchantillon: [''],
+      normeEchantillon: [''],
+      nomEchantillon: [''],
+      lieuPrelevement: [''],
+      dateFinPrelevement: [''],
+      heureFinPrelevement: [''],
+      priorite: [''],
+      commentairesInternes: [''],
+      demandeId: ['']
+    });
+  }
+
+  loadExistingData(): void {
+    this.loading = true;
     const existingData = localStorage.getItem('echantillonFormData');
-    this.echantillons = existingData ? JSON.parse(existingData) : [];
-    const echantillon = this.echantillons.find(e => e.echantillonId === this.echantillonId);
+    if (existingData) {
+      const echantillons: Echantillon[] = JSON.parse(existingData);
+      const echantillon = echantillons.find(e => e.echantillonId === this.echantillonId);
+      if (echantillon) {
+        this.echantillonForm.patchValue(echantillon);
+        this.echantillons = echantillons;
+      } else {
+        console.error('No echantillon found with the id:', this.echantillonId);
+      }
+    }
+    this.loading = false;
+  }
 
-  // If a matching echantillon is found, patch the form values
-  if (echantillon) {
-    this.echantillonForm.patchValue(echantillon);
-  }
-  }
   updateParamter(){
     this.loadExistingData();
     const formValue = this.echantillonForm.value;
@@ -90,17 +100,13 @@ export class UpdateEchanttillonComponent implements OnInit {
     this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: formValue.id }});
   }
   
-  onSubmit() {
+  onSubmit(): void {
     if (this.echantillonForm.valid) {
-      const formData = this.echantillonForm.value;
-      const index = this.echantillons.findIndex(e => e.echantillonId === formData.id);
-      if (index !== -1) {
-        this.echantillons[index] = formData;
-      } else {
-        this.echantillons.push(formData);
-      }
+      const formData: Echantillon = this.echantillonForm.value;
+      this.echantillons = this.echantillons.filter(e => e.echantillonId !== this.echantillonId);
+      this.echantillons.push(formData);
       localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
-      this.router.navigate(['/account/Listechantillon']);  // Adjust the route as needed
+      this.router.navigate(['/account/Listechantillon']);
     } else {
       console.error('Form is not valid');
     }

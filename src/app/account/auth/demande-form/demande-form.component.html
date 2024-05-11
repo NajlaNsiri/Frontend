@@ -7,10 +7,6 @@
   <div class="card">
     <div class="card-header">
       <h2>Nouvelle demande</h2>
-      <div class="card-actions">
-        <button type="button" class="btn draft-btn">Enregistrer comme brouillon</button>
-        <button type="button" class="btn submit-btn">Transmettre la demande</button>
-      </div>
     </div>
   <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
@@ -57,6 +53,6 @@
     </div>
   </form>
   <div class="button-container">
-    <button type="button" (click)="navigateToNext()" class="btn btn-secondary">Next</button>
+    <button type="button" (click)="navigateToNext()" class="btn btn-secondary">Suivant</button>
   </div>
 </div>
