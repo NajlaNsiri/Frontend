@@ -1,0 +1,36 @@
+.navbar {
+    padding: 0.5rem 1rem; /* Adjust padding to increase or decrease navbar height */
+}
+
+.nav-link {
+    margin-right: 1rem; /* Space between nav items */
+}
+
+.navbar-brand {
+    font-weight: bold; /* Makes the brand more prominent */
+}
+
+.navbar-toggler {
+    border: none; /* Removes border from the toggler button */
+    outline: none; /* Removes focus outline */
+}
+
+.dropdown-menu {
+    border-radius: 0.25rem; /* Rounded corners for dropdown */
+    border: none; /* Removes border */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adds shadow for dropdown */
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    border-radius: 0.25rem; /* Rounded corners for the input field */
+    border: 1px solid #fff; /* White border */
+}
+
+.btn-outline-light {
+    margin-left: 0.5rem; /* Space between search button and logout button */
+}

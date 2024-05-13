@@ -1,63 +1,70 @@
 <app-client-nav-bar></app-client-nav-bar>
-<div class="request-summary">
-  <h1>Demande de résumé pour  Bouchard Hébert</h1>
-  <div class="header-details">
-    <div class="detail">
-      <label>Bon de commande:</label>
-      {{demandes.bonDeCommande}}
+<div class="request-summary" id="table-to-pdf">
+ 
+    <h1>Demande de résumé pour Nyrstar Bouchard Hébert</h1>
+    <div class="header-details">
+      <div class="detail">
+        <span class="label">Purchase order:</span>
+        <span class="value">{{ demandes.bonDeCommande }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Certificate language:</span>
+        <span class="value">{{ demandes.langueDuCertificat }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Sent to laboratory:</span>
+        <span class="value">Rouyn Noranda</span>
+      </div>
+      <div class="detail">
+        <span class="label">Comments:</span>
+        <span class="value">{{ demandes.commentairesInternes }}</span>
+      </div>
     </div>
-    <div class="detail">
-      <label>Langue du certificat:</label>
-      {{demandes.langueDuCertificat}}
+  
+    <div class="sample-details">
+      <table class="sample-table">
+        <thead>
+          <tr>
+            <th>Sample number</th>
+            <th>Sample name</th>
+            <th>Sample type</th>
+            <th>Sampling location</th>
+            <th>Sample method</th>
+            <th>Sampling start date</th>
+            <th>Comments</th>
+            <th>Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let echantillon of echantillons">
+            <td>{{ echantillon.sampleNumber }}</td>
+            <td>{{ echantillon.sampleName }}</td>
+            <td>{{ echantillon.sampleType }}</td>
+            <td>{{ echantillon.samplingLocation }}</td>
+            <td>{{ echantillon.sampleMethod }}</td>
+            <td>{{ echantillon.samplingStartDate }}</td>
+            <td>{{ echantillon.comments }}</td>
+            <td>
+              <div class="parameters-details">
+                <div class="card parameters-card">
+                  <h2>Parameters</h2>
+                  <div class="card-content">
+                    <ul>
+                      <li *ngFor="let parameter of getParametersByEchantillonId(echantillon.echantillonId)">
+                        {{ parameter.name }}: {{ parameter.rdl }} {{ parameter.unit }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="detail">
-      <label>commentaires:</label>
-      {{demandes.commentairesInternes}}
-    </div>
-    <div class="detail">
-      <label>Envoyé au laboratoire:</label>
-      {{demandes.envoyeAuLaboratoire}}
-    </div>
-  </div>
-  <table class="samples-table">
-    <thead>
-      <tr>
-        <th>Type Echantillon</th>
-        <th>Norme Echantillon</th>
-        <th>Nom Echantillon</th>
-        <th>Lieu Prelevement</th>
-        <th>Date Fin Prelevement</th>
-        <th>Priorite</th>
-        <th>CommentairesInternes </th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Use *ngFor to iterate over your samples data -->
-      <tr *ngFor="let echantillon of echantillons">
-        <td>{{ echantillon.typeEchantillon }}</td>
-        <td>{{ echantillon.normeEchantillon }}</td>
-        <td>{{ echantillon.nomEchantillon }}</td>
-        <td>{{ echantillon.lieuPrelevement }}</td>
-        <td>{{ echantillon.dateFinPrelevement }}</td>
-        <td>{{ echantillon.priorite }}</td>
-        <td>{{ echantillon.commentairesInternes }}</td>
-        <td>
-          <div class="card parameters-card">
-            <h2>Parameters</h2>
-            <div class="card-content">
-              <!-- Adjust the filter to compare string IDs if necessary -->
-              <ul *ngFor="let parameter of getParametersByEchantillonId(echantillon.echantillonId)" >
-                <li>{{ parameter.name }}: {{ parameter.rdl }} {{ parameter.unit }}</li>
-              </ul>
-            </div>
-          </div>
-        </td>
-      </tr>         
-    </tbody>
-  </table>
+  
   <div class="form-actions">
     <button class="cancel-button">Cancel</button>
-    <button class="submit-button" (click)="saveDemande()">Submit request</button>
+    <button class="submit-button" (click)="saveAsPdf()">Submit request</button>
   </div>
 </div>
-
