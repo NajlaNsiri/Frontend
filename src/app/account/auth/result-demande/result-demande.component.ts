@@ -109,6 +109,7 @@ export class ResultDemandeComponent implements OnInit {
     pdf.addImage(contentDataURL, 'PNG', 0, 0, pdfWidth, pdfHeight);
     pdf.save('RequestedSummary.pdf');
   });
+  this.saveDemande();
 }
   
   }

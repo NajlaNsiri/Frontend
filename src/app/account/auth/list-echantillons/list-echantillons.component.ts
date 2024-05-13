@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Echantillon } from 'src/app/core/models/echantillon.model';
+import { ActivatedRoute } from '@angular/router';
 import { EchantillonService } from '../echantillon.service';
-import { DemandeService } from '../demande.service';
+import { Echantillon } from 'src/app/core/models/echantillon.model';
+import { Parameter } from 'src/app/core/models/parameter.model';
 
 @Component({
   selector: 'app-list-echantillons',
@@ -12,27 +12,39 @@ import { DemandeService } from '../demande.service';
 export class ListEchantillonsComponent implements OnInit {
   echantillons: Echantillon[] = [];
   demandeId: number = 0;
-  selectedStatut: string = "";  // To hold the status selected from the dropdown
-  etat: string="";
+
   constructor(
     private route: ActivatedRoute,
-    private echantillonService: EchantillonService,
-    private demandeService: DemandeService,
-    private router: Router
+    private echantillonService: EchantillonService
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.demandeId = params['demandeId'];
-      this.etat = params['etat'];
+      this.echantillonService.getEchantillonsByDemandeId(this.demandeId).subscribe({
+        next: (echantillons) => {
+          this.echantillons = echantillons.map(e => ({ ...e, showDetails: false, parameters: [] }));
+        },
+        error: (error) => console.error('Failed to load echantillons:', error)
+      });
     });
-    this.echantillonService.getEchantillonsByDemandeId(this.demandeId).subscribe({
-      next: (echantillons) => {
-        this.echantillons = echantillons;
-      },
-      error: (error) => {
-        console.error('Failed to load echantillons:', error);
-      }
-    });    
   }
+
+  toggleDetail(echantillon: Echantillon): void {
+    if (!echantillon.showDetails) {
+      this.echantillonService.getParametersByEchantillonId(echantillon.echantillonId).subscribe({
+        next: (parameters: Parameter[]) => {
+          echantillon.parameters = parameters;
+          echantillon.showDetails = true;
+        },
+        error: () => {
+          echantillon.parameters = [];
+          console.error('Failed to fetch parameters');
+        }
+      });
+    } else {
+      echantillon.showDetails = false;
+    }
+  }
+  
 }

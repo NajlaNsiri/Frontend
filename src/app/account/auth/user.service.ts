@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/core/models/auth.models'; // Assuming User model exists
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +11,46 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token');  // Retrieve the token from localStorage
+    return {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+  }
+
   // Get all users
-  getUsers(): Observable<any> {
-    return this.http.get(this.baseUrl);
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl, { headers: this.getAuthHeaders() });
   }
 
-  // Get a single user by id
-  getUser(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+  // Get user by id
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
-  // Create a new user
-  createUser(user: any): Observable<any> {
-    return this.http.post(this.baseUrl, user);
+  // Get users by role (assuming a similar endpoint is available)
+  getUsersByRole(role: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/role/${role}`, { headers: this.getAuthHeaders() });
   }
 
-  // Update an existing user
-  updateUser(id: number, user: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, user);
+  // Create new user
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(this.baseUrl, user, { headers: this.getAuthHeaders() });
   }
 
-  // Delete a user
+  // Update user
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/${id}`, user, { headers: this.getAuthHeaders() });
+  }
+
+  // Delete user
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() });
+  }
+
+  // Disable user
+  toggleUserActive(id: number): Observable<string> {
+    return this.http.put<string>(`${this.baseUrl}/disable/${id}`, null, { headers: this.getAuthHeaders() });
   }
 }

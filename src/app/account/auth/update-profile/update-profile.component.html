@@ -20,7 +20,7 @@
         <a class="nav-link" href="#">Configuration</a>
       </li>
     </ul>
-  
+    
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="bg-light p-3">
       <div class="form-group">
         <label for="firstName">Prénom</label>
@@ -32,10 +32,10 @@
       </div>
       <div class="form-group">
         <label for="phone">Numéro de téléphone</label>
-        <input type="text" class="form-control" id="phone" formControlName="phone">
+        <input type="text" class="form-control" id="phone" formControlName="phoneNumber">
       </div>
       <div class="form-group">
-        <label for="email">Courriel</label>
+        <label for="email">Email</label>
         <input type="email" class="form-control" id="email" formControlName="email">
       </div>
       <button type="submit" class="btn btn-primary">Enregistrer</button>
