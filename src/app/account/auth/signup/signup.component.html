@@ -49,6 +49,16 @@
                     L'email doit être une adresse email valide.
                   </div>
                 </div>
+                <div class="mb-3">
+                  <label for="phoneNumber" class="form-label">Numero telephone</label>
+                  <input type="phoneNumber" class="form-control" id="phoneNumber" placeholder="Entrez votre telephone" formControlName="phoneNumber" required>
+                  <div class="invalid-feedback" *ngIf="submitted && f.phoneNumber.errors?.required">
+                    L'Numero telephone est requis.
+                  </div>
+                  <div class="invalid-feedback" *ngIf="submitted && f.phoneNumber.errors?.phoneNumber">
+                    L'Numero telephone  doit être une Numero telephone valide.
+                  </div>
+                </div>
 
                 <div class="mb-3">
                   <label for="motdepasse" class="form-label">Mot de passe</label>

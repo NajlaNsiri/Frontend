@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule,  HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbNavModule, NgbAccordionModule, NgbTooltipModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbAccordionModule, NgbTooltipModule, NgbModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { LayoutsModule } from './layouts/layouts.module';
@@ -17,6 +17,7 @@ import { SiteModule } from './site/site.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateEchanttillonComponent } from './account/auth/update-echanttillon/update-echanttillon.component';
 import { UpdateListParameterComponent } from './account/auth/update-list-parameter/update-list-parameter.component';
+import { ValidationComponent } from './account/auth/validation/validation.component';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
