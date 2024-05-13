@@ -10,6 +10,7 @@ import { User } from 'src/app/core/models/User'; // Update this path if your mod
 })
 export class UpdateProfileComponent implements OnInit {
   profileForm: FormGroup;
+  passwordForm: FormGroup;
   userId: number = Number(localStorage.getItem('userId')); // This should be dynamically set, perhaps passed through a route or some other method
 
   constructor(private fb: FormBuilder, private userService: UserService) {
@@ -35,6 +36,11 @@ export class UpdateProfileComponent implements OnInit {
       phoneNumber: '',
       email: '',
     });
+    this.passwordForm= this.fb.group({
+      password:'',
+      newPassword:'',
+      confirmPassword:''
+    })
   }
 
   updateForm(user: User) {
@@ -62,5 +68,8 @@ export class UpdateProfileComponent implements OnInit {
   onSubmit() {
     console.log(this.profileForm.value);
     this.updateUserData();
+  }
+  updatePassword(){
+
   }
 }
