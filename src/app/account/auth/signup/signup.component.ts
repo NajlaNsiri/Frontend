@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,7 @@ export class SignupComponent implements OnInit {
   successmsg = false;
   messageError = '';
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,private router: Router ) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -39,16 +40,21 @@ export class SignupComponent implements OnInit {
 
     this.http.post<any>('http://localhost:4000/api/auth/signup', this.signupForm.value)
       .subscribe(
-        (response) => {
+        response => {
           console.log('API Response:', response);
+          if (response.message) {
+            console.log(response.message); // Success message from server
+          }
           this.successmsg = true;
           this.error = '';
+          this.router.navigate(['/account/validation']);  // Navigate when successful
         },
-        (error) => {
+        error => {
           console.error('API Error:', error);
-          this.error = 'An error occurred. Please try again.';
+          this.messageError = error.error.message || 'An error occurred. Please try again.';  // Use error message from response if available
           this.successmsg = false;
         }
       );
+
   }
 }

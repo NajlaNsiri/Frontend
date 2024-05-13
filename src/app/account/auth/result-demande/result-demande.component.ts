@@ -7,7 +7,8 @@ import { Parameter } from 'src/app/core/models/parameter.model';
 import { DemandeService } from '../demande.service';
 import { EchantillonService } from '../echantillon.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-result-demande',
   templateUrl: './result-demande.component.html',
@@ -88,6 +89,27 @@ export class ResultDemandeComponent implements OnInit {
         });
       }
     });
+
+   
   }
-  
+ saveAsPdf() {
+  // Temporarily hide the buttons
+  const buttons = document.querySelectorAll('.form-actions button');
+  buttons.forEach((button: any) => button.style.visibility = 'hidden');
+
+  const data = document.getElementById('table-to-pdf');
+  html2canvas(data).then(canvas => {
+    // Once captured, restore button visibility
+    buttons.forEach((button: any) => button.style.visibility = 'visible');
+
+    const contentDataURL = canvas.toDataURL('image/png');
+    let pdf = new jsPDF('l', 'cm', 'a4');  // Landscape mode, size A4
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    pdf.addImage(contentDataURL, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('RequestedSummary.pdf');
+  });
 }
+  
+  }
+

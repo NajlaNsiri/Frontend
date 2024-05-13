@@ -1,5 +1,5 @@
 <app-client-nav-bar></app-client-nav-bar>
-<div class="card-container">
+<div id="table-to-pdf" class="card-container">
   <div class="card-header">
     LISTE DES RÉSULTATS (accessible à NYSTAR LANGLOIS)
   </div>
@@ -7,9 +7,8 @@
   <!-- Button container for left-aligned buttons -->
   <div class="content-container">
     <div class="button-container">
-      <button class="table-button">Afficher</button>
-      <button class="table-button">Exporter</button>
-      <button class="table-button download-button">Télécharger documents</button>
+      
+      <button class="table-button download-button" (click)="saveAsPdf()">Télécharger documents  '''</button>
     </div>
   
     <div class="icon-legend-container">
@@ -21,7 +20,7 @@
       </div>
       <div class="icon-legend">
         <p><span class="icon gray">🔬</span> Reçu au laboratoire, en cours d'analyse</p>
-        <p><span class="icon green">✔️</span> Résultats complétés</p>
+        <p><span class="icon green">✔️✔️</span> Résultats complétés</p>
         <p><span class="icon red">❗❗</span> Non-Potable</p>
       </div>
     </div>

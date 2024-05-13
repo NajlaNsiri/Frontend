@@ -1,78 +1,152 @@
 .request-summary {
-    font-family: 'Arial', sans-serif;
-    margin: 20px;
-    h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    .header-details {
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  background: #fff;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .header-details {
+    display: flex;
+    justify-content: space-between; /* Spread children across the horizontal space */
+    align-items: center;
+    width: 100%; /* Ensure it spans the full width */
+    margin-top: 10px;
+
+    .detail {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      .detail {
-        display: flex;
-        flex-direction: column;
-        label {
-          font-weight: bold;
-          margin-bottom: 5px;
-        }
-        // Include styles for your inputs/selects/etc.
+      flex-direction: row; /* Align label and value in a row */
+      align-items: center;
+
+      .label {
+        font-weight: bold;
+        margin-right: 5px; /* Space between label and value */
+        white-space: nowrap; /* Prevents wrapping of text */
+      }
+
+      .value {
+        margin-right: 20px; /* Space after each value before the next label */
       }
     }
-    .samples-table {
+  }
+
+  .sample-details {
+    font-family: Arial, sans-serif;
+    width: 100%;
+  
+    .sample-table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 20px;
+  
       th, td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: left;
       }
+  
       th {
-        background-color: #f2f2f2;
+        background-color: #f4f4f4;
       }
     }
-    .card {
+  
+    .parameters-details {
+      background: #f9f9f9;
+      padding: 10px;
       border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 15px;
-      margin-bottom: 20px;
-      h2 {
-        font-size: 20px;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-      }
-      .card-content {
-        .card-item {
-          margin-bottom: 10px;
-          .item-title {
-            font-weight: bold;
+  
+      .card {
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-top: 10px;
+  
+        h2 {
+          padding: 5px;
+          border-bottom: 1px solid #eee;
+        }
+  
+        .card-content {
+          ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px;
+  
+            li {
+              padding: 5px;
+              border-bottom: 1px solid #eee;
+            }
           }
-          // Include any additional item styles
         }
       }
     }
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      .cancel-button,
-      .submit-button {
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-        cursor: pointer;
-        font-weight: bold;
+  }
+  
+
+  .parameters-details {
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+
+    .card {
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+      h2 {
+        padding: 5px;
+        border-bottom: 1px solid #eee;
       }
-      .cancel-button {
-        background-color: #ccc;
-        // Define any additional cancel button styles
-      }
-      .submit-button {
-        background-color: #4CAF50; // A green color
-        color: white;
-        // Define any additional submit button styles
+
+      .card-content {
+        ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 10px;
+
+          li {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+          }
+        }
       }
     }
   }
+
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &.cancel-button {
+        background-color: #ccc;
+        color: #333;
+
+        &:hover {
+          background-color: #bbb;
+        }
+      }
+
+      &.submit-button {
+        background-color: #4CAF50;
+        color: white;
+
+        &:hover {
+          background-color: #449d48;
+        }
+      }
+    }
+  }
+}

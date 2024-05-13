@@ -18,6 +18,7 @@ import { ListEchantillonComponent } from './list-echantillon/list-echantillon.co
 import { UpdateEchanttillonComponent } from './update-echanttillon/update-echanttillon.component';
 import { UpdateListParameterComponent } from './update-list-parameter/update-list-parameter.component';
 import { ListEchantillonsComponent } from './list-echantillons/list-echantillons.component';
+import { ValidationComponent } from './validation/validation.component';
 
 const routes: Routes = [
     {
@@ -27,6 +28,11 @@ const routes: Routes = [
     {
         path: 'signup',
         component: SignupComponent
+    },
+    
+    {
+        path: 'validation',
+        component: ValidationComponent
     },
     {
         path: 'restpassword',
