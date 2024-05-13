@@ -14,7 +14,7 @@ export class ListEchantillonComponent implements OnInit {
   echantillons: Echantillon[] = [];
   loading = true;
   existingData : any;
-  gabarits = [
+  typesEchantillons = [
     { display: 'B - Brine', value: 'B_BRINE' },
     { display: 'MW - Marine Water', value: 'MW_MARINE_WATER' },
     { display: 'W - Water', value: 'W_WATER' },
@@ -31,16 +31,22 @@ export class ListEchantillonComponent implements OnInit {
     { display: 'V - Vegetation', value: 'V_VEGETATION' },
     { display: 'SS - Stream Sediment', value: 'SS_STREAM_SEDIMENT' }
   ];
-  typesEchantillon = [
-    { display: '-Analyse', value: 'ANALYSE' },
-    { display: 'Roche', value: 'ROCHE' },
-    { display: 'Concasser', value: 'CONCASSER' }
+  retours = [
+    { display: 'After 60 days ($0.30/sample/month)', value: 'RETURN_60_DAYS' },
+    { display: 'After 90 days ($0.15/sample/month)', value: 'RETURN_90_DAYS' },
+    { display: 'After 3 months ($0.20/sample/month)', value: 'RETURN_3_MONTHS' },
+    { display: 'After 30 days ($0.20/sample/month)', value: 'RETURN_30_DAYS' }
   ];
+  
+  disposers = [
+    { display: 'Dispose after 60 days ($0.30/sample/month)', value: 'DISPOSE_60_DAYS' },
+    { display: 'Analysis after 90 days ($0.15/sample/month)', value: 'ANALYSIS_90_DAYS' },
+    { display: 'Dispose after 3 months ($0.20/sample/month)', value: 'DISPOSE_3_MONTHS' },
+    { display: 'Dispose after 30 days ($0.20/sample/month)', value: 'DISPOSE_30_DAYS' }
+  ];  
   priorites = [
     { display: 'Standard', value: 'STANDARD' },
-    { display: '1 jour', value: 'UN_JOUR' },
-    { display: '2 jours', value: 'DEUX_JOURS' },
-    { display: '3 jours', value: 'TROIS_JOURS' }
+    { display: 'Se précipiter', value: 'RUSH' },
   ];
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,private toastr: ToastrService ) {
     this.form = this.fb.group({});
@@ -58,12 +64,16 @@ export class ListEchantillonComponent implements OnInit {
       this.echantillons = JSON.parse(this.existingData);
       this.echantillons.forEach((echantillon, index) => {
         this.form.addControl(`echantillon${index}`, this.fb.group({
-          gabarit: [echantillon.gabarit, Validators.required],
           typeEchantillon: [echantillon.typeEchantillon, Validators.required],
           nomEchantillon: [{value: echantillon.nomEchantillon, disabled: true}],
           dateFinPrelevement: [{value: echantillon.dateFinPrelevement, disabled: true}],
           heureFinPrelevement: [{value: echantillon.heureFinPrelevement, disabled: true}],
-          commentairesInternes: [{value: echantillon.commentairesInternes, disabled: true}]
+          commentairesInternes: [{value: echantillon.commentairesInternes, disabled: true}],
+          lieuPrelevement: [{value: echantillon.lieuPrelevement, disabled: true}],
+          addressRetourner: [{value: echantillon.addressRetourner, disabled: true}], // New field
+          priorite: [{value: echantillon.priorite, disabled: true}],
+          disposes: [{value: echantillon.disposes, disabled: true}], // New field
+          returns: [{value: echantillon.returns, disabled: true}], // New field
         }));
       });
       console.log(this.echantillons);

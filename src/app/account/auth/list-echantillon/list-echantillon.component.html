@@ -11,20 +11,34 @@
     </div>
     <div class="card-body">
       <div class="form-group">
-        <label for="gabarit{{ i }}">Gabarit:</label>
-        <select formControlName="gabarit" class="form-control" id="gabarit{{ i }}">
-          <option *ngFor="let gabarit of gabarits" [value]="gabarit.value">{{ gabarit.display }}</option>
+        <label for="gabarit{{ i }}">Type d'échantillon:</label>
+        <select formControlName="typeEchantillon" class="form-control" id="typesEchantillon{{ i }}">
+          <option *ngFor="let typesEchantillon of typesEchantillons" [value]="typesEchantillon.value">{{ typesEchantillon.display }}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="typeEchantillon{{ i }}">Type d'échantillon:</label>
-        <select formControlName="typeEchantillon" class="form-control" id="typeEchantillon{{ i }}">
-          <option *ngFor="let type of typesEchantillon" [value]="type.value">{{ type.display }}</option>
+        <label for="returns{{ i }}">Retour:</label>
+        <select  class="form-control" id="returns{{ i }}">
+          <option *ngFor="let retour of retours" [value]="retour.value">{{ retour.display }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="returns{{ i }}">Disposer:</label>
+        <select formControlName="disposes" class="form-control" id="disposer{{ i }}">
+          <option *ngFor="let disposer of disposers" [value]="disposer.value">{{ disposer.display }}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="nomEchantillon{{ i }}">Nom de l'échantillon:</label>
         <input type="text" formControlName="nomEchantillon" class="form-control" id="nomEchantillon{{ i }}">
+      </div>
+      <div class="form-group">
+        <label for="lieuPrelevement{{ i }}">Lieu Prelevement:</label>
+        <input type="text" formControlName="lieuPrelevement" class="form-control" id="lieuPrelevement{{ i }}">
+      </div>
+      <div class="form-group">
+        <label for="addressRetourner{{ i }}">Adresse de retour:</label>
+        <input type="text" formControlName="addressRetourner" class="form-control" id="addressRetourner{{ i }}">
       </div>
       <div class="form-group">
         <label for="dateFinPrelevement{{ i }}">Date de fin de prélèvement:</label>

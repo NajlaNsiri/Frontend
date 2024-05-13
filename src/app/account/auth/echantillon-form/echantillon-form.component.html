@@ -2,31 +2,35 @@
 <div class="form-container">
   <div class="card-header">
     <h2>ÉCHANTILLON 1</h2>
-    <div class="card-actions">
-      <button type="button" class="btn">Enregistrer Gabarit</button>
-    </div>
   </div>
   <div class="card">
     <form [formGroup]="echantillonForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
         <div class="form-group">
-          <label for="gabarit">Gabarit:</label>
-          <select class="form-control" formControlName="gabarit" id="gabarit">
-            <option *ngFor="let gabarit of gabarits" [value]="gabarit.value">
-              {{ gabarit.display }}
+          <label for="gabarit">Type d'échantillon:</label>
+          <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
+            <option *ngFor="let typesEchantillon of typesEchantillons" [value]="typesEchantillon.value">
+              {{ typesEchantillon.display }}
             </option>
           </select>
         </div>
         <div class="form-group">
-          <label for="typeEchantillon" class="required">Type d'échantillon:</label>
-          <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
-            <option *ngFor="let type of typesEchantillon" [value]="type.value">
-              {{ type.display }}
+          <label for="typeEchantillon" class="required">Retour:</label>
+          <select class="form-control" formControlName="returns" id="returns">
+            <option *ngFor="let retour of retours" [value]="retour.value">
+              {{ retour.display }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="disposes" class="required">Disposer:</label>
+          <select class="form-control" formControlName="disposes" id="disposes">
+            <option *ngFor="let disposer of disposers" [value]="disposer.value">
+              {{ disposer.display }}
             </option>
           </select>
         </div>
       </div>
-
       <div class="form-group">
         <label for="nomEchantillon">Nom de l'échantillon:</label>
         <input type="text" class="form-control" formControlName="nomEchantillon" id="nomEchantillon">
@@ -34,6 +38,10 @@
       <div class="form-group">
         <label for="nomEchantillon">Lieu Prelevement:</label>
         <input type="text" class="form-control" formControlName="lieuPrelevement" id="lieuPrelevement">
+      </div>
+      <div class="form-group">
+        <label for="addressRetourner">Adresse de retour:</label>
+        <input type="text" class="form-control" formControlName="addressRetourner" id="addressRetourner">
       </div>
       <div class="form-row">
         <div class="form-group">
@@ -50,22 +58,44 @@
         <div class="form-group priority-group">
           <label class="required">Priorité:</label>
           <div class="priority-options">
-            <!-- Radio buttons for priority -->
-            <!-- Replace with actual value and formControlName -->
-            <label><input type="radio" formControlName="priorite" value="STANDARD"> Standard</label>
-            <label><input type="radio" formControlName="priorite" value="UN_JOUR"> 1 heure</label>
-            <label><input type="radio" formControlName="priorite" value="DEUX_JOURS"> 2 jours</label>
-            <label><input type="radio" formControlName="priorite" value="TROIS_JOURS"> 3 jours</label>
+            <label>
+              <input type="radio" formControlName="priorite" value="STANDARD" id="tooltipExample" 
+                     data-toggle="tooltip" data-placement="top" title="Standard"> 
+              Standard
+            </label>
+            <label>
+              <input type="radio" formControlName="priorite" value="RUSH" id="tooltipExample1"
+                     data-toggle="tooltip" data-placement="top" title="Se précipiter">
+              Se précipiter
+            </label>
+            
           </div>
         </div>
       </div>
-
       <div class="form-group">
         <label for="commentairesInternes">Commentaires internes de l'échantillon:</label>
         <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
       </div>
-
-      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>es-tu sûr</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button  type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+          </div>
+        </div>
+        </div>
+      <button type="button" class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Enregistrer</button>
     </form>
   </div>
 </div>

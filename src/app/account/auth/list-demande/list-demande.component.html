@@ -38,27 +38,6 @@
           <th>Commentaires Internes</th>
           <th>etat</th>
           <th>Actions</th>
-      <!-- <tr> 
-        <th></th>
-        
-        <th><input type="text" placeholder="Filter Bon de commande" /></th>
-        
-        <th><input type="text" placeholder="Filter Numéro d'échantillon" /></th>
-        <th><input type="text" placeholder="Filter Nom de l'échantillon" /></th>
-        <th><input type="text" placeholder="Filter Nom du préleveur" /></th>
-        <th><input type="text" placeholder="Filter Nom du projet" /></th>
-        <th><input type="text" placeholder="Filter Type d'échantillon" /></th>
-        <th><input type="text" placeholder="Filter Lieu de prélèvement" /></th>
-        <th><input type="text" placeholder="Filter Type de prélèvement" /></th>
-        <th><input type="text" placeholder="Filter Date de fin de prélèvement" /></th>
-        <th><input type="text" placeholder="Filter Date de dernière modification" /></th>
-        <th><input type="text" placeholder="Filter Nom du réseau" /></th>
-        <th><input type="text" placeholder="Filter Statut" /></th>
-        <th>
-          <button class="btn-search">Recherche</button><br>
-          <button class="btn-reset">Réinitialiser</button>
-        </th>
-      </tr> -->
         <tr *ngFor="let demande of demandes; let i = index">
           <td>{{ demande.demandeId }}</td>
           <td>{{ demande.demandePour }}</td>
@@ -68,15 +47,15 @@
           <td>{{ demande.langueDuCertificat }}</td>
           <td>{{ demande.commentairesInternes }}</td>
           <td [ngSwitch]="demande.etat">
-            <span *ngSwitchCase="'Demande en attente'">✔️ </span>
-            <span *ngSwitchCase="'Resultats partiels'">❗ </span>
-            <span *ngSwitchCase="'Echantillon rejeté'">✖️ </span>
-            <span *ngSwitchCase="'Depassement de norme'">⚠️ </span>
-            <span *ngSwitchCase="'En cours d`analyse'">🔬 </span>
-            <span *ngSwitchCase="'Résultats complétés'">✔️ </span>
-            <span *ngSwitchCase="'Non-Potable'">❗❗ </span>
+            <span *ngSwitchCase="'REQUEST_SUBMITTED'">{{ '✔' }} </span>
+            <span *ngSwitchCase="'PARTIAL_RESULTS'">{{ '⚪' }} </span>
+            <span *ngSwitchCase="'SAMPLE_REJECTED'">{{ '❌' }} </span>
+            <span *ngSwitchCase="'EXCEEDS_NORM'">{{ '!' }} </span>
+            <span *ngSwitchCase="'RECEIVED_IN_PROGRESS'">{{ '🕒' }} </span>
+            <span *ngSwitchCase="'COMPLETE_RESULTS'">{{ '✔' }} </span>
+            <span *ngSwitchCase="'NOT_POTABLE'">{{ '‼' }} </span>
             <span *ngSwitchDefault>Unknown Status</span>
-          </td>
+          </td>          
           
           <td>
             <!-- Buttons for actions such as edit, delete, etc. -->
@@ -85,21 +64,6 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Sample row -->
-      <!-- <tr *ngFor="let demande of demandes; let i = index">
-        <td>{{ demande.demandeId }}</td>
-        <td>{{ demande.demandePour }}</td>
-        <td>{{ demande.envoyeAuLaboratoire }}</td>
-        <td>{{ demande.courrielsSupplementaires }}</td>
-        <td>{{ demande.bonDeCommande }}</td>
-        <td>{{ demande.langueDuCertificat }}</td>
-        <td>{{ demande.commentairesInternes }}</td>
-        <td> -->
-          <!-- Buttons for actions such as edit, delete, etc. -->
-          <!-- <button class="btn-edit">Modifier</button>
-          <button class="btn-delete">Supprimer</button>
-        </td>
-      </tr> -->
     </tbody>
   </table>
 </div>

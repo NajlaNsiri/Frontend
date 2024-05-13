@@ -25,6 +25,7 @@ import { ClientNavBarComponent } from './client-nav-bar/client-nav-bar.component
     StepperComponent,
     WizardDialogComponent,
     ClientNavBarComponent,
+    
   ], 
   imports: [
     CommonModule,
@@ -32,7 +33,8 @@ import { ClientNavBarComponent } from './client-nav-bar/client-nav-bar.component
     WidgetModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule 
+    TranslateModule,
+    
   ],
   exports: [
     FormsModule,

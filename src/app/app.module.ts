@@ -17,6 +17,7 @@ import { SiteModule } from './site/site.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateEchanttillonComponent } from './account/auth/update-echanttillon/update-echanttillon.component';
 import { UpdateListParameterComponent } from './account/auth/update-list-parameter/update-list-parameter.component';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -47,7 +48,9 @@ export function createTranslateLoader(http: HttpClient): any {
     ScrollToModule.forRoot(),
     NgbModule, 
     ReactiveFormsModule,
+    NgbPopoverModule,
     ToastrModule.forRoot(),
+    
   ],
   bootstrap: [AppComponent],
   providers: [{

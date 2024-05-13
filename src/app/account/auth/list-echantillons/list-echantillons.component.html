@@ -18,9 +18,12 @@
          
         <th>Numéro d'échantillon</th>
         <th>Nom de l'échantillon</th>
+        <th>Retour</th>
+        <th>Disposer</th>
         <th>Type d'échantillon</th>
         <th>Lieu de prélèvement</th>
-        <th>Type de prélèvement</th>
+        <th>Adresse de retour</th>
+        <th>priorite</th>
         <th>Date de début de prélèvement</th>
         <th>Détails</th>
       </tr>
@@ -28,11 +31,13 @@
          
           <th><input type="text" placeholder="Filter Numéro d'échantillon" /></th>
           <th><input type="text" placeholder="Filter Nom de l'échantillon" /></th>
+          <th><input type="text" placeholder="Filter Retour" /></th>
+          <th><input type="text" placeholder="Filter Disposer" /></th>
           <th><input type="text" placeholder="Filter Type d'échantillon" /></th>
           <th><input type="text" placeholder="Filter Lieu de prélèvement" /></th>
-          <th><input type="text" placeholder="Filter Type de prélèvement" /></th>
+          <th><input type="text" placeholder="Filter Adresse de retour" /></th>
+          <th><input type="text" placeholder="Filter priorite" /></th>
           <th><input type="text" placeholder="Filter Date de début de prélèvement" /></th>
-          <th><input type="text" placeholder="Filter Statut" /></th>
           <th><!-- Placeholder for actions --></th>
       </tr>
   </thead>
@@ -41,9 +46,12 @@
       <tr *ngFor="let echantillon of echantillons">
         <td>{{ echantillon.echantillonId }}</td>
         <td>{{ echantillon.nomEchantillon }}</td>
+        <td>{{ echantillon.returns }}</td>
+        <td>{{ echantillon.disposes }}</td>
         <td>{{ echantillon.typeEchantillon }}</td>
         <td>{{ echantillon.lieuPrelevement }}</td>
-        <td>{{ echantillon.typeEchantillon }}</td>
+        <td>{{ echantillon.addressRetourner }}</td>
+        <td>{{ echantillon.priorite }}</td>
         <td>{{ echantillon.dateFinPrelevement }}</td>
         <td><button class="details-button">Détails</button></td>
       </tr>

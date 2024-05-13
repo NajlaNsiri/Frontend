@@ -4,41 +4,48 @@ import { TypeEchantillon } from "./typeEchantillon.enum";
 import { Demande } from './demande.model';
 
 export class Echantillon {
-    echantillonId: number;
-    gabarit: Gabarit;
-    typeEchantillon: TypeEchantillon;
-    normeEchantillon: string;
-    nomEchantillon: string;
-    lieuPrelevement: string;
-    dateFinPrelevement: string;  // Date as ISO string
-    heureFinPrelevement: string; // Time as ISO string
-    priorite: Priorite;
-    commentairesInternes: string;
-    demandeId: number;  
-    demande?: Demande;
-    parameterIds?: number[]
-    constructor(
-      gabarit: Gabarit,
-      typeEchantillon: TypeEchantillon,
-      normeEchantillon: string,
+  echantillonId: number;
+  gabarit: string; 
+  typeEchantillon: string;
+  nomEchantillon: string;
+  lieuPrelevement: string;
+  addressRetourner: string; 
+  dateFinPrelevement: string; 
+  heureFinPrelevement: string; 
+  priorite: string; 
+  commentairesInternes: string;
+  demandeId: number;
+  parameterIds?: number[]; 
+  disposes: string; 
+  returns: string; 
+
+  constructor(
+      gabarit: string,
+      typeEchantillon: string,
       nomEchantillon: string,
       lieuPrelevement: string,
+      addressRetourner: string,
       dateFinPrelevement: string,
       heureFinPrelevement: string,
-      priorite: Priorite,
+      priorite: string,
       commentairesInternes: string,
       demandeId: number,
+      disposes: string,
+      returns: string,
       parameterIds?: number[]
-    ) {
+  ) {
       this.gabarit = gabarit;
       this.typeEchantillon = typeEchantillon;
-      this.normeEchantillon = normeEchantillon;
       this.nomEchantillon = nomEchantillon;
       this.lieuPrelevement = lieuPrelevement;
+      this.addressRetourner = addressRetourner;
       this.dateFinPrelevement = dateFinPrelevement;
       this.heureFinPrelevement = heureFinPrelevement;
       this.priorite = priorite;
       this.commentairesInternes = commentairesInternes;
       this.demandeId = demandeId;
-    }
+      this.disposes = disposes;
+      this.returns = returns;
+      this.parameterIds = parameterIds;
   }
+}

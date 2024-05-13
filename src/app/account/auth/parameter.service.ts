@@ -16,7 +16,7 @@ export class ParameterService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get(`${this.baseUrl}`,{ headers });
+    return this.http.get(`${this.baseUrl}/available`,{ headers });
   }
 
   // Get a single parameter by id

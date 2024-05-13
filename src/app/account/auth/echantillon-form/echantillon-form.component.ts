@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,AfterViewInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EchantillonService } from '../echantillon.service';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
-
+declare var $: any;
 @Component({
   selector: 'app-echantillon-form',
   templateUrl: './echantillon-form.component.html',
@@ -18,7 +18,7 @@ export class EchantillonFormComponent implements OnInit {
   error = '';
   successmsg = false;
   messageError = '';
-  gabarits = [
+  typesEchantillons = [
     { display: 'B - Brine', value: 'B_BRINE' },
     { display: 'MW - Marine Water', value: 'MW_MARINE_WATER' },
     { display: 'W - Water', value: 'W_WATER' },
@@ -35,37 +35,50 @@ export class EchantillonFormComponent implements OnInit {
     { display: 'V - Vegetation', value: 'V_VEGETATION' },
     { display: 'SS - Stream Sediment', value: 'SS_STREAM_SEDIMENT' }
   ];
-  typesEchantillon = [
-    { display: '-Analyse', value: 'ANALYSE' },
-    { display: 'Roche', value: 'ROCHE' },
-    { display: 'Concasser', value: 'CONCASSER' }
+  retours = [
+    { display: 'After 60 days ($0.30/sample/month)', value: 'RETURN_60_DAYS' },
+    { display: 'After 90 days ($0.15/sample/month)', value: 'RETURN_90_DAYS' },
+    { display: 'After 3 months ($0.20/sample/month)', value: 'RETURN_3_MONTHS' },
+    { display: 'After 30 days ($0.20/sample/month)', value: 'RETURN_30_DAYS' }
   ];
+  
+  disposers = [
+    { display: 'Dispose after 60 days ($0.30/sample/month)', value: 'DISPOSE_60_DAYS' },
+    { display: 'Analysis after 90 days ($0.15/sample/month)', value: 'ANALYSIS_90_DAYS' },
+    { display: 'Dispose after 3 months ($0.20/sample/month)', value: 'DISPOSE_3_MONTHS' },
+    { display: 'Dispose after 30 days ($0.20/sample/month)', value: 'DISPOSE_30_DAYS' }
+  ];  
   priorites = [
     { display: 'Standard', value: 'STANDARD' },
-    { display: '1 jour', value: 'UN_JOUR' },
-    { display: '2 jours', value: 'DEUX_JOURS' },
-    { display: '3 jours', value: 'TROIS_JOURS' }
+    { display: 'Se précipiter', value: 'RUSH' },
   ];
 
   constructor(private fb: FormBuilder, private echantillonService: EchantillonService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.echantillonForm = this.fb.group({
-      echantillonId: '',
-      gabarit: '',
-      typeEchantillon: '',
-      normeEchantillon: '',
-      nomEchantillon: '',
-      lieuPrelevement: '',
-      dateFinPrelevement: '',
-      heureFinPrelevement: '',
-      priorite: '',
-      commentairesInternes: '',
-      demandeId: [this.demandeId,]
+      echantillonId: [''],
+      typeEchantillon: [''],
+      nomEchantillon: [''],
+      lieuPrelevement: [''],
+      addressRetourner: [''], // New field
+      dateFinPrelevement: [''],
+      heureFinPrelevement: [''],
+      priorite: [''],
+      disposes: [''], // New field
+      returns: [''], // New field
+      commentairesInternes: [''],
+      demandeId: [this.demandeId] // Adjusted for clarity, previously [this.demandeId,]
     });
     this.loadExistingData();
   }
-
+  ngAfterViewInit(): void {
+    // Initialize the tooltip for the radio buttons
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  }
+  
   loadExistingData() {
     const existingData = localStorage.getItem('echantillonFormData');
     this.echantillons = existingData ? JSON.parse(existingData) : [];
@@ -87,5 +100,6 @@ export class EchantillonFormComponent implements OnInit {
     localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
     console.log(formValue);
     this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: formValue.echantillonId }});
+    $('#exampleModalCenter').modal('hide');
   }
 }
