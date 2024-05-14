@@ -95,25 +95,63 @@ export class ResultDemandeComponent implements OnInit {
 
    
   }
- saveAsPdf() {
-  // Temporarily hide the buttons
-  const buttons = document.querySelectorAll('.form-actions button');
-  buttons.forEach((button: any) => button.style.visibility = 'hidden');
-
-  const data = document.getElementById('table-to-pdf');
-  html2canvas(data).then(canvas => {
-    // Once captured, restore button visibility
-    buttons.forEach((button: any) => button.style.visibility = 'visible');
-
-    const contentDataURL = canvas.toDataURL('image/png');
-    let pdf = new jsPDF('l', 'cm', 'a4');  // Landscape mode, size A4
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-    pdf.addImage(contentDataURL, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('RequestedSummary.pdf');
-  });
-  this.saveDemande();
+  saveAsPdf() {
+    const data = document.getElementById('table-to-pdf') as HTMLElement;
+    const buttons = document.querySelectorAll('.form-actions button');
+    buttons.forEach(button => (button as HTMLElement).style.visibility = 'hidden');
+  
+    const currentDate = new Date().toLocaleDateString('fr-FR'); // Format the date as you prefer, using French locale here
+  
+    html2canvas(data, {
+      scale: 2, // Adjust this for better resolution
+      windowWidth: data.offsetWidth,
+      windowHeight: data.offsetHeight
+    }).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('l', 'mm', 'a4'); // Landscape orientation
+  
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+  
+      const scaleToFitWidth = pdfWidth / canvasWidth;
+      const scaleToFitHeight = pdfHeight / canvasHeight;
+      const scale = Math.min(scaleToFitWidth, scaleToFitHeight);
+  
+      // Load the image from the assets
+      const image = new Image();
+      image.src = 'assets/images/logo.png'; // Make sure the path is correct
+      image.onload = () => {
+        // Calculate dimensions to maintain aspect ratio at 20% size
+        const imageHeight = image.height / 5; // Reduce to 20% of original height
+        const imageWidth = image.width / 5; // Reduce to 20% of original width
+  
+        // Calculate position to align on the left and higher up
+        const imgX = 10; // Position 10mm from the left edge
+        const imgY = 10; // Position 10mm from the top, moved higher from previous 20mm
+  
+        // Add image to PDF
+        pdf.addImage(image, 'JPEG', imgX, imgY, imageWidth, imageHeight);
+  
+        // Calculate the right alignment for the date
+        pdf.setFontSize(10);
+        const dateWidth = pdf.getStringUnitWidth(currentDate) * pdf.getFontSize() / pdf.internal.scaleFactor;
+        const datePositionX = pdfWidth - dateWidth - 10; // 10 mm margin from the right edge
+  
+        pdf.text(currentDate, datePositionX, 10); // Position the date on the right
+  
+        // Add the canvas image
+        const contentImageY = imgY + imageHeight + 5; // Position below the image with reduced spacing
+        pdf.addImage(contentDataURL, 'PNG', (pdfWidth - canvasWidth * scale) / 2, contentImageY, canvasWidth * scale, canvasHeight * scale);
+        pdf.save('DemandesSummary.pdf'); // Saving the PDF with a filename
+  
+        // Show buttons again after generating the PDF
+        buttons.forEach(button => (button as HTMLElement).style.visibility = 'visible');
+      };
+    });
+  }
+  
+  
 }
   
-  }
-

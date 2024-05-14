@@ -89,18 +89,39 @@ export class UpdateProfileComponent implements OnInit {
 
   updatePassword() {
     if (this.passwordForm.invalid) {
-      console.log('error');
+      this.toastr.error('Please fill all required fields.', 'Error', {
+        positionClass: 'toast-top-center',
+        timeOut: 3000,
+        closeButton: true
+      });
       return; // If form is invalid, do not proceed
     }
+  
     const { password, newPassword } = this.passwordForm.value;
     this.userService.changePassword(this.profileForm.value.email, password, newPassword).subscribe({
       next: (response) => {
-        console.log('Password updated successfully:', response);
-        // Optionally reset the form or provide additional user feedback
+        // Assuming response is always coming as expected even on successful password change
+        if (response.message === "Password updated successfully.") {
+          this.toastr.success(response.message, 'Success', {
+            positionClass: 'toast-top-right',
+            timeOut: 3000,
+            closeButton: true
+          });
+          this.passwordForm.reset(); // Reset form if needed
+        } else {
+          // Handle any other message as an error even if it comes as a success from API
+          this.toastr.error(response.message || 'Unknown error occurred', 'Error', {
+            positionClass: 'toast-top-center',
+            timeOut: 3000,
+            closeButton: true
+          });
+        }
       },
       error: (error) => {
+        // Handling HTTP error response
         console.error('Failed to update password:', error);
-        this.toastr.error(error.message, '', {
+        let errorMessage = (error.error && error.error.message) || 'Failed to update password.';
+        this.toastr.error(errorMessage, 'Error', {
           positionClass: 'toast-top-center',
           timeOut: 3000,
           closeButton: true
@@ -108,4 +129,5 @@ export class UpdateProfileComponent implements OnInit {
       }
     });
   }
+  
 }

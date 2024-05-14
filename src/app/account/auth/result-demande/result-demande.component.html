@@ -1,7 +1,9 @@
 <app-client-nav-bar></app-client-nav-bar>
 <div class="request-summary" id="table-to-pdf">
- 
-    <h1>Demande de résumé pour Nyrstar Bouchard Hébert</h1>
+  <div class="card-header">
+    Demande de résumé pour Nyrstar Bouchard Hébert
+  </div>
+  <div class="card-content">
     <div class="header-details">
       <div class="detail">
         <span class="label">Purchase order:</span>
@@ -20,7 +22,8 @@
         <span class="value">{{ demandes.commentairesInternes }}</span>
       </div>
     </div>
-  
+
+    <!-- Main sample details table -->
     <div class="sample-details">
       <table class="sample-table">
         <thead>
@@ -32,9 +35,8 @@
             <th>Type d'échantillon</th>
             <th>Lieu de prélèvement</th>
             <th>Adresse de retour</th>
-            <th>priorite</th>
-            <th>Date de début de prélèvement</th>
-            <th>Parameters</th>
+            <th>Priorité</th>
+            <th>Date de début <br>de prélèvement</th>
           </tr>
         </thead>
         <tbody>
@@ -48,27 +50,40 @@
             <td>{{ echantillon.addressRetourner }}</td>
             <td>{{ echantillon.priorite }}</td>
             <td>{{ echantillon.dateFinPrelevement }}</td>
-            <td>
-              <div class="parameters-details">
-                <div class="card parameters-card">
-                  <h2>Parameters</h2>
-                  <div class="card-content">
-                    <ul>
-                      <li *ngFor="let parameter of getParametersByEchantillonId(echantillon.echantillonId)">
-                        {{ parameter.name }}: {{ parameter.rdl }} {{ parameter.unit }}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </td>
           </tr>
         </tbody>
       </table>
     </div>
-  
-  <div class="form-actions">
-    <button class="cancel-button">Cancel</button>
-    <button class="submit-button" (click)="saveAsPdf()">Submit request</button>
+
+    <!-- Separate Parameters Table -->
+    <div class="parameters-details">
+      <h2>Parameters</h2>
+      <div class="card">
+        <table class="parameters-table">
+          <thead>
+            <tr>
+              <th>Sample ID</th>
+              <th>Parameter</th>
+              <th>RDL</th>
+              <th>Unit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let echantillon of echantillons">
+              <td>{{ echantillon.echantillonId }}</td>
+              <td>{{ echantillon.parameter.name }}</td>
+              <td>{{ echantillon.parameter.rdl }}</td>
+              <td>{{ echantillon.parameter.unit }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+
+    <div class="form-actions">
+      <button class="cancel-button">Cancel</button>
+      <button class="submit-button" (click)="saveAsPdf()">Submit request</button>
+    </div>
   </div>
 </div>
