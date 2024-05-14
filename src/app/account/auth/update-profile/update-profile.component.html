@@ -37,17 +37,17 @@
                   <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()" class="bg-light p-3">
                     <div class="form-group">
                       <label for="password">mot de passe</label>
-                      <input type="text" class="form-control" id="password" formControlName="password">
+                      <input type="password" class="form-control" id="password" formControlName="password">
                     </div>
                     <div class="form-group">
                       <label for="newPassword">Nouveau mot de passe</label>
-                      <input type="text" class="form-control" id="newPassword" formControlName="newPassword">
+                      <input type="password" class="form-control" id="newPassword" formControlName="newPassword">
                     </div>
                     <div class="form-group">
                       <label for="confirmPassword">Confirmer nouveau mot de passe</label>
-                      <input type="text" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                      <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="submit"  class="btn btn-primary">Modifier mot de passe</button>
                     <button type="button" class="btn btn-secondary">Annuler</button>
                   </form>
                 </div>

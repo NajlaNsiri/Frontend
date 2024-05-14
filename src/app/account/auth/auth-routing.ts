@@ -19,6 +19,7 @@ import { UpdateEchanttillonComponent } from './update-echanttillon/update-echant
 import { UpdateListParameterComponent } from './update-list-parameter/update-list-parameter.component';
 import { ListEchantillonsComponent } from './list-echantillons/list-echantillons.component';
 import { ValidationComponent } from './validation/validation.component';
+import { ResetPasswordMessageComponent } from './reset-password-message/reset-password-message.component';
 
 const routes: Routes = [
     {
@@ -37,6 +38,10 @@ const routes: Routes = [
     {
         path: 'restpassword',
         component: RestPasswordComponent
+    },
+    {
+        path: 'restpasswordmessage',
+        component: ResetPasswordMessageComponent
     },
     {
         path: 'updatePassword',

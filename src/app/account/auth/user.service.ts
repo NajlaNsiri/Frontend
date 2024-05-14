@@ -53,4 +53,12 @@ export class UserService {
   toggleUserActive(id: number): Observable<string> {
     return this.http.put<string>(`${this.baseUrl}/disable/${id}`, null, { headers: this.getAuthHeaders() });
   }
+  changePassword(usernameOrEmail: string, password: string, newPassword: string): Observable<any> {
+    const body = {
+      usernameOrEmail: usernameOrEmail,
+      password: password,
+      newPassword: newPassword
+    };
+    return this.http.put<any>(`${this.baseUrl}/change-password`, body, { headers: this.getAuthHeaders() });
+  }
 }

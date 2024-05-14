@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service'; // Update this path as necessary
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-password',
@@ -14,9 +15,10 @@ export class UpdatePasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, 
-    private http: HttpClient, 
+    private authService: AuthService, // Use AuthService instead of HttpClient
     private router: Router,
     private route: ActivatedRoute, 
+    private toastr: ToastrService 
   ) { }
 
   ngOnInit() {
@@ -35,19 +37,25 @@ export class UpdatePasswordComponent implements OnInit {
     if (this.resetPasswordForm.invalid) {
       return;
     }
-    const payload = {
+    const resetData = {
       token: this.token, // Make sure this is correctly being captured from queryParams
       newPassword: this.resetPasswordForm.value.newPassword
     };
-    this.http.post<any>('http://localhost:4000/api/auth/reset-password', payload)
+    this.authService.resetPassword(resetData)
       .subscribe({
         next: (response) => {
-          alert('Your password has been successfully reset.');
+          console.log('Your password has been successfully reset:', response);
+          this.toastr.success('Votre mot de passe a été réinitialisé avec succès :', '', {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+            closeButton: true,
+            progressBar: true
+          });  
           this.router.navigate(['/account/login']); // Redirect to login page
         },
         error: (error) => {
+          console.error('Failed to reset password:', error);
           alert('Failed to reset password. Please check your token or try again.');
-          console.error('Password reset error:', error);
         }
       });
   }
