@@ -41,11 +41,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe(
       response => {
         console.log('API Response:', response); // Log the full response object
-
-        // Store userId and token in localStorage
         localStorage.setItem('userId', response.userId.toString());
         localStorage.setItem('token', response.token);
-
+        localStorage.setItem('fisrtName', response.fisrtName);
+        localStorage.setItem('lastName', response.lastName);
         // Navigate to the 'demande' page and pass the user ID as a state or parameter
         this.router.navigate(['/account/Listdemande'], { queryParams: { userId: response.userId } });
         this.error = ''; // Clear any previous errors

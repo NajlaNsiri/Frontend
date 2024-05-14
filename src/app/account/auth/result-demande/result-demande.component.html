@@ -1,7 +1,7 @@
 <app-client-nav-bar></app-client-nav-bar>
 <div class="request-summary" id="table-to-pdf">
   <div class="card-header">
-    Demande de résumé pour Nyrstar Bouchard Hébert
+    Demande de résumé pour {{firstName+' '+lastName}} 
   </div>
   <div class="card-content">
     <div class="header-details">
@@ -43,9 +43,9 @@
           <tr *ngFor="let echantillon of echantillons">
             <td>{{ echantillon.echantillonId }}</td>
             <td>{{ echantillon.nomEchantillon }}</td>
-            <td>{{ echantillon.returns }}</td>
-            <td>{{ echantillon.disposes }}</td>
-            <td>{{ echantillon.typeEchantillon }}</td>
+            <td>{{ getEnumDescription(Return, echantillon.returns) }}</td>
+            <td>{{ getEnumDescription(Dispose, echantillon.disposes) }}</td>
+            <td>{{ getEnumDescription(TypeEchantillon, echantillon.typeEchantillon) }}</td>
             <td>{{ echantillon.lieuPrelevement }}</td>
             <td>{{ echantillon.addressRetourner }}</td>
             <td>{{ echantillon.priorite }}</td>
@@ -54,32 +54,28 @@
         </tbody>
       </table>
     </div>
-
-    <!-- Separate Parameters Table -->
     <div class="parameters-details">
       <h2>Parameters</h2>
       <div class="card">
-        <table class="parameters-table">
-          <thead>
-            <tr>
-              <th>Sample ID</th>
-              <th>Parameter</th>
-              <th>RDL</th>
-              <th>Unit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let echantillon of echantillons">
-              <td>{{ echantillon.echantillonId }}</td>
-              <td>{{ echantillon.parameter.name }}</td>
-              <td>{{ echantillon.parameter.rdl }}</td>
-              <td>{{ echantillon.parameter.unit }}</td>
-            </tr>
-          </tbody>
-        </table>
+          <table class="parameters-table">
+              <thead>
+                  <tr >
+                      <th>Parameter Details</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let group of groupedParameters">
+                      <td *ngFor="let parameter of group">
+                          Nom: {{ parameter.name }} ,Rdl:{{ parameter.rdl }}
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
       </div>
-    </div>
-    
+  </div>
+  
+   
+
 
     <div class="form-actions">
       <button class="cancel-button">Cancel</button>

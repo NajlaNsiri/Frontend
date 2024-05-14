@@ -6,6 +6,9 @@ import { Echantillon } from 'src/app/core/models/echantillon.model';
 import { Parameter } from 'src/app/core/models/parameter.model';
 import { DemandeService } from '../demande.service';
 import { EchantillonService } from '../echantillon.service';
+import { Dispose } from 'src/app/core/models/Dispose.enum';
+import { Return } from 'src/app/core/models/Return.enum';
+import { TypeEchantillon } from 'src/app/core/models/typeEchantillon.enum';
 import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -19,6 +22,12 @@ export class ResultDemandeComponent implements OnInit {
   demandes: Demande;      // If demandes is also an array, initialize it as well
   echantillons: Echantillon[] = [];  // Initialize as empty array
   echantillonId: number;
+  Dispose = Dispose;
+  Return = Return;
+  TypeEchantillon= TypeEchantillon;
+  firstName:string = localStorage.getItem('fisrtName');
+  lastName:string = localStorage.getItem('lastName');
+  groupedParameters = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -29,8 +38,13 @@ export class ResultDemandeComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.loadFormDataFromLocalStorage();
+    this.groupParameters();
   }
-
+  groupParameters(): void {
+    for (let i = 0; i < this.parameters.length; i += 3) {
+        this.groupedParameters.push(this.parameters.slice(i, i + 3));
+    }
+}
   private loadFormDataFromLocalStorage() {
     const demandeData = localStorage.getItem('demandeFormData');
     const echantillonData = localStorage.getItem('echantillonFormData');
@@ -41,6 +55,9 @@ export class ResultDemandeComponent implements OnInit {
     this.parameters = parameterData ? JSON.parse(parameterData) : [];
     this.linkParametersToEchantillons();
   }
+  getEnumDescription(enumObj: any, key: string): string {
+    return enumObj[key];
+}
   private linkParametersToEchantillons() {
     this.echantillons.forEach(ech => {
       // Filter parameters by echantillonId and map to get their IDs
@@ -150,6 +167,7 @@ export class ResultDemandeComponent implements OnInit {
         buttons.forEach(button => (button as HTMLElement).style.visibility = 'visible');
       };
     });
+    this.saveDemande();
   }
   
   
