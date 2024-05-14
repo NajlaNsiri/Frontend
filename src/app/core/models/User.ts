@@ -8,6 +8,7 @@ export class User {
     username: string;
     email: string;
     password: string;
+    phoneNumber:string;
     genre: string;
     active: boolean;
     roles: Role[];  
@@ -17,6 +18,7 @@ export class User {
       username: string,
       email: string,
       password: string,
+      phoneNumber:string,
       genre: string,
       active: boolean,
       roles: Role[],
@@ -28,6 +30,7 @@ export class User {
       this.username = username;
       this.email = email;
       this.password = password;
+      this.phoneNumber= phoneNumber;
       this.genre = genre;
       this.active = active;
       this.roles = roles;

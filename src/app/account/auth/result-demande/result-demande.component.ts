@@ -78,6 +78,9 @@ export class ResultDemandeComponent implements OnInit {
           closeButton: true,
           progressBar: true
         });  
+        localStorage.setItem('demandeFormData','');
+        localStorage.setItem('echantillonFormData','');
+        localStorage.setItem('ListParamater','');
         this.router.navigate(['/account/Listdemande']);
       },
       error: (error) => {

@@ -39,7 +39,16 @@ export class EchantillonService {
   getEchantillon(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
-
+  getParametersByEchantillonId(echantillonId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${echantillonId}/parameters`, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      catchError((error) => {
+        console.error('Error fetching parameters by echantillonId', error);
+        return throwError(error);
+      })
+    );
+  }
   // Create a new echantillon
   createEchantillon(demandeId: number, echantillon: Echantillon[]): Observable<any> {
     const token = localStorage.getItem('token'); // Retrieve the token from localStorage

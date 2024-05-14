@@ -1,40 +1,40 @@
-import { Gabarit } from "./gabarit.enum";
+import { Parameter } from "./parameter.model";
 import { Priorite } from "./priorite.enum";
 import { TypeEchantillon } from "./typeEchantillon.enum";
-import { Demande } from './demande.model';
 
 export class Echantillon {
   echantillonId: number;
-  gabarit: string; 
-  typeEchantillon: string;
+  typeEchantillon: TypeEchantillon;
   nomEchantillon: string;
   lieuPrelevement: string;
   addressRetourner: string; 
   dateFinPrelevement: string; 
   heureFinPrelevement: string; 
-  priorite: string; 
+  priorite: Priorite; 
   commentairesInternes: string;
   demandeId: number;
   parameterIds?: number[]; 
   disposes: string; 
   returns: string; 
+  showDetails: boolean = false;  // Default to false
+  parameters: Parameter[] = [];  // Default to empty array
 
   constructor(
-      gabarit: string,
-      typeEchantillon: string,
+      echantillonId: number,
+      typeEchantillon: TypeEchantillon,
       nomEchantillon: string,
       lieuPrelevement: string,
       addressRetourner: string,
       dateFinPrelevement: string,
       heureFinPrelevement: string,
-      priorite: string,
+      priorite: Priorite,
       commentairesInternes: string,
       demandeId: number,
       disposes: string,
       returns: string,
       parameterIds?: number[]
   ) {
-      this.gabarit = gabarit;
+      this.echantillonId = echantillonId;
       this.typeEchantillon = typeEchantillon;
       this.nomEchantillon = nomEchantillon;
       this.lieuPrelevement = lieuPrelevement;
