@@ -9,6 +9,7 @@ import { EchantillonService } from '../echantillon.service';
 import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import QRCode from 'qrcode';
 @Component({
   selector: 'app-result-demande',
   templateUrl: './result-demande.component.html',
@@ -95,63 +96,63 @@ export class ResultDemandeComponent implements OnInit {
 
    
   }
-  saveAsPdf() {
-    const data = document.getElementById('table-to-pdf') as HTMLElement;
-    const buttons = document.querySelectorAll('.form-actions button');
-    buttons.forEach(button => (button as HTMLElement).style.visibility = 'hidden');
-  
-    const currentDate = new Date().toLocaleDateString('fr-FR'); // Format the date as you prefer, using French locale here
-  
-    html2canvas(data, {
-      scale: 2, // Adjust this for better resolution
-      windowWidth: data.offsetWidth,
-      windowHeight: data.offsetHeight
-    }).then(canvas => {
-      const contentDataURL = canvas.toDataURL('image/png');
-      let pdf = new jsPDF('l', 'mm', 'a4'); // Landscape orientation
-  
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
-  
-      const scaleToFitWidth = pdfWidth / canvasWidth;
-      const scaleToFitHeight = pdfHeight / canvasHeight;
-      const scale = Math.min(scaleToFitWidth, scaleToFitHeight);
-  
-      // Load the image from the assets
+
+ saveAsPdf() {
+  const data = document.getElementById('table-to-pdf') as HTMLElement;
+  const buttons = document.querySelectorAll('.form-actions button');
+  buttons.forEach(button => (button as HTMLElement).style.visibility = 'hidden');
+
+  const currentDate = new Date().toLocaleDateString('fr-FR');
+
+  html2canvas(data, {
+    scale: 2,
+    windowWidth: data.offsetWidth,
+    windowHeight: data.offsetHeight
+  }).then(canvas => {
+    const contentDataURL = canvas.toDataURL('image/png');
+    let pdf = new jsPDF('l', 'mm', 'a4'); // Landscape orientation
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const scale = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
+
+    QRCode.toDataURL('Put Your QR Data Here', { errorCorrectionLevel: 'H' }, (err, url) => {
+      if (err) throw err;
+      const qrCodeSize = 40; // Size of QR code in mm
+      const qrCodeX = 10; // QR code X position in mm
+      const qrCodeY = 10; // QR code Y position in mm
+      pdf.addImage(url, 'PNG', qrCodeX, qrCodeY, qrCodeSize, qrCodeSize);
+
       const image = new Image();
-      image.src = 'assets/images/logo.png'; // Make sure the path is correct
+      image.src = 'assets/images/logo.png';
       image.onload = () => {
-        // Calculate dimensions to maintain aspect ratio at 20% size
-        const imageHeight = image.height / 5; // Reduce to 20% of original height
-        const imageWidth = image.width / 5; // Reduce to 20% of original width
-  
-        // Calculate position to align on the left and higher up
-        const imgX = 10; // Position 10mm from the left edge
-        const imgY = 10; // Position 10mm from the top, moved higher from previous 20mm
-  
-        // Add image to PDF
+        const imageWidth = image.width * 0.1; // Scaling down the logo
+        const imageHeight = image.height * 0.1; // Scaling down the logo
+        const imgX = (pdfWidth - imageWidth) / 2; // Center the logo horizontally
+        const imgY = 20; // Position the logo 20 mm from the top
         pdf.addImage(image, 'JPEG', imgX, imgY, imageWidth, imageHeight);
-  
-        // Calculate the right alignment for the date
+
         pdf.setFontSize(10);
         const dateWidth = pdf.getStringUnitWidth(currentDate) * pdf.getFontSize() / pdf.internal.scaleFactor;
-        const datePositionX = pdfWidth - dateWidth - 10; // 10 mm margin from the right edge
-  
-        pdf.text(currentDate, datePositionX, 10); // Position the date on the right
-  
-        // Add the canvas image
-        const contentImageY = imgY + imageHeight + 5; // Position below the image with reduced spacing
-        pdf.addImage(contentDataURL, 'PNG', (pdfWidth - canvasWidth * scale) / 2, contentImageY, canvasWidth * scale, canvasHeight * scale);
+        const datePositionX = pdfWidth - dateWidth - 10; // Right-align the date
+        const datePositionY = imgY + (imageHeight / 2); // Align the date vertically with the middle of the logo
+        pdf.text(currentDate, datePositionX, datePositionY);
+
+        // Calculate the starting Y position for the content, 5.3 mm below the QR code
+        const contentImageY = qrCodeY + qrCodeSize + 5.3; // Position below the QR code
+        const imgWidth = canvas.width * scale;
+        const imgHeight = canvas.height * scale;
+        const x = (pdfWidth - imgWidth) / 2; // Center the canvas image horizontally
+
+        pdf.addImage(contentDataURL, 'PNG', x, contentImageY, imgWidth, imgHeight);
         pdf.save('DemandesSummary.pdf'); // Saving the PDF with a filename
-  
+
         // Show buttons again after generating the PDF
         buttons.forEach(button => (button as HTMLElement).style.visibility = 'visible');
       };
     });
-  }
-  
+  });
+}
   
 }
   

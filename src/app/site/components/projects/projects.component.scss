@@ -37,3 +37,72 @@
 .row > div:nth-child(n+4) {
     margin-top: 20px; /* Ajoute un espace entre la première et la deuxième ligne de div */
 }
+/* General Styles for the Section */
+#propos {
+    position: relative;
+    overflow: hidden;
+    height: 60vh;  /* Adjust the height as necessary */
+    display: flex;
+    align-items: center;  /* Aligns content vertically */
+    justify-content: center;  /* Aligns content horizontally */
+}
+
+/* Background Image Styling with Gradient Overlay */
+#propos .full-width {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;  /* Keeps the image below the overlay */
+}
+
+#propos:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));  /* Gradient overlay */
+    z-index: 1;  /* Ensures overlay is below the text */
+}
+
+/* Typography and Title Styling */
+.titre {
+    font-size: 3rem;  /* Larger font size for prominence */
+    color: #fff;  /* Ensuring high contrast */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);  /* Adding text shadow for better readability */
+    font-weight: bold;  /* Bold font for emphasis */
+    margin-top: 15vh;  /* Centering vertically more effectively */
+    position: relative;
+    z-index: 2;  /* Ensures the text is above the overlay */
+    animation: fadeInUp 1s ease-out forwards;  /* Animation for the title */
+    border-bottom: 2px solid #ffd700;  /* Gold underline for thematic consistency */
+    padding-bottom: 10px;  /* Spacing for underline */
+}
+
+/* Keyframes for fadeInUp Animation */
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Adjustments for Mobile Devices */
+@media (max-width: 768px) {
+    .titre {
+        font-size: 1.5rem;  /* Smaller font size for smaller screens */
+        padding: 0 10px;  /* Padding to handle narrow screens */
+    }
+
+    #propos {
+        height: 40vh;  /* Smaller height on mobile devices */
+    }
+}
