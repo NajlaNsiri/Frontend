@@ -117,6 +117,7 @@ export class ResultDemandeComponent implements OnInit {
    
   }
 
+  
   saveAsPdf() {
     // Hide elements that should not be in the PDF
     const modalElements = document.querySelectorAll('.modal') as NodeListOf<HTMLElement>;
@@ -140,51 +141,57 @@ export class ResultDemandeComponent implements OnInit {
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const scale = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
   
-      QRCode.toDataURL(`Nom:${this.firstName}, Prenom ${this.lastName}, demandeId:${this.demandeId}`, { errorCorrectionLevel: 'H' }, (err, url) => {
-        if (err) throw err;
+      const image = new Image();
+      image.src = 'assets/images/logo.png';
+      image.onload = () => {
+        const imageWidth = image.width * 0.1; // Scaling down the logo
+        const imageHeight = image.height * 0.1; // Scaling down the logo
+        const imgX = 10; // Position the logo 10 mm from the left
+        const imgY = 10; // Position the logo 10 mm from the top
+        pdf.addImage(image, 'JPEG', imgX, imgY, imageWidth, imageHeight);
+
+        QRCode.toDataURL(`Nom:${this.firstName}, Prenom ${this.lastName}, demandeId:${this.demandeId}`, { errorCorrectionLevel: 'H' }, (err, url) => {
+          if (err) throw err;
   
-        const qrCodeSize = 40; // Size of QR code in mm
-        const qrCodeX = 10; // QR code X position in mm
-        const qrCodeY = 10; // QR code Y position in mm
-        pdf.addImage(url, 'PNG', qrCodeX, qrCodeY, qrCodeSize, qrCodeSize);
-  
-        const image = new Image();
-        image.src = 'assets/images/logo.png';
-        image.onload = () => {
-          const imageWidth = image.width * 0.1; // Scaling down the logo
-          const imageHeight = image.height * 0.1; // Scaling down the logo
-          const imgX = (pdfWidth - imageWidth) / 2; // Center the logo horizontally
-          const imgY = 20; // Position the logo 20 mm from the top
-          pdf.addImage(image, 'JPEG', imgX, imgY, imageWidth, imageHeight);
-  
+          const qrCodeSize = 40; // Size of QR code in mm
+          const qrCodeX = (pdfWidth - qrCodeSize) / 2; // Center the QR code horizontally
+          const qrCodeY = 20; // Position the QR code 20 mm from the top
+          pdf.addImage(url, 'PNG', qrCodeX, qrCodeY, qrCodeSize, qrCodeSize);
+
           pdf.setFontSize(10);
           const dateWidth = pdf.getStringUnitWidth(currentDate) * pdf.getFontSize() / pdf.internal.scaleFactor;
           const datePositionX = pdfWidth - dateWidth - 10; // Right-align the date
           const datePositionY = imgY + (imageHeight / 2); // Align the date vertically with the middle of the logo
-          pdf.text(currentDate, datePositionX, datePositionY);
-  
-          // Calculate the starting Y position for the content, 5.3 mm below the QR code
+
+          // Calculate the starting Y position for the content, below the QR code
           const contentImageY = qrCodeY + qrCodeSize + 5.3; // Position below the QR code
           const imgWidth = canvas.width * scale;
           const imgHeight = canvas.height * scale;
           const x = (pdfWidth - imgWidth) / 2; // Center the canvas image horizontally
   
           pdf.addImage(contentDataURL, 'PNG', x, contentImageY, imgWidth, imgHeight);
+          
+          // Footer Information - positioned below the content area
+          const footerText = "Request number: 3283301    Request made by: rajia tsini    Sending date: 2024/02/26 17:40:53    Page: 1 of 3";
+          const footerY = contentImageY + imgHeight + 10; // Place footer 10 mm below the content
+          const footerWidth = pdf.getStringUnitWidth(footerText) * pdf.getFontSize() / pdf.internal.scaleFactor;
+          const centeredFooterX = (pdfWidth - footerWidth) / 2; // Center the footer text horizontally
+          pdf.text(footerText, centeredFooterX, footerY); // Adds footer text below the content
+
           pdf.save('DemandesSummary.pdf'); // Saving the PDF with a filename
   
           // Restore the elements after generating the PDF
           modalElements.forEach(el => el.style.display = 'block');
           buttons.forEach(button => button.style.visibility = 'visible');
-        };
-      });
+        });
+      };
     });
-  
+
     // Navigate to the list of demands after generating the PDF
     this.router.navigate(['/account/Listdemande']);
     $('#exampleModalCenter').modal('hide');
   }
-  
-  
-  
+
+
 }
   
