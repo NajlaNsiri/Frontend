@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';  // Update this path as necessary
 import { User } from 'src/app/core/models/User'; // Update this path if your model is located elsewhere
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-profile',
@@ -12,8 +13,7 @@ export class UpdateProfileComponent implements OnInit {
   profileForm: FormGroup;
   passwordForm: FormGroup;
   userId: number = Number(localStorage.getItem('userId')); // This should be dynamically set, perhaps passed through a route or some other method
-
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService,  private toastr: ToastrService ) {
     this.createForm();
   }
 
@@ -28,7 +28,6 @@ export class UpdateProfileComponent implements OnInit {
       }
     });
   }
-
   createForm() {
     this.profileForm = this.fb.group({
       firstName: '',
@@ -36,40 +35,99 @@ export class UpdateProfileComponent implements OnInit {
       phoneNumber: '',
       email: '',
     });
-    this.passwordForm= this.fb.group({
-      password:'',
-      newPassword:'',
-      confirmPassword:''
-    })
+    this.passwordForm = this.fb.group({
+      password: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    }, { validator: this.checkPasswords });
+  }
+
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+    const pass = group.get('newPassword').value;
+    const confirmPass = group.get('confirmPassword').value;
+
+    return pass === confirmPass ? null : { notSame: true }     
   }
 
   updateForm(user: User) {
     this.profileForm.setValue({
       firstName: user.firstName,
       lastName: user.lastName,
-      phoneNumber: user.phoneNumber ,
+      phoneNumber: user.phoneNumber,
       email: user.email,
     });
   }
-  
+
   updateUserData() {
     const updatedUser = this.profileForm.value as User;
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: (response) => {
         console.log('User updated successfully:', response);
-        this.ngOnInit();
+        this.ngOnInit(); 
+        this.toastr.success('informations modifiées avec succès', '', {
+          timeOut: 5000,
+          positionClass: 'toast-top-right',
+          closeButton: true,
+          progressBar: true
+        });   // Refresh user data
       },
       error: (error) => {
         console.error('Failed to update user:', error);
-        // Handle update errors here, possibly with user feedback
+        this.toastr.error(error, '', {
+          positionClass: 'toast-top-center',
+          timeOut: 3000,
+          closeButton: true
+        });
       }
     });
   }
+
   onSubmit() {
     console.log(this.profileForm.value);
     this.updateUserData();
   }
-  updatePassword(){
 
+  updatePassword() {
+    if (this.passwordForm.invalid) {
+      this.toastr.error('Please fill all required fields.', 'Error', {
+        positionClass: 'toast-top-center',
+        timeOut: 3000,
+        closeButton: true
+      });
+      return; // If form is invalid, do not proceed
+    }
+  
+    const { password, newPassword } = this.passwordForm.value;
+    this.userService.changePassword(this.profileForm.value.email, password, newPassword).subscribe({
+      next: (response) => {
+        // Assuming response is always coming as expected even on successful password change
+        if (response.message === "Password updated successfully.") {
+          this.toastr.success(response.message, 'Success', {
+            positionClass: 'toast-top-right',
+            timeOut: 3000,
+            closeButton: true
+          });
+          this.passwordForm.reset(); // Reset form if needed
+        } else {
+          // Handle any other message as an error even if it comes as a success from API
+          this.toastr.error(response.message || 'Unknown error occurred', 'Error', {
+            positionClass: 'toast-top-center',
+            timeOut: 3000,
+            closeButton: true
+          });
+        }
+      },
+      error: (error) => {
+        // Handling HTTP error response
+        console.error('Failed to update password:', error);
+        let errorMessage = (error.error && error.error.message) || 'Failed to update password.';
+        this.toastr.error(errorMessage, 'Error', {
+          positionClass: 'toast-top-center',
+          timeOut: 3000,
+          closeButton: true
+        });
+      }
+    });
   }
+  
 }

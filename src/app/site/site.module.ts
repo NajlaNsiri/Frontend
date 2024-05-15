@@ -30,11 +30,13 @@ import { MagneticComponent } from './components/magnetic/magnetic.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { NewsComponent } from './components/news/news.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, HomeComponent, FooterComponent, ProposComponent, GouvernanceComponent, CollaborateursComponent, ConsultingComponent, RMDComponent, EnvironmentalComponent, EnergyComponent, RdComponent, GoldComponent, TestingComponent, LabComponent, PreparationComponent, CommunitionComponent, GravityComponent, GoldTestingComponent, FloatationComponent, HydrometComponent, SeparationComponent, MagneticComponent, ProjectsComponent, ClientsComponent, NewsComponent],
+  declarations: [NavbarComponent, HomeComponent, FooterComponent, ProposComponent, GouvernanceComponent, CollaborateursComponent, ConsultingComponent, RMDComponent, EnvironmentalComponent, EnergyComponent, RdComponent, GoldComponent, TestingComponent, LabComponent, PreparationComponent, CommunitionComponent, GravityComponent, GoldTestingComponent, FloatationComponent, HydrometComponent, SeparationComponent, MagneticComponent, ProjectsComponent, ClientsComponent, NewsComponent, ContactComponent],
   imports: [
     CommonModule,
     SiteRoutingModule, 
@@ -42,6 +44,7 @@ import { NewsComponent } from './components/news/news.component';
     NgbCarouselModule,
     NgbDropdownModule, 
     ScrollToModule.forRoot(),
+    ReactiveFormsModule
 
   ]
 })

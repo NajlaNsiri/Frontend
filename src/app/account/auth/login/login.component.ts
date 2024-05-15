@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../services/auth.service'; // Update this path as necessary
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient ,private router: Router ,private toastr: ToastrService ) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService, // Use AuthService instead of HttpClient
+    private router: Router, 
+    private toastr: ToastrService 
+  ) { }
 
   ngOnInit() {
     localStorage.clear();
@@ -24,49 +30,45 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get f() { return this.loginForm.controls;  }
+  get f() { return this.loginForm.controls; }
 
   onSubmit() {
-    // If form is invalid, return
     if (this.loginForm.invalid) {
       return;
     }
-  
-    // Send login request
-    this.http.post<any>('http://localhost:4000/api/auth/signin', this.loginForm.value)
-  .subscribe(
-    (response) => {
-      console.log('API Response:', response); // Log the full response object
 
-      // Store userId and token in localStorage
-      localStorage.setItem('userId', response.userId.toString());
-      localStorage.setItem('token', response.token);
+    // Use authService to submit login data
+    this.authService.login(this.loginForm.value).subscribe(
+      response => {
+        console.log('API Response:', response); // Log the full response object
+        localStorage.setItem('userId', response.userId.toString());
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('fisrtName', response.fisrtName);
+        localStorage.setItem('lastName', response.lastName);
+        // Navigate to the 'demande' page and pass the user ID as a state or parameter
+        this.router.navigate(['/account/Listdemande'], { queryParams: { userId: response.userId } });
+        this.error = ''; // Clear any previous errors
+      },
+      error => {
+        console.error('API Error:', error);
+        let errorMessage = 'An error occurred. Please try again.'; // Default error message
 
-      // Navigate to the 'demande' page and pass the user ID as a state or parameter        
-      this.router.navigate(['/account/Listdemande'], { queryParams: { userId: response.userId } });
-      this.error = ''; // Clear any previous errors
-    },
-    (error) => {
-      console.error('API Error:', error);
-      let errorMessage = 'An error occurred. Please try again.'; // Default error message
+        // Ensure you are displaying a meaningful error message
+        if (error.error && typeof error.error === 'string') {
+          errorMessage = error.error;
+        } else if (error.message && typeof error.message === 'string') {
+          errorMessage = error.message;
+        } else if (typeof error === 'string') {
+          errorMessage = error;
+        }
 
-      // Ensure you are displaying a meaningful error message
-      if (error.error && typeof error.error === 'string') {
-        errorMessage = error.error;
-      } else if (error.message && typeof error.message === 'string') {
-        errorMessage = error.message;
-      } else if (typeof error === 'string') {
-        errorMessage = error;
+        this.error = errorMessage; // Set the UI error message
+        this.toastr.error(errorMessage, 'Login Failed', {
+          positionClass: 'toast-top-center',
+          timeOut: 3000,
+          closeButton: true
+        });
       }
-
-      this.error = errorMessage; // Set the UI error message
-
-      this.toastr.error(errorMessage, 'Login Failed', {
-        positionClass: 'toast-top-center',
-        timeOut: 3000,
-        closeButton: true
-      });
-    }
-  );
+    );
   }
 }

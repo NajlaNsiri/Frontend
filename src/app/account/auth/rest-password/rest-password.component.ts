@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service'; // Update this path as necessary
 
 @Component({
   selector: 'app-rest-password',
@@ -15,7 +15,7 @@ export class RestPasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, 
-    private http: HttpClient, 
+    private authService: AuthService, // Use AuthService instead of HttpClient
     private router: Router
   ) { }
 
@@ -30,10 +30,8 @@ export class RestPasswordComponent implements OnInit {
     });
   }
 
-  // Getters for requestResetForm controls
+  // Getters for form controls
   get fRequest() { return this.requestResetForm.controls; }
-
-  // Getters for resetPasswordForm controls
   get fReset() { return this.resetPasswordForm.controls; }
 
   onRequestReset() {
@@ -41,18 +39,37 @@ export class RestPasswordComponent implements OnInit {
       return;
     }
     const email = this.requestResetForm.value.email;
-    this.http.get<any>(`http://localhost:4000/api/auth/request-reset-password?email=${email}`)
+    this.authService.requestResetPassword(email)
       .subscribe({
         next: (response) => {
-          alert('Reset link sent to your email.');
-          this.requestResetForm.reset();
+          console.log('Reset link sent to your email:', response);
+          this.router.navigate(['/account/restpasswordmessage']); // Navigate to a confirmation page if needed
         },
-        // error: (error) => {
-        //   alert('Failed to send reset link. Please try again.');
-        //   console.error('Reset password request error:', error);
-        // }
+        error: (error) => {
+          console.error('Failed to send reset link:', error);
+          alert('Failed to send reset link. Please try again.');
+        }
       });
   }
 
-  
+  onResetPassword() {
+    if (this.resetPasswordForm.invalid) {
+      return;
+    }
+    const resetData = {
+      token: this.resetPasswordForm.value.resetToken,
+      newPassword: this.resetPasswordForm.value.newPassword
+    };
+    this.authService.resetPassword(resetData)
+      .subscribe({
+        next: (response) => {
+          console.log('Password reset successfully:', response);
+          this.router.navigate(['/login']); // Redirect to login after successful password reset
+        },
+        error: (error) => {
+          console.error('Reset password error:', error);
+          alert('Failed to reset password. Please verify your token and try again.');
+        }
+      });
+  }
 }

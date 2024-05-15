@@ -24,6 +24,7 @@ import { MagneticComponent } from './components/magnetic/magnetic.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { NewsComponent } from './components/news/news.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -139,6 +140,11 @@ const routes: Routes = [
   {
     path:'news' , 
     component:NewsComponent
+  
+  },
+  {
+    path:'contact' , 
+    component:ContactComponent
   
   }
 ];
