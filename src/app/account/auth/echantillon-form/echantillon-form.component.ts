@@ -1,8 +1,9 @@
 import { Component, OnInit ,AfterViewInit} from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EchantillonService } from '../echantillon.service';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 @Component({
   selector: 'app-echantillon-form',
@@ -53,22 +54,22 @@ export class EchantillonFormComponent implements OnInit {
     { display: 'Se précipiter', value: 'RUSH' },
   ];
 
-  constructor(private fb: FormBuilder, private echantillonService: EchantillonService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private fb: FormBuilder, private echantillonService: EchantillonService, private route: ActivatedRoute, private router: Router,private toastr: ToastrService ) {}
 
   ngOnInit(): void {
     this.echantillonForm = this.fb.group({
-      echantillonId: [''],
-      typeEchantillon: [''],
-      nomEchantillon: [''],
-      lieuPrelevement: [''],
-      addressRetourner: [''], // New field
-      dateFinPrelevement: [''],
-      heureFinPrelevement: [''],
+      echantillonId: [''], // Required field
+      typeEchantillon: ['', Validators.required], // Required field
+      nomEchantillon: ['', Validators.required], // Required field with minimum length
+      lieuPrelevement: ['', Validators.required], // Required field
+      addressRetourner: ['', Validators.required], // Example for a pattern, adjust as necessary
+      dateFinPrelevement: ['', Validators.required], // Required field
+      heureFinPrelevement: ['', Validators.required], // Required field
       priorite: [''],
-      disposes: [''], // New field
-      returns: [''], // New field
+      disposes: ['', Validators.required], // Required field
+      returns: ['', Validators.required], // Required field
       commentairesInternes: [''],
-      demandeId: [this.demandeId] // Adjusted for clarity, previously [this.demandeId,]
+      // demandeId: [this.demandeId] // Required and use the initialized demandeId
     });
     this.loadExistingData();
   }
@@ -86,22 +87,29 @@ export class EchantillonFormComponent implements OnInit {
   navigateToPrevious(){
     this.router.navigate(['/account/Listechantillon']);
   }
-  // dupliquer() {
-  //   const formValue = this.echantillonForm.value;
-  //   formValue.echantillonId = this.echantillons && this.echantillons.length ? this.echantillons.length + 1 : 1;
-  //   this.echantillons.push(formValue);
-  //   localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
-  //   this.router.navigate(['/account/ListParamter'], { queryParams: { dup: true, echantillonId: formValue.echantillonId }});
-  // }
 
   onSubmit() {
+    // Make sure to load the existing data before checking form validity.
     this.loadExistingData();
-    const formValue = this.echantillonForm.value;
-    formValue.echantillonId = this.echantillons.length ? this.echantillons.length + 1 : 1;
-    this.echantillons.push(formValue);
-    localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
-    console.log(formValue);
-    this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: formValue.echantillonId }});
-    $('#exampleModalCenter').modal('hide');
+    if (this.echantillonForm.valid) {
+      const formValue = this.echantillonForm.value;
+      // Assuming 'this.echantillons' is already loaded with existing data
+      formValue.echantillonId = this.echantillons.length + 1;
+      this.echantillons.push(formValue);
+      localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
+      console.log(formValue);
+      // Navigate after submission
+      this.router.navigate(['/account/ListParamter'], { queryParams: { echantillonId: formValue.echantillonId }});
+      // Hide modal if using Bootstrap jQuery plugins
+      $('#exampleModalCenter').modal('hide');
+    } else {
+      // Use Angular's toast service for error handling
+      this.toastr.error('Veuillez valider votre formulaire échantillon.', '', {
+        positionClass: 'toast-top-center',
+        timeOut: 3000,
+        closeButton: true
+      });
+    }
   }
+  
 }

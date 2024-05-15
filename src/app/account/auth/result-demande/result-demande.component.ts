@@ -153,7 +153,7 @@ export class ResultDemandeComponent implements OnInit {
         QRCode.toDataURL(`Nom:${this.firstName}, Prenom ${this.lastName}, demandeId:${this.demandeId}`, { errorCorrectionLevel: 'H' }, (err, url) => {
           if (err) throw err;
   
-          const qrCodeSize = 40; // Size of QR code in mm
+          const qrCodeSize = 20; // Size of QR code in mm
           const qrCodeX = (pdfWidth - qrCodeSize) / 2; // Center the QR code horizontally
           const qrCodeY = 20; // Position the QR code 20 mm from the top
           pdf.addImage(url, 'PNG', qrCodeX, qrCodeY, qrCodeSize, qrCodeSize);
