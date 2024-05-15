@@ -6,19 +6,19 @@
   <div class="card-content">
     <div class="header-details">
       <div class="detail">
-        <span class="label">Purchase order:</span>
+        <span class="label">Bon de commande:</span>
         <span class="value">{{ demandes.bonDeCommande }}</span>
       </div>
       <div class="detail">
-        <span class="label">Certificate language:</span>
+        <span class="label">Langue du certificat:</span>
         <span class="value">{{ demandes.langueDuCertificat }}</span>
       </div>
       <div class="detail">
-        <span class="label">Sent to laboratory:</span>
+        <span class="label">Envoyé au laboratoire:</span>
         <span class="value">Rouyn Noranda</span>
       </div>
       <div class="detail">
-        <span class="label">Comments:</span>
+        <span class="label">Commentaires:</span>
         <span class="value">{{ demandes.commentairesInternes }}</span>
       </div>
     </div>
@@ -73,13 +73,29 @@
           </table>
       </div>
   </div>
-  
-   
-
-
     <div class="form-actions">
-      <button class="cancel-button">Cancel</button>
-      <button class="submit-button" (click)="saveAsPdf()">Submit request</button>
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>es-tu sûr</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              <button (click)="saveDemande()" class="btn btn-primary" >Sauvegarder les modifications</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        <button class="cancel-button">Cancel</button>
+      <button type="button" class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Enregistrer</button>
+      <!-- <button class="submit-button" (click)="saveDemande()">Submit request</button> -->
     </div>
   </div>
 </div>

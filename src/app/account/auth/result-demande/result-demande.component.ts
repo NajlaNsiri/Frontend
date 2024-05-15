@@ -26,6 +26,7 @@ export class ResultDemandeComponent implements OnInit {
   Dispose = Dispose;
   Return = Return;
   TypeEchantillon= TypeEchantillon;
+  demandeId:number;
   firstName:string = localStorage.getItem('fisrtName');
   lastName:string = localStorage.getItem('lastName');
   groupedParameters = [];
@@ -79,7 +80,8 @@ export class ResultDemandeComponent implements OnInit {
       this.demandeService.createDemande(this.demandes).subscribe({
         next: (response) => {
           console.log('Demande created successfully', response);
-          const demandeId = response.demandeId;  // Extract the demandeId from the response
+          const demandeId = response.demandeId;
+          this.demandeId=demandeId;  // Extract the demandeId from the response
           console.log('Received Demande ID:', demandeId);
           this.saveEchantillon(demandeId);
         },
@@ -99,7 +101,7 @@ export class ResultDemandeComponent implements OnInit {
         localStorage.setItem('demandeFormData','');
         localStorage.setItem('echantillonFormData','');
         localStorage.setItem('ListParamater','');
-        this.router.navigate(['/account/Listdemande']);
+        this.saveAsPdf();
       },
       error: (error) => {
         console.error('Error sending batch of Echantillons', error)
@@ -132,8 +134,7 @@ export class ResultDemandeComponent implements OnInit {
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
     const scale = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
-
-    QRCode.toDataURL('Put Your QR Data Here', { errorCorrectionLevel: 'H' }, (err, url) => {
+    QRCode.toDataURL(`Nom:${this.firstName}, Prenom ${this.lastName} ,demandeId:${this.demandeId} `, { errorCorrectionLevel: 'H' }, (err, url) => {
       if (err) throw err;
       const qrCodeSize = 40; // Size of QR code in mm
       const qrCodeX = 10; // QR code X position in mm
@@ -169,6 +170,7 @@ export class ResultDemandeComponent implements OnInit {
       };
     });
   });
+  this.router.navigate(['/account/Listdemande']);
 }
   
 }
