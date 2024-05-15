@@ -28,5 +28,8 @@
     </tr>
     </tbody>
 </table>
-<button type="button" class="btn btn-primary" (click)="submitAnalytes()">Submit</button>
+<div class="button-container">
+    <button type="button" (click)="navigateToPrevious()" class="btn btn-secondary">Précédent </button>
+    <button type="button" (click)="submitAnalytes()" class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Suivant</button>
+  </div>
 </div>

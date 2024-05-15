@@ -9,6 +9,7 @@
         <div class="form-group">
           <label for="gabarit">Type d'échantillon:</label>
           <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
+            <option value="" disabled selected>Sélectionner Type d'échantillon</option>
             <option *ngFor="let typesEchantillon of typesEchantillons" [value]="typesEchantillon.value">
               {{ typesEchantillon.display }}
             </option>
@@ -17,6 +18,7 @@
         <div class="form-group">
           <label for="typeEchantillon" class="required">Retour:</label>
           <select class="form-control" formControlName="returns" id="returns">
+            <option value="" disabled selected>Sélectionner Retour</option>
             <option *ngFor="let retour of retours" [value]="retour.value">
               {{ retour.display }}
             </option>
@@ -25,6 +27,7 @@
         <div class="form-group">
           <label for="disposes" class="required">Disposer:</label>
           <select class="form-control" formControlName="disposes" id="disposes">
+            <option value="" disabled selected>Sélectionner Disposer</option>
             <option *ngFor="let disposer of disposers" [value]="disposer.value">
               {{ disposer.display }}
             </option>
@@ -80,7 +83,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation </h5>
+              <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation Sauvegarder échantillon </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -90,12 +93,15 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-              <button  type="submit" class="btn btn-primary" >Sauvegarder les modifications</button>
+              <button  type="submit" class="btn btn-primary" >Sauvegarder</button>
             </div>
           </div>
         </div>
         </div>
-      <button type="button" class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Enregistrer</button>
+        <div class="button-container">
+          <button type="button" (click)="navigateToPrevious()" class="btn btn-secondary">Précédent </button>
+          <button type="button" class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Suivant</button>
+        </div>
     </form>
   </div>
 </div>

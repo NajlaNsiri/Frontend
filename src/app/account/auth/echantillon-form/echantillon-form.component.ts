@@ -83,14 +83,16 @@ export class EchantillonFormComponent implements OnInit {
     const existingData = localStorage.getItem('echantillonFormData');
     this.echantillons = existingData ? JSON.parse(existingData) : [];
   }
-
-  dupliquer() {
-    const formValue = this.echantillonForm.value;
-    formValue.echantillonId = this.echantillons && this.echantillons.length ? this.echantillons.length + 1 : 1;
-    this.echantillons.push(formValue);
-    localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
-    this.router.navigate(['/account/ListParamter'], { queryParams: { dup: true, echantillonId: formValue.echantillonId }});
+  navigateToPrevious(){
+    this.router.navigate(['/account/Listechantillon']);
   }
+  // dupliquer() {
+  //   const formValue = this.echantillonForm.value;
+  //   formValue.echantillonId = this.echantillons && this.echantillons.length ? this.echantillons.length + 1 : 1;
+  //   this.echantillons.push(formValue);
+  //   localStorage.setItem('echantillonFormData', JSON.stringify(this.echantillons));
+  //   this.router.navigate(['/account/ListParamter'], { queryParams: { dup: true, echantillonId: formValue.echantillonId }});
+  // }
 
   onSubmit() {
     this.loadExistingData();

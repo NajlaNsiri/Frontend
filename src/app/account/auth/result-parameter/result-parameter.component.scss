@@ -75,7 +75,11 @@ th {
   font-size: 16px;
   padding-right: 5px;
 }
-
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;  /* Adjust margin to create space after the cards */
+}
 .icon.green { color: green; }
 .icon.yellow { color: orange; }
 .icon.red { color: red; }

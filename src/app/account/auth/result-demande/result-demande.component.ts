@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import QRCode from 'qrcode';
+declare var $: any;
 @Component({
   selector: 'app-result-demande',
   templateUrl: './result-demande.component.html',
@@ -180,6 +181,7 @@ export class ResultDemandeComponent implements OnInit {
   
     // Navigate to the list of demands after generating the PDF
     this.router.navigate(['/account/Listdemande']);
+    $('#exampleModalCenter').modal('hide');
   }
   
   
