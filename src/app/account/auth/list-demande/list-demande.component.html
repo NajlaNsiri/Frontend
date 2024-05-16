@@ -46,13 +46,13 @@
           <td>{{ demande.langueDuCertificat }}</td>
           <td>{{ demande.commentairesInternes }}</td>
           <td [ngSwitch]="demande.etat">
-            <span *ngSwitchCase="'REQUEST_SUBMITTED'">{{ '✔' }} </span>
-            <span *ngSwitchCase="'PARTIAL_RESULTS'">{{ '⚪' }} </span>
+            <span *ngSwitchCase="'REQUEST_SUBMITTED'">{{ '✔️' }} </span>
+            <span *ngSwitchCase="'PARTIAL_RESULTS'">{{ '❗' }} </span>
             <span *ngSwitchCase="'SAMPLE_REJECTED'">{{ '❌' }} </span>
-            <span *ngSwitchCase="'EXCEEDS_NORM'">{{ '!' }} </span>
-            <span *ngSwitchCase="'RECEIVED_IN_PROGRESS'">{{ '🕒' }} </span>
-            <span *ngSwitchCase="'COMPLETE_RESULTS'">{{ '✔' }} </span>
-            <span *ngSwitchCase="'NOT_POTABLE'">{{ '‼' }} </span>
+            <span *ngSwitchCase="'EXCEEDS_NORM'">{{ '⚠️' }} </span>
+            <span *ngSwitchCase="'RECEIVED_IN_PROGRESS'">{{ '🔬' }} </span>
+            <span *ngSwitchCase="'COMPLETE_RESULTS'">{{ '✔️✔️' }} </span>
+            <span *ngSwitchCase="'NOT_POTABLE'">{{ '❗❗' }} </span>
             <span *ngSwitchDefault>Unknown Status</span>
           </td>          
           
