@@ -1,41 +1,42 @@
 <app-navbar></app-navbar>
-<br><br><br>
-<div class="container">
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-    <h5 class="mb-3 footer-list-title">Contact Us:</h5>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="mb-3">
-            <label for="name">Your Name</label>
-            <input type="text" class="form-control" formControlName="name" placeholder="Your Name" required>
-          </div>
-          <div class="mb-3">
-            <label for="email">Your Email</label>
-            <input type="email" class="form-control" formControlName="email" placeholder="Your Email" required>
-          </div>
-          <div class="mb-3">
-            <label for="issueDescription">Describe the Issue</label>
-            <textarea class="form-control" formControlName="issueDescription" placeholder="Describe the Issue" required></textarea>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="mb-3">
-            <label for="company">Your Company</label>
-            <input type="text" class="form-control" formControlName="company" placeholder="Your Company">
-          </div>
-          <div class="mb-3">
-            <label for="dateOfComplaint">Date of complaint</label>
-            <input type="date" class="form-control" formControlName="dateOfComplaint" required>
-          </div>
-          <div class="mb-3">
-            <label for="contactPerson">Who were you dealing with?</label>
-            <textarea class="form-control" formControlName="contactPerson" placeholder="Who were you dealing with?"></textarea>
-          </div>
-        </div>
-        <div class="text-end col-12">
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  
+<main class="container">
+    <div class="card">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <h5>Contactez-nous</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name">Votre Nom</label>
+                        <input type="text" id="name" class="form-control" formControlName="name" placeholder="Votre Nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Votre Email</label>
+                        <input type="email" id="email" class="form-control" formControlName="email" placeholder="Votre Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="issueDescription">Décrivez le Problème</label>
+                        <textarea id="issueDescription" class="form-control" formControlName="issueDescription" placeholder="Décrivez le Problème" required></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="company">Votre Entreprise</label>
+                        <input type="text" id="company" class="form-control" formControlName="company" placeholder="Votre Entreprise">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateOfComplaint">Date de la Réclamation</label>
+                        <input type="date" id="dateOfComplaint" class="form-control" formControlName="dateOfComplaint" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contactPerson">Personne de Contact</label>
+                        <textarea id="contactPerson" class="form-control" formControlName="contactPerson" placeholder="Personne de Contact"></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<app-footer></app-footer>

@@ -1,116 +1,137 @@
-
-
-
+/* General styles */
 .full-width {
-    position: absolute; /* Position absolue pour que l'image occupe toute la section */
-    top: 0;
-    left: 0;
-    width: 100%; /* La largeur de l'image sera égale à la largeur de la section */
-    height: 100%; /* La hauteur de l'image sera égale à la hauteur de la section */
-    object-fit: cover; /* Remplir l'espace de manière proportionnée */
-} 
-
-.titre {
-    text-align: center; /* Centrer le texte horizontalement */
-    font-size: 2rem; /* Taille de police augmentée */
-    font-weight: bold; /* Poids de la police */
-    color: #ffffff; /* Couleur du texte en blanc */
-    margin-top: 50px; /* Espacement supérieur */
-    margin-bottom: 50px; /* Espacement inférieur */
-    position: relative; /* Position relative pour le conteneur du titre */
-}
-
-
-.img-bordered {
-    border-radius: 15px;
-    border: 1px solid #ddd; /* Couleur et épaisseur de la bordure */
-}
-
-
-/* Style des cartes */
-.card {
-    border: 1px solid #ddd; /* Bordure grise */
-    border-radius: 10px; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
-    padding: 20px; /* Espacement interne */
-    margin-bottom: 20px; /* Marge en bas */
-}
-
-/* Couleur de fond pour la première carte */
-.card:first-child {
-    background-color: #f0f0f0; /* Gris clair */
-}
-
-/* Couleur de fond pour la deuxième carte */
-.card:last-child {
-    background-color: #e0e0e0; /* Gris légèrement plus foncé */
-}
-/* General Styles for the Section */
-#propos {
-    position: relative;
-    overflow: hidden;
-    height: 60vh;  /* Adjust the height as necessary */
-    display: flex;
-    align-items: center;  /* Aligns content vertically */
-    justify-content: center;  /* Aligns content horizontally */
-}
-
-/* Background Image Styling with Gradient Overlay */
-#propos .full-width {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;  /* Keeps the image below the overlay */
-}
-
-#propos:before {
+  }
+  
+  .titre {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  
+  /* Card styling */
+  .card {
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(145deg, #f6f6f6, #ffffff);
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, #f093fb, #f5576c);
+  }
+  
+  .card-body {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .card ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .card ul li {
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  /* Background section */
+  #propos {
+    position: relative;
+    overflow: hidden;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #propos .full-width {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  
+  #propos:before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));  /* Gradient overlay */
-    z-index: 1;  /* Ensures overlay is below the text */
-}
-
-/* Typography and Title Styling */
-.titre {
-    font-size: 3rem;  /* Larger font size for prominence */
-    color: #fff;  /* Ensuring high contrast */
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);  /* Adding text shadow for better readability */
-    font-weight: bold;  /* Bold font for emphasis */
-    margin-top: 15vh;  /* Centering vertically more effectively */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    z-index: 1;
+  }
+  
+  .titre {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    margin-top: 15vh;
     position: relative;
-    z-index: 2;  /* Ensures the text is above the overlay */
-    animation: fadeInUp 1s ease-out forwards;  /* Animation for the title */
-    border-bottom: 2px solid #ffd700;  /* Gold underline for thematic consistency */
-    padding-bottom: 10px;  /* Spacing for underline */
-}
-
-/* Keyframes for fadeInUp Animation */
-@keyframes fadeInUp {
+    z-index: 2;
+    animation: fadeInUp 1s ease-out forwards;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 10px;
+  }
+  
+  @keyframes fadeInUp {
     from {
-        transform: translateY(20px);
-        opacity: 0;
+      transform: translateY(20px);
+      opacity: 0;
     }
     to {
-        transform: translateY(0);
-        opacity: 1;
+      transform: translateY(0);
+      opacity: 1;
     }
-}
-
-/* Responsive Adjustments for Mobile Devices */
-@media (max-width: 768px) {
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
     .titre {
-        font-size: 1.5rem;  /* Smaller font size for smaller screens */
-        padding: 0 10px;  /* Padding to handle narrow screens */
+      font-size: 1.5rem;
+      padding: 0 10px;
     }
-
+  
     #propos {
-        height: 40vh;  /* Smaller height on mobile devices */
+      height: 40vh;
     }
-}
+  }
+  
