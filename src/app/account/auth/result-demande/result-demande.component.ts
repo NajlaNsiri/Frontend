@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import QRCode from 'qrcode';
+declare var $: any;
 @Component({
   selector: 'app-result-demande',
   templateUrl: './result-demande.component.html',

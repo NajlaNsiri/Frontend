@@ -84,9 +84,21 @@ export class ListEchantillonComponent implements OnInit {
   navigateToListEchantillon() {
     this.router.navigate(['/account/echantillon']);
   }
-  navigateToNext(){
-    this.router.navigate(['/account/ResultDemande']);
+  navigateToNext() {
+    // Check if 'existingData' is not null, undefined, or an empty object
+    if (this.existingData && Object.keys(this.existingData).length > 0) {
+      this.router.navigate(['/account/ResultDemande']);
+    } else {
+      console.error('No existing data to proceed with navigation.');
+      this.toastr.error('', 'Aucune  echantillon', {
+        positionClass: 'toast-top-center',
+        timeOut: 3000,
+        closeButton: true
+      });
+      // Optionally, handle the situation when there's no data (e.g., display a message)
+    }
   }
+  
   navigateToPrevious(){
     this.router.navigate(['/account/demande']);
   }

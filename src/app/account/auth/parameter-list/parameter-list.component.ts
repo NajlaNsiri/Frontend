@@ -15,7 +15,7 @@ export class ParameterListComponent implements OnInit {
   dup: boolean;
 
   selectedAnalytes: Set<any> = new Set();
-
+  
   toggleAnalyteSelection(analyte: any) {
     if (this.selectedAnalytes.has(analyte)) {
       this.selectedAnalytes.delete(analyte);
@@ -48,6 +48,9 @@ export class ParameterListComponent implements OnInit {
         console.error('Error fetching parameters:', error);
       }
     });
+  }
+  navigateToPrevious(){
+    this.router.navigate(['/account/echantillon']);
   }
   submitAnalytes() {
   // Create the analytesWithIds from selectedAnalytes

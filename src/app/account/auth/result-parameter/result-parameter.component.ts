@@ -28,6 +28,9 @@ export class ResultParameterComponent implements OnInit {
       this.getParametersFromLocalStorage();
     });
   }
+  navigateToPrevious(){
+    this.router.navigate(['/account/ListParamter'],{ queryParams: { echantillonId: this.echantillonId }});
+  }
   private getParametersFromLocalStorage() {
     const storedParameters = localStorage.getItem('ListParameter');
     if (storedParameters) {

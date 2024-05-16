@@ -31,8 +31,8 @@ export class SignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       genre: ['', Validators.required],
-      username: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^(\+\d{1,3}[- ]?)?\d{10}$/)]]
     });
   }
 
@@ -40,24 +40,26 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     if (this.signupForm.invalid) {
+      this.toastr.error('Veuillez vérifier le formulaire pour les erreurs.', 'Formulaire invalide', {
+        positionClass: 'toast-top-center',
+        timeOut: 3000,
+        closeButton: true
+      });
       return;
     }
 
-    // Use authService to submit signup data
     this.authService.signup(this.signupForm.value).subscribe(
       response => {
-        console.log('API Response:', response);
         if (response.message && response.message.includes('User registered successfully and activation email sent.')) {
-          console.log('User registered successfully and activation email sent.');
-          this.successmsg = true;
-          this.error = '';
-          this.router.navigate(['/account/validation']); // Navigate to validation page
+          this.toastr.success('Utilisateur enregistré avec succès !', 'Succès', {
+            positionClass: 'toast-top-center',
+            timeOut: 3000,
+            closeButton: true
+          });
+          this.router.navigate(['/account/validation']);
         } else {
-          console.error('Unexpected success response:', response);
-          this.error = 'An unexpected error occurred. Please try again.';
-          this.toastr.error('An unexpected error occurred. Please try again.', 'Unexpected Error', {
+          this.toastr.error('Une erreur inattendue est apparue. Veuillez réessayer.', 'Erreur inattendue', {
             positionClass: 'toast-top-center',
             timeOut: 3000,
             closeButton: true
@@ -65,17 +67,8 @@ export class SignupComponent implements OnInit {
         }
       },
       error => {
-        console.error('API Error:', error);
-        let errorMessage = 'An error occurred. Please try again.'; // Default error message
-
-        if (error.error && typeof error.error === 'string') {
-          errorMessage = error.error;
-        } else if (error.status === 400 && error.error) {
-          errorMessage = error.error;
-        }
-
-        this.error = errorMessage; // Set the UI error message
-        this.toastr.error(errorMessage, 'Signup Failed', {
+        const errorMessage = error.error ? error.error : `Une erreur s"est produite. Veuillez réessayer.`;
+        this.toastr.error(errorMessage, `Échec de l'inscriptio`, {
           positionClass: 'toast-top-center',
           timeOut: 3000,
           closeButton: true
