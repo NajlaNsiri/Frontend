@@ -1,68 +1,82 @@
-/* General footer styles */
 .landing-footer {
-    padding: 40px 0; /* Ample padding for visual separation */
-    background-color: #343a40; /* Dark background for the footer */
-    color: #adb5bd; /* Lighter text color for contrast */
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Modern, clean font family */
+    padding-top: 80px; /* Maintains larger padding */
+    padding-bottom: 80px;
+    background-color: #20232a; /* Dark grey background */
+    color: #adb5bd; /* Greyish text color for good contrast */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Clean, modern font */
 }
 
-.img-bordered {
-    border-radius: 15px;
-    border: 1px solid #666; /* Subtle border for the logo */
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    text-align: left;
 }
 
-/* Button styles */
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #fff;
-    padding: 8px 30px;
-    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
+.footer-brand, .footer-links, .footer-contact {
+    flex: 1;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+.footer-brand p:first-child {
+    font-size: 24px; /* Increased size for the first paragraph */
+    color: #ffffff; /* White color for the main title */
+    margin-bottom: 10px; /* Adjusted spacing */
 }
 
-/* Footer headings */
-.footer-list-title {
-    font-size: 16px;
-    color: #ffffff; /* Bright color for headings for better visibility */
+.footer-brand p {
+    font-size: 18px; /* Increased text size for additional descriptions */
+    margin-bottom: 20px; /* Spacing below the paragraph */
 }
 
-/* Link and Address Styles */
-.post-title {
-    color: #17a2b8; /* Brighter, themed color for interactive elements */
-    font-size: 14px;
-    transition: color 0.3s; /* Smooth transition for hover effects */
+.social-link {
+    color: #adb5bd; /* Sets the icon color similar to other text */
+    font-size: 28px; /* Larger icon size for better visibility */
+    display: inline-block; /* Keeps the link inline */
+    transition: color 0.3s; /* Smooth transition for color change */
 }
 
-.post-title:hover {
-    color: #1397a6; /* Slightly darker on hover for a subtle effect */
+.social-link:hover {
+    color: #fff; /* Changes color to white on hover */
 }
 
-.footer-border {
-    background-color: #666; /* Darker line for a subtle separator */
-    height: 1px;
-    opacity: 1;
-}
-.card {
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 100%; /* Adjust width as needed */
-    margin-top: 20px;
-    font-family: 'Arial', sans-serif;
+.footer-links h4 {
+    font-size: 20px; /* Larger font size for headings */
+    color: #fff; /* White color for headings */
+    margin-bottom: 15px; /* Space below headings */
 }
 
-.card-header, .card-footer {
-    padding: 10px;
-    background-color: #343a40;
-    color: #fff;
-    text-align: center;
+.footer-links ul {
+    list-style: none; /* No bullet points */
+    padding: 0; /* No padding */
 }
 
-.card-map {
-    width: 100%;
-    height: 200px; /* Adjust height as needed */
+.footer-links ul li a {
+    font-size: 16px; /* Increased font size for links */
+    color: #adb5bd; /* Link color */
+    text-decoration: none; /* No underline */
+    display: block; /* Makes links block to increase clickable area */
+    padding: 5px 0; /* Increased padding for better clickability */
+    transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.footer-links ul li a:hover {
+    color: #fff; /* White color on hover */
+}
+
+.footer-contact h4 {
+    font-size: 20px; /* Larger font size for contact heading */
+}
+
+.footer-contact p, .footer-contact i {
+    font-size: 16px; /* Larger font size for contact info */
+    margin-right: 10px; /* Space after the icon */
+    display: inline-block; /* Inline display for alignment */
+}
+
+.footer-contact i {
+    margin-right: 5px; /* Space after the icon, adjusted */
+}
+
+.footer-contact i:hover {
+    color: #1397a6; /* Hover effect for icons */
 }

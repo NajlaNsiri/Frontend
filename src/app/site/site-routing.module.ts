@@ -25,6 +25,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { NewsComponent } from './components/news/news.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { IsoComponent } from './components/iso/iso.component';
 
 const routes: Routes = [
   {
@@ -145,6 +146,11 @@ const routes: Routes = [
   {
     path:'contact' , 
     component:ContactComponent
+  
+  },
+  {
+    path:'iso' , 
+    component:IsoComponent
   
   }
 ];
