@@ -32,11 +32,11 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { NewsComponent } from './components/news/news.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { IsoComponent } from './components/iso/iso.component';
 
 
 @NgModule({
-  declarations: [NavbarComponent, HomeComponent, FooterComponent, ProposComponent, GouvernanceComponent, CollaborateursComponent, ConsultingComponent, RMDComponent, EnvironmentalComponent, EnergyComponent, RdComponent, GoldComponent, TestingComponent, LabComponent, PreparationComponent, CommunitionComponent, GravityComponent, GoldTestingComponent, FloatationComponent, HydrometComponent, SeparationComponent, MagneticComponent, ProjectsComponent, ClientsComponent, NewsComponent, ContactComponent],
+  declarations: [NavbarComponent, HomeComponent, FooterComponent, ProposComponent, GouvernanceComponent, CollaborateursComponent, ConsultingComponent, RMDComponent, EnvironmentalComponent, EnergyComponent, RdComponent, GoldComponent, TestingComponent, LabComponent, PreparationComponent, CommunitionComponent, GravityComponent, GoldTestingComponent, FloatationComponent, HydrometComponent, SeparationComponent, MagneticComponent, ProjectsComponent, ClientsComponent, NewsComponent, ContactComponent,IsoComponent],
   imports: [
     CommonModule,
     SiteRoutingModule, 
