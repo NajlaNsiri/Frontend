@@ -1,39 +1,28 @@
 <app-client-nav-bar></app-client-nav-bar>
 <div class="card-container">
   <div class="card-header">
-    RÉSULTATS RÉCENTS (accessible à NYSTAR LANGLOIS)
+    RECENT RESULTS
   </div>
   <div class="demande-client-table">
     <div class="content-container">
       <div class="button-container">
-        <button class="table-button">Afficher/masquer les colonnes</button>
+        <button class="table-button">Show/hide columns</button>
       </div>
     </div>
     <div class="table-responsive"> 
       <table>
         <thead>
           <tr>
-            <th>Numéro d'échantillon</th>
-            <th>Nom de l'échantillon</th>
-            <th>Retour</th>
-            <th>Disposer</th>
-            <th>Type d'échantillon</th>
-            <th>Lieu de prélèvement</th>
-            <th>Adresse de retour</th>
-            <th>Priorité</th>
-            <th>Date de début de prélèvement</th>
-            <th>Détails</th>
-          </tr>
-          <tr> <!-- Filters Row -->
-            <th><input type="text" placeholder="Filter Numéro d'échantillon"></th>
-            <th><input type="text" placeholder="Filter Nom de l'échantillon"></th>
-            <th><input type="text" placeholder="Filter Retour"></th>
-            <th><input type="text" placeholder="Filter Disposer"></th>
-            <th><input type="text" placeholder="Filter Type d'échantillon"></th>
-            <th><input type="text" placeholder="Filter Lieu de prélèvement"></th>
-            <th><input type="text" placeholder="Filter Adresse de retour"></th>
-            <th><input type="text" placeholder="Filter Priorité"></th>
-            <th><input type="text" placeholder="Filter Date de début de prélèvement"></th>
+            <th>Sample number</th>
+            <th>Sample Name</th>
+            <th>Back</th>
+            <th>Arrange</th>
+            <th>Sample type</th>
+            <th>Collection location</th>
+            <th>Return address</th>
+            <th>Priority</th>
+            <th>Collection start date</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody>
@@ -55,7 +44,7 @@
             <tr *ngIf="echantillon.showDetails">
               <td colspan="10">
                 <table>
-                  <h4>List de Parameters</h4>
+                  <h4>List of Parameters</h4>
                  <tr colspan="10">
                   <th>Name</th>
                   <th>RDL</th>

@@ -13,6 +13,7 @@ export class ClientNavBarComponent implements OnInit {
   ngOnInit(): void {
   }
   lougout(){
-    this.router.navigate(['/account/login']);
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 }

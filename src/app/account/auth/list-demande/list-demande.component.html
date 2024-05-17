@@ -3,68 +3,74 @@
   <div class="card-header">
     LISTE DES RÉSULTATS
   </div>
-<div class="demande-client-table">
-  <!-- Button container for left-aligned buttons -->
-  <div class="content-container">
-    <div class="button-container">
-      
-      <button class="table-button download-button" (click)="saveAsPdf()">Télécharger documents  '''</button>
+  <div class="demande-client-table">
+    <div class="content-container">
+      <div class="button-container">
+        <button class="table-button download-button" (click)="saveAsPdf()">Download documents</button>
+      </div>
+      <div class="icon-legend-container">
+        <div class="icon-legend">
+          <p><span class="icon green">✔️</span> Analysis request transmitted and awaiting acceptance</p>
+          <p><span class="icon yellow">❗</span> Partial results</p>
+          <p><span class="icon red">✖️</span> Sample rejected</p>
+          <p><span class="icon blue">⚠️</span> Exceeding standard</p>
+        </div>
+        <div class="icon-legend">
+          <p><span class="icon gray">🔬</span> Received in the laboratory, currently being analyzed</p>
+          <p><span class="icon green">✔️✔️</span> Completed results</p>
+          <p><span class="icon red">❗❗</span> Undrinkable</p>
+        </div>
+      </div>
     </div>
-  
-    <div class="icon-legend-container">
-      <div class="icon-legend">
-        <p><span class="icon green">✔️</span> Demande d'analyse transmise et en attente d'acceptation</p>
-        <p><span class="icon yellow">❗</span> Résultats partiels</p>
-        <p><span class="icon red">✖️</span> Échantillon rejeté</p>
-        <p><span class="icon blue">⚠️</span> Dépassement de norme</p>
-      </div>
-      <div class="icon-legend">
-        <p><span class="icon gray">🔬</span> Reçu au laboratoire, en cours d'analyse</p>
-        <p><span class="icon green">✔️✔️</span> Résultats complétés</p>
-        <p><span class="icon red">❗❗</span> Non-Potable</p>
-      </div>
+
+    <!-- Check if demandes array is empty -->
+    <div *ngIf="demandes && demandes.length > 0; else noData">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Request For</th>
+            <th>Sent To Laboratory</th>
+            <th>Additional Emails</th>
+            <th>Purchase order</th>
+            <th>Certificate Language</th>
+            <th>Internal Comments</th>
+            <th>State</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let demande of demandes; let i = index">
+            <td>{{ demande.demandeId }}</td>
+            <td>{{ demande.demandePour }}</td>
+            <td>{{ demande.envoyeAuLaboratoire }}</td>
+            <td>{{ demande.courrielsSupplementaires }}</td>
+            <td>{{ demande.bonDeCommande }}</td>
+            <td>{{ demande.langueDuCertificat }}</td>
+            <td>{{ demande.commentairesInternes }}</td>
+            <td [ngSwitch]="demande.etat">
+              <span *ngSwitchCase="'REQUEST_SUBMITTED'">✔️</span>
+              <span *ngSwitchCase="'PARTIAL_RESULTS'">❗</span>
+              <span *ngSwitchCase="'SAMPLE_REJECTED'">❌</span>
+              <span *ngSwitchCase="'EXCEEDS_NORM'">⚠️</span>
+              <span *ngSwitchCase="'RECEIVED_IN_PROGRESS'">🔬</span>
+              <span *ngSwitchCase="'COMPLETE_RESULTS'">✔️✔️</span>
+              <span *ngSwitchCase="'NOT_POTABLE'">❗❗</span>
+              <span *ngSwitchDefault>Unknown Status</span>
+            </td>
+            <td>
+              <button class="btn-edit" (click)="details(demande.demandeId)">Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-          <th>Demande Pour</th>
-          <th>Envoyé Au Laboratoire</th>
-          <th>Courriels Supplémentaires</th>
-          <th>Bon De Commande</th>
-          <th>Langue Du Certificat</th>
-          <th>Commentaires Internes</th>
-          <th>etat</th>
-          <th>Actions</th>
-        <tr *ngFor="let demande of demandes; let i = index">
-          <td>{{ demande.demandeId }}</td>
-          <td>{{ demande.demandePour }}</td>
-          <td>{{ demande.envoyeAuLaboratoire }}</td>
-          <td>{{ demande.courrielsSupplementaires }}</td>
-          <td>{{ demande.bonDeCommande }}</td>
-          <td>{{ demande.langueDuCertificat }}</td>
-          <td>{{ demande.commentairesInternes }}</td>
-          <td [ngSwitch]="demande.etat">
-            <span *ngSwitchCase="'REQUEST_SUBMITTED'">{{ '✔️' }} </span>
-            <span *ngSwitchCase="'PARTIAL_RESULTS'">{{ '❗' }} </span>
-            <span *ngSwitchCase="'SAMPLE_REJECTED'">{{ '❌' }} </span>
-            <span *ngSwitchCase="'EXCEEDS_NORM'">{{ '⚠️' }} </span>
-            <span *ngSwitchCase="'RECEIVED_IN_PROGRESS'">{{ '🔬' }} </span>
-            <span *ngSwitchCase="'COMPLETE_RESULTS'">{{ '✔️✔️' }} </span>
-            <span *ngSwitchCase="'NOT_POTABLE'">{{ '❗❗' }} </span>
-            <span *ngSwitchDefault>Unknown Status</span>
-          </td>          
-          
-          <td>
-            <!-- Buttons for actions such as edit, delete, etc. -->
-            <button class="btn-edit" (click)="details(demande.demandeId)">Details</button>
-          </td>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
 </div>
 
-</div>
+<!-- Template displayed when there is no data -->
+<ng-template #noData>
+  <div class="alert alert-info" style="margin: 20px;">
+    No requests were found.
+  </div>
+</ng-template>

@@ -40,14 +40,24 @@ export class LoginComponent implements OnInit {
     // Use authService to submit login data
     this.authService.login(this.loginForm.value).subscribe(
       response => {
-        console.log('API Response:', response); // Log the full response object
-        localStorage.setItem('userId', response.userId.toString());
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('fisrtName', response.fisrtName);
-        localStorage.setItem('lastName', response.lastName);
-        // Navigate to the 'demande' page and pass the user ID as a state or parameter
-        this.router.navigate(['/account/Listdemande'], { queryParams: { userId: response.userId } });
-        this.error = ''; // Clear any previous errors
+        const roles = response.roles;  // Correctly access roles
+        if(roles.includes("ROLE_USER")){
+          console.log('API Response:', response); // Log the full response object
+          localStorage.setItem('userId', response.userId.toString());
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('fisrtName', response.fisrtName);
+          localStorage.setItem('lastName', response.lastName);
+          // Navigate to the 'demande' page and pass the user ID as a state or parameter
+          this.router.navigate(['/account/Listdemande'], { queryParams: { userId: response.userId } });
+          this.error = '';
+        }else{
+          this.toastr.error("", 'UserName incorrect ', {
+            positionClass: 'toast-top-center',
+            timeOut: 3000,
+            closeButton: true
+          });
+        }
+         // Clear any previous errors
       },
       error => {
         console.error('API Error:', error);

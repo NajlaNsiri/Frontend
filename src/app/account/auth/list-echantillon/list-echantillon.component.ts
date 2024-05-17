@@ -58,6 +58,10 @@ export class ListEchantillonComponent implements OnInit {
   }
 
   loadExistingData() {
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
     this.existingData = localStorage.getItem('echantillonFormData');
     
     if (this.existingData) {

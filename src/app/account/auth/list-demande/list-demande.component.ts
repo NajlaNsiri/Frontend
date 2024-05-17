@@ -14,20 +14,6 @@ import QRCode from 'qrcode';
 })
 export class ListDemandeComponent implements OnInit {
   demandes: Demande[] = [];
-  // demandes = [
-  //   {
-  //     DemandeID: 1,
-  //     DemandePour: 'Client A',
-  //     EnvoyeAuLaboratoire: 'Lab X',
-  //     CourrielsSupplementaires: 'clienta@example.com',
-  //     BonDeCommande: '1234',
-  //     UnEchantillon: true,
-  //     LangueDuCertificat: 'francais',
-  //     CommentairesInternes: 'Initial review completed',
-  //     etat:"complate"
-  //   },
-  //   // More fake demandes can be added here
-  // ];
   constructor(private demandeService: DemandeService,private router: Router) {}
 
   ngOnInit(): void {
@@ -41,6 +27,7 @@ export class ListDemandeComponent implements OnInit {
         },
         error: (error) => {
           console.error('Failed to load demandes:', error);
+          this.router.navigate(['/account/login']);
         }
       });
   }

@@ -33,6 +33,7 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/styleComponentsGlobal.css",
               "src/styles.scss",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/assets/scss/bootstrap.scss",
               "src/assets/scss/app.scss",
               "src/assets/scss/icons.scss"

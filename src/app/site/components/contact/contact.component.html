@@ -1,42 +1,92 @@
 <app-navbar></app-navbar>
-<main class="container">
-    <div class="card">
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-            <h5>Contactez-nous</h5>
+<br>
+
+<div>
+    <section class="section" id="propos" style="height: 60vh;">
+        <img src="assets/images/small/energy1.jpeg" alt="Image de fond" class="full-width" />
+        <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="name">Votre Nom</label>
-                        <input type="text" id="name" class="form-control" formControlName="name" placeholder="Votre Nom" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email">Votre Email</label>
-                        <input type="email" id="email" class="form-control" formControlName="email" placeholder="Votre Email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="issueDescription">Décrivez le Problème</label>
-                        <textarea id="issueDescription" class="form-control" formControlName="issueDescription" placeholder="Décrivez le Problème" required></textarea>
-                    </div>
+                <h1 class="titre text-center"> Energy Solutions </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="propos" style="height: 60vh;">
+        <div class="container centered-text">
+            <h1>Let's discuss together to optimize your results!</h1>
+            <p>Our team is solution-oriented</p>
+            <p>IGS offers mining companies a range of specialist services and research expertise to optimize and develop key mineral processing processes. Choosing IGS means choosing more than 20 years of innovation!</p>
+            <p>Contact us to discuss your issues and we will offer you solutions.</p>
+        </div>
+    </section>
+    <section id="contact-us" class="section bg-light">
+        <div class="cards-container">
+            <div class="card-style">
+                <div class="icon-container">
+                    <i class="icon fa fa-phone"></i>
                 </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="company">Votre Entreprise</label>
-                        <input type="text" id="company" class="form-control" formControlName="company" placeholder="Votre Entreprise">
-                    </div>
-                    <div class="mb-3">
-                        <label for="dateOfComplaint">Date de la Réclamation</label>
-                        <input type="date" id="dateOfComplaint" class="form-control" formControlName="dateOfComplaint" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="contactPerson">Personne de Contact</label>
-                        <textarea id="contactPerson" class="form-control" formControlName="contactPerson" placeholder="Personne de Contact"></textarea>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                <div class="card-text">
+                    <strong>Call us!</strong><br>
+                    +1 418-527-8211
                 </div>
             </div>
-        </form>
-    </div>
-</main>
+            <div class="card-style">
+                <div class="icon-container">
+                    <i class="icon fa fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="map-section" class="section">
+        <div class="card">
+            <iframe class="card-map"
+                    frameborder="0" style="border:0"
+                    src="https://maps.google.com/maps?q=45.36105684619159,-73.5365741576717&hl=en&z=14&amp;output=embed"
+                    allowfullscreen>
+            </iframe>
+            <div class="card-footer">
+                70 Goodfellow, Delson, QC, Canada
+            </div>
+        </div>
+    </section>
+    <section id="contact-us" class="section bg-light">
+        <div class="card">
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <h5 class="text-center mt-4">Contact us</h5>
+                <div class="row p-4">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="name">Your name</label>
+                            <input type="text" id="name" class="form-control" formControlName="name" placeholder="Your name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Your email</label>
+                            <input type="email" id="email" class="form-control" formControlName="email" placeholder="Your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="issueDescription">Describe the Problem</label>
+                            <textarea id="issueDescription" class="form-control" formControlName="issueDescription" rows="4" placeholder="Describe the Problem" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="company">Your business</label>
+                            <input type="text" id="company" class="form-control" formControlName="company" placeholder="Your business">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateOfComplaint">Date of Claim</label>
+                            <input type="date" id="dateOfComplaint" class="form-control" formControlName="dateOfComplaint" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactPerson">Contact person</label>
+                            <textarea id="contactPerson" class="form-control" formControlName="contactPerson" rows="4" placeholder="Contact person"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
 <app-footer></app-footer>

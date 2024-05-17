@@ -24,10 +24,16 @@ export class ParameterListComponent implements OnInit {
     }
   }
   constructor(private parameterService: ParameterService, private router: Router , private route: ActivatedRoute) {
-      this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe({
+      next: (params) => {
         this.echantillonId = params['echantillonId'];
-      });
-   }
+      },
+      error: (error) => {
+        console.error('Failed to load demandes:', error);
+        this.router.navigate(['/account/login']);
+      }
+    });
+    }
   
   setSelectedAnalytes(analytes: Set<string>) {
     this.selectedAnalytes = analytes;
@@ -46,6 +52,7 @@ export class ParameterListComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching parameters:', error);
+        this.router.navigate(['/account/login']);
       }
     });
   }

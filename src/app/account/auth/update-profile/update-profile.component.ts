@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';  // Update this path as necessary
 import { User } from 'src/app/core/models/User'; // Update this path if your model is located elsewhere
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-profile',
@@ -13,7 +14,7 @@ export class UpdateProfileComponent implements OnInit {
   profileForm: FormGroup;
   passwordForm: FormGroup;
   userId: number = Number(localStorage.getItem('userId')); // This should be dynamically set, perhaps passed through a route or some other method
-  constructor(private fb: FormBuilder, private userService: UserService,  private toastr: ToastrService ) {
+  constructor(private fb: FormBuilder, private userService: UserService,  private toastr: ToastrService, private router: Router ) {
     this.createForm();
   }
 
@@ -24,7 +25,7 @@ export class UpdateProfileComponent implements OnInit {
       },
       error: (err) => {
         console.error('Failed to fetch user:', err);
-        // Handle errors here, possibly with user feedback
+        this.router.navigate(['/account/login']);
       }
     });
   }
@@ -64,7 +65,7 @@ export class UpdateProfileComponent implements OnInit {
       next: (response) => {
         console.log('User updated successfully:', response);
         this.ngOnInit(); 
-        this.toastr.success('informations modifiées avec succès', '', {
+        this.toastr.success('information successfully modified', '', {
           timeOut: 5000,
           positionClass: 'toast-top-right',
           closeButton: true,
