@@ -181,6 +181,7 @@ saveAsPdf() {
 
   // Navigate to the list of demands after generating the PDF
   this.router.navigate(['/account/Listdemande']);
+  $('#exampleModalCenter').modal('hide');
 }
 
   
