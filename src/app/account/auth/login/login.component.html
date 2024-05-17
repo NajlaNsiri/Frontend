@@ -4,7 +4,7 @@
       <div class="col-md-8 col-lg-6 col-xl-5">
         <div class="card overflow-hidden card-container">
           <div class="card-header">
-            Connexion
+            Login
           </div>
           <div class="card-body pt-0">
             <div class="p-4">
@@ -15,39 +15,39 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                     </div>
-                    <input type="email" class="form-control" id="email" placeholder="Entrez votre email" formControlName="usernameOrEmail" required>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your e-mail" formControlName="usernameOrEmail" required>
                   </div>
                   <div *ngIf="f.usernameOrEmail.errors?.required" class="invalid-feedback">
-                    L'email est requis.
+                    Email is required.
                   </div>
                   <div *ngIf="f.usernameOrEmail.errors?.email" class="invalid-feedback">
-                    L'email doit être une adresse email valide.
+                    The email must be a valid email address.
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="password" class="form-label">Mot de passe</label>
+                  <label for="password" class="form-label">Password</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" formControlName="password" required>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" required>
                   </div>
                   <div *ngIf="f.password.errors?.required" class="invalid-feedback">
-                    Le mot de passe est requis.
+                    Password is required.
                   </div>
                 </div>
 
                 <div class="mt-3 d-grid">
-                  <button class="btn btn-primary" type="submit">Connexion</button>
+                  <button class="btn btn-primary" type="submit">Login</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
         <div class="mt-4 text-center">
-          <p>Vous avez oublié votre mot de passe ? <a routerLink="/account/restpassword" class="fw-medium text-primary">Réinitialisez-le maintenant.</a></p>
-          <p>Vous n'avez pas de compte ? <a routerLink="/account/signup" class="fw-medium text-primary">Inscrivez-vous maintenant.</a></p>
+          <p>Forgot your password ? <a routerLink="/account/restpassword" class="fw-medium text-primary">Reset it now.</a></p>
+          <p>You do not have an account ? <a routerLink="/account/signup" class="fw-medium text-primary">Register now.</a></p>
         </div>
       </div>
     </div>

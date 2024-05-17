@@ -7,27 +7,27 @@
     <form [formGroup]="echantillonForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
         <div class="form-group">
-          <label for="gabarit">Type d'échantillon:</label>
+          <label for="gabarit">Sample type:</label>
           <select class="form-control" formControlName="typeEchantillon" id="typeEchantillon">
-            <option value="" disabled selected>Sélectionner Type d'échantillon</option>
+            <option value="" disabled selected>Select Sample Type</option>
             <option *ngFor="let typesEchantillon of typesEchantillons" [value]="typesEchantillon.value">
               {{ typesEchantillon.display }}
             </option>
           </select>
         </div>
         <div class="form-group">
-          <label for="typeEchantillon" class="required">Retour:</label>
+          <label for="typeEchantillon" class="required">Back:</label>
           <select class="form-control" formControlName="returns" id="returns">
-            <option value="" disabled selected>Sélectionner Retour</option>
+            <option value="" disabled selected>Select Back</option>
             <option *ngFor="let retour of retours" [value]="retour.value">
               {{ retour.display }}
             </option>
           </select>
         </div>
         <div class="form-group">
-          <label for="disposes" class="required">Disposer:</label>
+          <label for="disposes" class="required">Arrange:</label>
           <select class="form-control" formControlName="disposes" id="disposes">
-            <option value="" disabled selected>Sélectionner Disposer</option>
+            <option value="" disabled selected>Select Arrange</option>
             <option *ngFor="let disposer of disposers" [value]="disposer.value">
               {{ disposer.display }}
             </option>
@@ -35,55 +35,55 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="nomEchantillon">Nom de l'échantillon:</label>
+        <label for="nomEchantillon">Sample Name:</label>
         <input type="text" class="form-control" formControlName="nomEchantillon" id="nomEchantillon">
       </div>
       <div class="form-group">
-        <label for="nomEchantillon">Lieu Prelevement:</label>
+        <label for="nomEchantillon">Location Sampling:</label>
         <input type="text" class="form-control" formControlName="lieuPrelevement" id="lieuPrelevement">
       </div>
       <div class="form-group">
-        <label for="addressRetourner">Adresse de retour:</label>
+        <label for="addressRetourner">Return address:</label>
         <input type="text" class="form-control" formControlName="addressRetourner" id="addressRetourner">
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="dateFinPrelevement" class="required">Date de fin de prélèvement:</label>
+          <label for="dateFinPrelevement" class="required">Collection end date:</label>
           <input type="date" class="form-control" formControlName="dateFinPrelevement" id="dateFinPrelevement">
         </div>
         <div class="form-group">
-          <label for="heureFinPrelevement" class="required">Heure de fin de prélèvement:</label>
+          <label for="heureFinPrelevement" class="required">Sampling end time:</label>
           <input type="time" class="form-control" formControlName="heureFinPrelevement" id="heureFinPrelevement">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group priority-group">
-          <label class="required">Priorité:</label>
+          <label class="required">Priority:</label>
           <div class="priority-options">
             <label>
               <input type="radio" formControlName="priorite" value="STANDARD" id="tooltipExample" 
                      data-toggle="tooltip" data-placement="top" title="Standard"> 
-              Standard
+                     Standard
             </label>
             <label>
               <input type="radio" formControlName="priorite" value="RUSH" id="tooltipExample1"
                      data-toggle="tooltip" data-placement="top" title="Se précipiter">
-              Se précipiter
+                     Rushing
             </label>
             
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="commentairesInternes">Commentaires internes de l'échantillon:</label>
+        <label for="commentairesInternes">Internal sample feedback:</label>
         <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
       </div>
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation Sauvegarder échantillon </h5>
+              <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation Save sample </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -92,15 +92,15 @@
               <p>es-tu sûr</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-              <button  type="submit" class="btn btn-primary" >Sauvegarder</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button  type="submit" class="btn btn-primary" >Save</button>
             </div>
           </div>
         </div>
         </div>
         <div class="button-container">
-          <button type="button" (click)="navigateToPrevious()" class="btn btn-secondary">Précédent </button>
-          <button type="button" class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Suivant</button>
+          <button type="button" (click)="navigateToPrevious()" class="btn btn-secondary">Previous </button>
+          <button type="button" class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Next</button>
         </div>
     </form>
   </div>
