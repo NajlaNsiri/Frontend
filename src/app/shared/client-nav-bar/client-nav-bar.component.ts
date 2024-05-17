@@ -13,6 +13,7 @@ export class ClientNavBarComponent implements OnInit {
   ngOnInit(): void {
   }
   lougout(){
+    localStorage.clear();
     this.router.navigate(['/']);
   }
 }

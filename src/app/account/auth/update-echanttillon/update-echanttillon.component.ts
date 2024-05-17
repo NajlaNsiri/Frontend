@@ -82,6 +82,10 @@ export class UpdateEchanttillonComponent implements OnInit {
   }
 
   loadExistingData(): void {
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
     this.loading = true;
     const existingData = localStorage.getItem('echantillonFormData');
     if (existingData) {

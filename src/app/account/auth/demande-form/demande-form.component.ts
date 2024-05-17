@@ -36,6 +36,10 @@ export class DemandeFormComponent implements OnInit {
       commentairesInternes: [''],
       // userId: [this.userId, Validators.required]
     });
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
   }
 
   get form() {
@@ -53,7 +57,7 @@ export class DemandeFormComponent implements OnInit {
         localStorage.setItem('demandeFormData', JSON.stringify(this.demandeForm.value));
         this.router.navigate(['/account/Listechantillon']);
     } else {
-      this.toastr.error('', 'validé votre demande form ', {
+      this.toastr.error('', 'validated your request form', {
         positionClass: 'toast-top-center',
         timeOut: 3000,
         closeButton: true

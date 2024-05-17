@@ -104,7 +104,7 @@ export class EchantillonFormComponent implements OnInit {
       $('#exampleModalCenter').modal('hide');
     } else {
       // Use Angular's toast service for error handling
-      this.toastr.error('Veuillez valider votre formulaire échantillon.', '', {
+      this.toastr.error('Please validate your sample form.', '', {
         positionClass: 'toast-top-center',
         timeOut: 3000,
         closeButton: true

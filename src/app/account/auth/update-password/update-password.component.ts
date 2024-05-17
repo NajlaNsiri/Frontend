@@ -45,7 +45,7 @@ export class UpdatePasswordComponent implements OnInit {
       .subscribe({
         next: (response) => {
           console.log('Your password has been successfully reset:', response);
-          this.toastr.success('Votre mot de passe a été réinitialisé avec succès :', '', {
+          this.toastr.success('Your password has been successfully reset :', '', {
             timeOut: 5000,
             positionClass: 'toast-top-right',
             closeButton: true,

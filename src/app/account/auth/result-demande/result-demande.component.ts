@@ -57,6 +57,10 @@ export class ResultDemandeComponent implements OnInit {
     this.echantillons = echantillonData ? JSON.parse(echantillonData) : [];
     this.parameters = parameterData ? JSON.parse(parameterData) : [];
     this.linkParametersToEchantillons();
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
   }
   getEnumDescription(enumObj: any, key: string): string {
     return enumObj[key];
@@ -93,7 +97,7 @@ export class ResultDemandeComponent implements OnInit {
     this.echantillonService.createEchantillon(demandeId, this.echantillons).subscribe({
       next: (response) => {
         console.log('Batch of Echantillons sent successfully', response),
-        this.toastr.success('demande envoyée avec succès', '', {
+        this.toastr.success('request sent successfully', '', {
           timeOut: 5000,
           positionClass: 'toast-top-right',
           closeButton: true,

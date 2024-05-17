@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EchantillonService } from '../echantillon.service';
 import { Echantillon } from 'src/app/core/models/echantillon.model';
 import { Parameter } from 'src/app/core/models/parameter.model';
@@ -15,7 +15,8 @@ export class ListEchantillonsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private echantillonService: EchantillonService
+    private echantillonService: EchantillonService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -25,7 +26,10 @@ export class ListEchantillonsComponent implements OnInit {
         next: (echantillons) => {
           this.echantillons = echantillons.map(e => ({ ...e, showDetails: false, parameters: [] }));
         },
-        error: (error) => console.error('Failed to load echantillons:', error)
+        error: (error) => {
+          console.error('Failed to load echantillons:', error);
+          this.router.navigate(['/account/login']);
+        }
       });
     });
   }
